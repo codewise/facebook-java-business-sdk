@@ -99,6 +99,8 @@ public class AdsInsights extends APINode {
   private String mAdsetStart = null;
   @SerializedName("age_targeting")
   private String mAgeTargeting = null;
+  @SerializedName("attribution_setting")
+  private String mAttributionSetting = null;
   @SerializedName("auction_bid")
   private String mAuctionBid = null;
   @SerializedName("auction_competitiveness")
@@ -689,6 +691,15 @@ public class AdsInsights extends APINode {
 
   public AdsInsights setFieldAgeTargeting(String value) {
     this.mAgeTargeting = value;
+    return this;
+  }
+
+  public String getFieldAttributionSetting() {
+    return mAttributionSetting;
+  }
+
+  public AdsInsights setFieldAttributionSetting(String value) {
+    this.mAttributionSetting = value;
     return this;
   }
 
@@ -2008,6 +2019,8 @@ public class AdsInsights extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
+      @SerializedName("mixed")
+      VALUE_MIXED("mixed"),
       ;
 
       private String value;
@@ -2104,8 +2117,8 @@ public class AdsInsights extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")
@@ -2229,6 +2242,7 @@ public class AdsInsights extends APINode {
     this.mAdsetName = instance.mAdsetName;
     this.mAdsetStart = instance.mAdsetStart;
     this.mAgeTargeting = instance.mAgeTargeting;
+    this.mAttributionSetting = instance.mAttributionSetting;
     this.mAuctionBid = instance.mAuctionBid;
     this.mAuctionCompetitiveness = instance.mAuctionCompetitiveness;
     this.mAuctionMaxCompetitorBid = instance.mAuctionMaxCompetitorBid;

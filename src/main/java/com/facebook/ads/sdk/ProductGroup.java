@@ -330,6 +330,7 @@ public class ProductGroup extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -353,12 +354,14 @@ public class ProductGroup extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "parent_product_id",
       "pattern",
       "price",
       "product_catalog",
@@ -503,6 +506,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
+      return this;
+    }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -666,6 +676,13 @@ public class ProductGroup extends APINode {
       this.requestField("image_url", value);
       return this;
     }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
     public APIRequestGetProducts requestInventoryField () {
       return this.requestInventoryField(true);
     }
@@ -706,6 +723,13 @@ public class ProductGroup extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestParentProductIdField () {
+      return this.requestParentProductIdField(true);
+    }
+    public APIRequestGetProducts requestParentProductIdField (boolean value) {
+      this.requestField("parent_product_id", value);
       return this;
     }
     public APIRequestGetProducts requestPatternField () {

@@ -75,6 +75,8 @@ public class ProductFeed extends APINode {
   private String mItemSubType = null;
   @SerializedName("latest_upload")
   private ProductFeedUpload mLatestUpload = null;
+  @SerializedName("migrated_from_feed_id")
+  private String mMigratedFromFeedId = null;
   @SerializedName("name")
   private String mName = null;
   @SerializedName("override_type")
@@ -406,6 +408,10 @@ public class ProductFeed extends APINode {
       mLatestUpload.context = getContext();
     }
     return mLatestUpload;
+  }
+
+  public String getFieldMigratedFromFeedId() {
+    return mMigratedFromFeedId;
   }
 
   public String getFieldName() {
@@ -2038,6 +2044,7 @@ public class ProductFeed extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2061,12 +2068,14 @@ public class ProductFeed extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "parent_product_id",
       "pattern",
       "price",
       "product_catalog",
@@ -2231,6 +2240,13 @@ public class ProductFeed extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
+      return this;
+    }
     public APIRequestGetProducts requestAvailabilityField () {
       return this.requestAvailabilityField(true);
     }
@@ -2392,6 +2408,13 @@ public class ProductFeed extends APINode {
       this.requestField("image_url", value);
       return this;
     }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
     public APIRequestGetProducts requestInventoryField () {
       return this.requestInventoryField(true);
     }
@@ -2432,6 +2455,13 @@ public class ProductFeed extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestParentProductIdField () {
+      return this.requestParentProductIdField(true);
+    }
+    public APIRequestGetProducts requestParentProductIdField (boolean value) {
+      this.requestField("parent_product_id", value);
       return this;
     }
     public APIRequestGetProducts requestPatternField () {
@@ -4497,6 +4527,7 @@ public class ProductFeed extends APINode {
       "id",
       "item_sub_type",
       "latest_upload",
+      "migrated_from_feed_id",
       "name",
       "override_type",
       "product_count",
@@ -4664,6 +4695,13 @@ public class ProductFeed extends APINode {
       this.requestField("latest_upload", value);
       return this;
     }
+    public APIRequestGet requestMigratedFromFeedIdField () {
+      return this.requestMigratedFromFeedIdField(true);
+    }
+    public APIRequestGet requestMigratedFromFeedIdField (boolean value) {
+      this.requestField("migrated_from_feed_id", value);
+      return this;
+    }
     public APIRequestGet requestNameField () {
       return this.requestNameField(true);
     }
@@ -4720,6 +4758,7 @@ public class ProductFeed extends APINode {
       "deletion_enabled",
       "delimiter",
       "encoding",
+      "migrated_from_feed_id",
       "name",
       "quoted_fields_mode",
       "schedule",
@@ -4811,6 +4850,11 @@ public class ProductFeed extends APINode {
     }
     public APIRequestUpdate setEncoding (String encoding) {
       this.setParam("encoding", encoding);
+      return this;
+    }
+
+    public APIRequestUpdate setMigratedFromFeedId (String migratedFromFeedId) {
+      this.setParam("migrated_from_feed_id", migratedFromFeedId);
       return this;
     }
 
@@ -5113,6 +5157,7 @@ public class ProductFeed extends APINode {
     this.mId = instance.mId;
     this.mItemSubType = instance.mItemSubType;
     this.mLatestUpload = instance.mLatestUpload;
+    this.mMigratedFromFeedId = instance.mMigratedFromFeedId;
     this.mName = instance.mName;
     this.mOverrideType = instance.mOverrideType;
     this.mProductCount = instance.mProductCount;

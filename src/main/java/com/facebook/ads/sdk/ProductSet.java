@@ -1966,6 +1966,7 @@ public class ProductSet extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
+      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -1989,12 +1990,14 @@ public class ProductSet extends APINode {
       "id",
       "image_cdn_urls",
       "image_url",
+      "images",
       "inventory",
       "manufacturer_part_number",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "parent_product_id",
       "pattern",
       "price",
       "product_catalog",
@@ -2159,6 +2162,13 @@ public class ProductSet extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetProducts requestArDataField () {
+      return this.requestArDataField(true);
+    }
+    public APIRequestGetProducts requestArDataField (boolean value) {
+      this.requestField("ar_data", value);
+      return this;
+    }
     public APIRequestGetProducts requestAvailabilityField () {
       return this.requestAvailabilityField(true);
     }
@@ -2320,6 +2330,13 @@ public class ProductSet extends APINode {
       this.requestField("image_url", value);
       return this;
     }
+    public APIRequestGetProducts requestImagesField () {
+      return this.requestImagesField(true);
+    }
+    public APIRequestGetProducts requestImagesField (boolean value) {
+      this.requestField("images", value);
+      return this;
+    }
     public APIRequestGetProducts requestInventoryField () {
       return this.requestInventoryField(true);
     }
@@ -2360,6 +2377,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestParentProductIdField () {
+      return this.requestParentProductIdField(true);
+    }
+    public APIRequestGetProducts requestParentProductIdField (boolean value) {
+      this.requestField("parent_product_id", value);
       return this;
     }
     public APIRequestGetProducts requestPatternField () {
@@ -3392,6 +3416,7 @@ public class ProductSet extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "allow_live_product_set_deletion",
     };
 
     public static final String[] FIELDS = {
@@ -3449,6 +3474,15 @@ public class ProductSet extends APINode {
       return this;
     }
 
+
+    public APIRequestDelete setAllowLiveProductSetDeletion (Boolean allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
+    public APIRequestDelete setAllowLiveProductSetDeletion (String allowLiveProductSetDeletion) {
+      this.setParam("allow_live_product_set_deletion", allowLiveProductSetDeletion);
+      return this;
+    }
 
     public APIRequestDelete requestAllFields () {
       return this.requestAllFields(true);

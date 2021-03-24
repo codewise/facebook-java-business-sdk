@@ -395,6 +395,7 @@ public class AdReportRun extends APINode {
       "adset_name",
       "adset_start",
       "age_targeting",
+      "attribution_setting",
       "auction_bid",
       "auction_competitiveness",
       "auction_max_competitor_bid",
@@ -750,6 +751,13 @@ public class AdReportRun extends APINode {
     }
     public APIRequestGetInsights requestAgeTargetingField (boolean value) {
       this.requestField("age_targeting", value);
+      return this;
+    }
+    public APIRequestGetInsights requestAttributionSettingField () {
+      return this.requestAttributionSettingField(true);
+    }
+    public APIRequestGetInsights requestAttributionSettingField (boolean value) {
+      this.requestField("attribution_setting", value);
       return this;
     }
     public APIRequestGetInsights requestAuctionBidField () {
@@ -1817,6 +1825,8 @@ public class AdReportRun extends APINode {
       VALUE_CONVERSION("conversion"),
       @SerializedName("impression")
       VALUE_IMPRESSION("impression"),
+      @SerializedName("mixed")
+      VALUE_MIXED("mixed"),
       ;
 
       private String value;
@@ -1913,8 +1923,8 @@ public class AdReportRun extends APINode {
       VALUE_LAST_WEEK_SUN_SAT("last_week_sun_sat"),
       @SerializedName("last_year")
       VALUE_LAST_YEAR("last_year"),
-      @SerializedName("lifetime")
-      VALUE_LIFETIME("lifetime"),
+      @SerializedName("maximum")
+      VALUE_MAXIMUM("maximum"),
       @SerializedName("this_month")
       VALUE_THIS_MONTH("this_month"),
       @SerializedName("this_quarter")
