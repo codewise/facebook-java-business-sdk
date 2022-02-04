@@ -67,6 +67,8 @@ public class InvoiceCampaign extends APINode {
   private Long mClicks = null;
   @SerializedName("conversions")
   private Long mConversions = null;
+  @SerializedName("description")
+  private String mDescription = null;
   @SerializedName("impressions")
   private Long mImpressions = null;
   @SerializedName("tags")
@@ -281,6 +283,15 @@ public class InvoiceCampaign extends APINode {
     return this;
   }
 
+  public String getFieldDescription() {
+    return mDescription;
+  }
+
+  public InvoiceCampaign setFieldDescription(String value) {
+    this.mDescription = value;
+    return this;
+  }
+
   public Long getFieldImpressions() {
     return mImpressions;
   }
@@ -322,6 +333,7 @@ public class InvoiceCampaign extends APINode {
     this.mCampaignName = instance.mCampaignName;
     this.mClicks = instance.mClicks;
     this.mConversions = instance.mConversions;
+    this.mDescription = instance.mDescription;
     this.mImpressions = instance.mImpressions;
     this.mTags = instance.mTags;
     this.context = instance.context;

@@ -119,6 +119,8 @@ public class VehicleOffer extends APINode {
   private String mTitle = null;
   @SerializedName("trim")
   private String mTrim = null;
+  @SerializedName("unit_price")
+  private Object mUnitPrice = null;
   @SerializedName("url")
   private String mUrl = null;
   @SerializedName("vehicle_offer_id")
@@ -477,6 +479,10 @@ public class VehicleOffer extends APINode {
 
   public String getFieldTrim() {
     return mTrim;
+  }
+
+  public Object getFieldUnitPrice() {
+    return mUnitPrice;
   }
 
   public String getFieldUrl() {
@@ -864,6 +870,7 @@ public class VehicleOffer extends APINode {
       "term_qualifier",
       "title",
       "trim",
+      "unit_price",
       "url",
       "vehicle_offer_id",
       "year",
@@ -1182,6 +1189,13 @@ public class VehicleOffer extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGet requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGet requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGet requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1279,6 +1293,7 @@ public class VehicleOffer extends APINode {
     this.mTermQualifier = instance.mTermQualifier;
     this.mTitle = instance.mTitle;
     this.mTrim = instance.mTrim;
+    this.mUnitPrice = instance.mUnitPrice;
     this.mUrl = instance.mUrl;
     this.mVehicleOfferId = instance.mVehicleOfferId;
     this.mYear = instance.mYear;

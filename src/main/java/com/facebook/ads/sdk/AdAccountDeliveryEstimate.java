@@ -61,8 +61,14 @@ public class AdAccountDeliveryEstimate extends APINode {
   private Long mEstimateDau = null;
   @SerializedName("estimate_mau")
   private Long mEstimateMau = null;
+  @SerializedName("estimate_mau_lower_bound")
+  private Long mEstimateMauLowerBound = null;
+  @SerializedName("estimate_mau_upper_bound")
+  private Long mEstimateMauUpperBound = null;
   @SerializedName("estimate_ready")
   private Boolean mEstimateReady = null;
+  @SerializedName("targeting_optimization_types")
+  private Map<String, Long> mTargetingOptimizationTypes = null;
   protected static Gson gson = null;
 
   public AdAccountDeliveryEstimate() {
@@ -246,6 +252,24 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
+  public Long getFieldEstimateMauLowerBound() {
+    return mEstimateMauLowerBound;
+  }
+
+  public AdAccountDeliveryEstimate setFieldEstimateMauLowerBound(Long value) {
+    this.mEstimateMauLowerBound = value;
+    return this;
+  }
+
+  public Long getFieldEstimateMauUpperBound() {
+    return mEstimateMauUpperBound;
+  }
+
+  public AdAccountDeliveryEstimate setFieldEstimateMauUpperBound(Long value) {
+    this.mEstimateMauUpperBound = value;
+    return this;
+  }
+
   public Boolean getFieldEstimateReady() {
     return mEstimateReady;
   }
@@ -255,19 +279,26 @@ public class AdAccountDeliveryEstimate extends APINode {
     return this;
   }
 
+  public Map<String, Long> getFieldTargetingOptimizationTypes() {
+    return mTargetingOptimizationTypes;
+  }
+
+  public AdAccountDeliveryEstimate setFieldTargetingOptimizationTypes(Map<String, Long> value) {
+    this.mTargetingOptimizationTypes = value;
+    return this;
+  }
+
 
 
   public static enum EnumOptimizationGoal {
       @SerializedName("AD_RECALL_LIFT")
       VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("APP_INSTALLS")
       VALUE_APP_INSTALLS("APP_INSTALLS"),
-      @SerializedName("BRAND_AWARENESS")
-      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("CLICKS")
-      VALUE_CLICKS("CLICKS"),
+      @SerializedName("APP_INSTALLS_AND_OFFSITE_CONVERSIONS")
+      VALUE_APP_INSTALLS_AND_OFFSITE_CONVERSIONS("APP_INSTALLS_AND_OFFSITE_CONVERSIONS"),
+      @SerializedName("CONVERSATIONS")
+      VALUE_CONVERSATIONS("CONVERSATIONS"),
       @SerializedName("DERIVED_EVENTS")
       VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       @SerializedName("ENGAGED_USERS")
@@ -284,12 +315,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_LINK_CLICKS("LINK_CLICKS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OFFER_CLAIMS")
-      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("OFFSITE_CONVERSIONS")
       VALUE_OFFSITE_CONVERSIONS("OFFSITE_CONVERSIONS"),
-      @SerializedName("PAGE_ENGAGEMENT")
-      VALUE_PAGE_ENGAGEMENT("PAGE_ENGAGEMENT"),
       @SerializedName("PAGE_LIKES")
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
@@ -300,14 +327,8 @@ public class AdAccountDeliveryEstimate extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
-      @SerializedName("REPLIES")
-      VALUE_REPLIES("REPLIES"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
-      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
       @SerializedName("VISIT_INSTAGRAM_PROFILE")
@@ -344,7 +365,10 @@ public class AdAccountDeliveryEstimate extends APINode {
     this.mDailyOutcomesCurve = instance.mDailyOutcomesCurve;
     this.mEstimateDau = instance.mEstimateDau;
     this.mEstimateMau = instance.mEstimateMau;
+    this.mEstimateMauLowerBound = instance.mEstimateMauLowerBound;
+    this.mEstimateMauUpperBound = instance.mEstimateMauUpperBound;
     this.mEstimateReady = instance.mEstimateReady;
+    this.mTargetingOptimizationTypes = instance.mTargetingOptimizationTypes;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

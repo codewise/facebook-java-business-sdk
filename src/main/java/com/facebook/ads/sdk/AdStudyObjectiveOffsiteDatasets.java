@@ -54,25 +54,25 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class ProductFeedUploadDiagnosticsReport extends APINode {
-  @SerializedName("last_updated_time")
-  private String mLastUpdatedTime = null;
-  @SerializedName("report_url")
-  private String mReportUrl = null;
+public class AdStudyObjectiveOffsiteDatasets extends APINode {
+  @SerializedName("event_names")
+  private List<String> mEventNames = null;
+  @SerializedName("id")
+  private String mId = null;
   protected static Gson gson = null;
 
-  public ProductFeedUploadDiagnosticsReport() {
+  public AdStudyObjectiveOffsiteDatasets() {
   }
 
   public String getId() {
-    return null;
+    return getFieldId().toString();
   }
-  public static ProductFeedUploadDiagnosticsReport loadJSON(String json, APIContext context, String header) {
-    ProductFeedUploadDiagnosticsReport productFeedUploadDiagnosticsReport = getGson().fromJson(json, ProductFeedUploadDiagnosticsReport.class);
+  public static AdStudyObjectiveOffsiteDatasets loadJSON(String json, APIContext context, String header) {
+    AdStudyObjectiveOffsiteDatasets adStudyObjectiveOffsiteDatasets = getGson().fromJson(json, AdStudyObjectiveOffsiteDatasets.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(productFeedUploadDiagnosticsReport.toString());
+      JsonElement o2 = parser.parse(adStudyObjectiveOffsiteDatasets.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -82,14 +82,14 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    productFeedUploadDiagnosticsReport.context = context;
-    productFeedUploadDiagnosticsReport.rawValue = json;
-    productFeedUploadDiagnosticsReport.header = header;
-    return productFeedUploadDiagnosticsReport;
+    adStudyObjectiveOffsiteDatasets.context = context;
+    adStudyObjectiveOffsiteDatasets.rawValue = json;
+    adStudyObjectiveOffsiteDatasets.header = header;
+    return adStudyObjectiveOffsiteDatasets;
   }
 
-  public static APINodeList<ProductFeedUploadDiagnosticsReport> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<ProductFeedUploadDiagnosticsReport> productFeedUploadDiagnosticsReports = new APINodeList<ProductFeedUploadDiagnosticsReport>(request, json, header);
+  public static APINodeList<AdStudyObjectiveOffsiteDatasets> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<AdStudyObjectiveOffsiteDatasets> adStudyObjectiveOffsiteDatasetss = new APINodeList<AdStudyObjectiveOffsiteDatasets>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -100,9 +100,9 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          productFeedUploadDiagnosticsReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          adStudyObjectiveOffsiteDatasetss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return productFeedUploadDiagnosticsReports;
+        return adStudyObjectiveOffsiteDatasetss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -112,20 +112,20 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                productFeedUploadDiagnosticsReports.setCursors(before, after);
+                adStudyObjectiveOffsiteDatasetss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            productFeedUploadDiagnosticsReports.setPaging(previous, next);
+            adStudyObjectiveOffsiteDatasetss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              productFeedUploadDiagnosticsReports.setAppSecret(context.getAppSecretProof());
+              adStudyObjectiveOffsiteDatasetss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              productFeedUploadDiagnosticsReports.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -136,23 +136,23 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  productFeedUploadDiagnosticsReports.add(loadJSON(entry.getValue().toString(), context, header));
+                  adStudyObjectiveOffsiteDatasetss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              productFeedUploadDiagnosticsReports.add(loadJSON(obj.toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return productFeedUploadDiagnosticsReports;
+          return adStudyObjectiveOffsiteDatasetss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              productFeedUploadDiagnosticsReports.add(loadJSON(entry.getValue().toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return productFeedUploadDiagnosticsReports;
+          return adStudyObjectiveOffsiteDatasetss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -169,20 +169,20 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              productFeedUploadDiagnosticsReports.add(loadJSON(value.toString(), context, header));
+              adStudyObjectiveOffsiteDatasetss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return productFeedUploadDiagnosticsReports;
+            return adStudyObjectiveOffsiteDatasetss;
           }
 
           // Sixth, check if it's pure JsonObject
-          productFeedUploadDiagnosticsReports.clear();
-          productFeedUploadDiagnosticsReports.add(loadJSON(json, context, header));
-          return productFeedUploadDiagnosticsReports;
+          adStudyObjectiveOffsiteDatasetss.clear();
+          adStudyObjectiveOffsiteDatasetss.add(loadJSON(json, context, header));
+          return adStudyObjectiveOffsiteDatasetss;
         }
       }
     } catch (Exception e) {
@@ -210,21 +210,21 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
   }
 
 
-  public String getFieldLastUpdatedTime() {
-    return mLastUpdatedTime;
+  public List<String> getFieldEventNames() {
+    return mEventNames;
   }
 
-  public ProductFeedUploadDiagnosticsReport setFieldLastUpdatedTime(String value) {
-    this.mLastUpdatedTime = value;
+  public AdStudyObjectiveOffsiteDatasets setFieldEventNames(List<String> value) {
+    this.mEventNames = value;
     return this;
   }
 
-  public String getFieldReportUrl() {
-    return mReportUrl;
+  public String getFieldId() {
+    return mId;
   }
 
-  public ProductFeedUploadDiagnosticsReport setFieldReportUrl(String value) {
-    this.mReportUrl = value;
+  public AdStudyObjectiveOffsiteDatasets setFieldId(String value) {
+    this.mId = value;
     return this;
   }
 
@@ -244,18 +244,18 @@ public class ProductFeedUploadDiagnosticsReport extends APINode {
     return gson;
   }
 
-  public ProductFeedUploadDiagnosticsReport copyFrom(ProductFeedUploadDiagnosticsReport instance) {
-    this.mLastUpdatedTime = instance.mLastUpdatedTime;
-    this.mReportUrl = instance.mReportUrl;
+  public AdStudyObjectiveOffsiteDatasets copyFrom(AdStudyObjectiveOffsiteDatasets instance) {
+    this.mEventNames = instance.mEventNames;
+    this.mId = instance.mId;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<ProductFeedUploadDiagnosticsReport> getParser() {
-    return new APIRequest.ResponseParser<ProductFeedUploadDiagnosticsReport>() {
-      public APINodeList<ProductFeedUploadDiagnosticsReport> parseResponse(String response, APIContext context, APIRequest<ProductFeedUploadDiagnosticsReport> request, String header) throws MalformedResponseException {
-        return ProductFeedUploadDiagnosticsReport.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<AdStudyObjectiveOffsiteDatasets> getParser() {
+    return new APIRequest.ResponseParser<AdStudyObjectiveOffsiteDatasets>() {
+      public APINodeList<AdStudyObjectiveOffsiteDatasets> parseResponse(String response, APIContext context, APIRequest<AdStudyObjectiveOffsiteDatasets> request, String header) throws MalformedResponseException {
+        return AdStudyObjectiveOffsiteDatasets.parseResponse(response, context, request, header);
       }
     };
   }

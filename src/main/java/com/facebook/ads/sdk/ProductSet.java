@@ -67,6 +67,8 @@ public class ProductSet extends APINode {
   private ProductSetMetadata mLiveMetadata = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("ordering_info")
+  private List<Long> mOrderingInfo = null;
   @SerializedName("product_catalog")
   private ProductCatalog mProductCatalog = null;
   @SerializedName("product_count")
@@ -355,6 +357,10 @@ public class ProductSet extends APINode {
     return mName;
   }
 
+  public List<Long> getFieldOrderingInfo() {
+    return mOrderingInfo;
+  }
+
   public ProductCatalog getFieldProductCatalog() {
     if (mProductCatalog != null) {
       mProductCatalog.context = getContext();
@@ -411,6 +417,7 @@ public class ProductSet extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "year",
     };
@@ -704,6 +711,13 @@ public class ProductSet extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGetAutomotiveModels requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetAutomotiveModels requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetAutomotiveModels requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -747,6 +761,7 @@ public class ProductSet extends APINode {
       "price_change",
       "sanitized_images",
       "types",
+      "unit_price",
       "url",
     };
 
@@ -955,6 +970,13 @@ public class ProductSet extends APINode {
       this.requestField("types", value);
       return this;
     }
+    public APIRequestGetDestinations requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetDestinations requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetDestinations requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -993,6 +1015,7 @@ public class ProductSet extends APINode {
       "origin_city",
       "price",
       "sanitized_images",
+      "unit_price",
       "url",
     };
 
@@ -1215,6 +1238,13 @@ public class ProductSet extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGetFlights requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetFlights requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetFlights requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1279,6 +1309,7 @@ public class ProductSet extends APINode {
       "price",
       "property_type",
       "sanitized_images",
+      "unit_price",
       "url",
       "year_built",
     };
@@ -1684,6 +1715,13 @@ public class ProductSet extends APINode {
       this.requestField("sanitized_images", value);
       return this;
     }
+    public APIRequestGetHomeListings requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHomeListings requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetHomeListings requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -1733,6 +1771,7 @@ public class ProductSet extends APINode {
       "sale_price",
       "sanitized_images",
       "star_rating",
+      "unit_price",
       "url",
     };
 
@@ -1983,6 +2022,13 @@ public class ProductSet extends APINode {
       this.requestField("star_rating", value);
       return this;
     }
+    public APIRequestGetHotels requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetHotels requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetHotels requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -2160,13 +2206,18 @@ public class ProductSet extends APINode {
       "image_fetch_status",
       "image_url",
       "images",
+      "importer_address",
+      "importer_name",
+      "invalidation_errors",
       "inventory",
+      "manufacturer_info",
       "manufacturer_part_number",
       "marked_for_product_launch",
       "material",
       "mobile_link",
       "name",
       "ordering_index",
+      "origin_country",
       "parent_product_id",
       "pattern",
       "price",
@@ -2515,11 +2566,39 @@ public class ProductSet extends APINode {
       this.requestField("images", value);
       return this;
     }
+    public APIRequestGetProducts requestImporterAddressField () {
+      return this.requestImporterAddressField(true);
+    }
+    public APIRequestGetProducts requestImporterAddressField (boolean value) {
+      this.requestField("importer_address", value);
+      return this;
+    }
+    public APIRequestGetProducts requestImporterNameField () {
+      return this.requestImporterNameField(true);
+    }
+    public APIRequestGetProducts requestImporterNameField (boolean value) {
+      this.requestField("importer_name", value);
+      return this;
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField () {
+      return this.requestInvalidationErrorsField(true);
+    }
+    public APIRequestGetProducts requestInvalidationErrorsField (boolean value) {
+      this.requestField("invalidation_errors", value);
+      return this;
+    }
     public APIRequestGetProducts requestInventoryField () {
       return this.requestInventoryField(true);
     }
     public APIRequestGetProducts requestInventoryField (boolean value) {
       this.requestField("inventory", value);
+      return this;
+    }
+    public APIRequestGetProducts requestManufacturerInfoField () {
+      return this.requestManufacturerInfoField(true);
+    }
+    public APIRequestGetProducts requestManufacturerInfoField (boolean value) {
+      this.requestField("manufacturer_info", value);
       return this;
     }
     public APIRequestGetProducts requestManufacturerPartNumberField () {
@@ -2562,6 +2641,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestOrderingIndexField (boolean value) {
       this.requestField("ordering_index", value);
+      return this;
+    }
+    public APIRequestGetProducts requestOriginCountryField () {
+      return this.requestOriginCountryField(true);
+    }
+    public APIRequestGetProducts requestOriginCountryField (boolean value) {
+      this.requestField("origin_country", value);
       return this;
     }
     public APIRequestGetProducts requestParentProductIdField () {
@@ -2765,6 +2851,7 @@ public class ProductSet extends APINode {
       "term_qualifier",
       "title",
       "trim",
+      "unit_price",
       "url",
       "vehicle_offer_id",
       "year",
@@ -3101,6 +3188,13 @@ public class ProductSet extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetVehicleOffers requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -3176,6 +3270,7 @@ public class ProductSet extends APINode {
       "title",
       "transmission",
       "trim",
+      "unit_price",
       "url",
       "vehicle_id",
       "vehicle_registration_plate",
@@ -3565,6 +3660,13 @@ public class ProductSet extends APINode {
       this.requestField("trim", value);
       return this;
     }
+    public APIRequestGetVehicles requestUnitPriceField () {
+      return this.requestUnitPriceField(true);
+    }
+    public APIRequestGetVehicles requestUnitPriceField (boolean value) {
+      this.requestField("unit_price", value);
+      return this;
+    }
     public APIRequestGetVehicles requestUrlField () {
       return this.requestUrlField(true);
     }
@@ -3747,6 +3849,7 @@ public class ProductSet extends APINode {
       "latest_metadata",
       "live_metadata",
       "name",
+      "ordering_info",
       "product_catalog",
       "product_count",
       "retailer_id",
@@ -3883,6 +3986,13 @@ public class ProductSet extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestOrderingInfoField () {
+      return this.requestOrderingInfoField(true);
+    }
+    public APIRequestGet requestOrderingInfoField (boolean value) {
+      this.requestField("ordering_info", value);
+      return this;
+    }
     public APIRequestGet requestProductCatalogField () {
       return this.requestProductCatalogField(true);
     }
@@ -3917,6 +4027,8 @@ public class ProductSet extends APINode {
       "filter",
       "metadata",
       "name",
+      "ordering_info",
+      "publish_to_shops",
       "retailer_id",
     };
 
@@ -3999,6 +4111,24 @@ public class ProductSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setOrderingInfo (List<Long> orderingInfo) {
+      this.setParam("ordering_info", orderingInfo);
+      return this;
+    }
+    public APIRequestUpdate setOrderingInfo (String orderingInfo) {
+      this.setParam("ordering_info", orderingInfo);
+      return this;
+    }
+
+    public APIRequestUpdate setPublishToShops (List<Map<String, String>> publishToShops) {
+      this.setParam("publish_to_shops", publishToShops);
+      return this;
+    }
+    public APIRequestUpdate setPublishToShops (String publishToShops) {
+      this.setParam("publish_to_shops", publishToShops);
+      return this;
+    }
+
     public APIRequestUpdate setRetailerId (String retailerId) {
       this.setParam("retailer_id", retailerId);
       return this;
@@ -4063,6 +4193,7 @@ public class ProductSet extends APINode {
     this.mLatestMetadata = instance.mLatestMetadata;
     this.mLiveMetadata = instance.mLiveMetadata;
     this.mName = instance.mName;
+    this.mOrderingInfo = instance.mOrderingInfo;
     this.mProductCatalog = instance.mProductCatalog;
     this.mProductCount = instance.mProductCount;
     this.mRetailerId = instance.mRetailerId;

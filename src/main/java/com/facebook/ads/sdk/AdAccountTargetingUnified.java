@@ -57,6 +57,10 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdAccountTargetingUnified extends APINode {
   @SerializedName("audience_size")
   private Long mAudienceSize = null;
+  @SerializedName("audience_size_lower_bound")
+  private Long mAudienceSizeLowerBound = null;
+  @SerializedName("audience_size_upper_bound")
+  private Long mAudienceSizeUpperBound = null;
   @SerializedName("conversion_lift")
   private Double mConversionLift = null;
   @SerializedName("description")
@@ -256,6 +260,24 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified setFieldAudienceSize(Long value) {
     this.mAudienceSize = value;
+    return this;
+  }
+
+  public Long getFieldAudienceSizeLowerBound() {
+    return mAudienceSizeLowerBound;
+  }
+
+  public AdAccountTargetingUnified setFieldAudienceSizeLowerBound(Long value) {
+    this.mAudienceSizeLowerBound = value;
+    return this;
+  }
+
+  public Long getFieldAudienceSizeUpperBound() {
+    return mAudienceSizeUpperBound;
+  }
+
+  public AdAccountTargetingUnified setFieldAudienceSizeUpperBound(Long value) {
+    this.mAudienceSizeUpperBound = value;
     return this;
   }
 
@@ -528,6 +550,8 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
+      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
       ;
 
       private String value;
@@ -802,6 +826,16 @@ public class AdAccountTargetingUnified extends APINode {
   public static enum EnumAppStore {
       @SerializedName("amazon_app_store")
       VALUE_AMAZON_APP_STORE("amazon_app_store"),
+      @SerializedName("apk_mirror")
+      VALUE_APK_MIRROR("apk_mirror"),
+      @SerializedName("apk_monk")
+      VALUE_APK_MONK("apk_monk"),
+      @SerializedName("apk_pure")
+      VALUE_APK_PURE("apk_pure"),
+      @SerializedName("aptoide_a1_store")
+      VALUE_APTOIDE_A1_STORE("aptoide_a1_store"),
+      @SerializedName("bemobi_mobile_store")
+      VALUE_BEMOBI_MOBILE_STORE("bemobi_mobile_store"),
       @SerializedName("does_not_exist")
       VALUE_DOES_NOT_EXIST("does_not_exist"),
       @SerializedName("fb_android_store")
@@ -822,12 +856,20 @@ public class AdAccountTargetingUnified extends APINode {
       VALUE_ITUNES_IPAD("itunes_ipad"),
       @SerializedName("oculus_app_store")
       VALUE_OCULUS_APP_STORE("oculus_app_store"),
+      @SerializedName("oppo")
+      VALUE_OPPO("oppo"),
       @SerializedName("roku_channel_store")
       VALUE_ROKU_CHANNEL_STORE("roku_channel_store"),
+      @SerializedName("uptodown")
+      VALUE_UPTODOWN("uptodown"),
+      @SerializedName("vivo")
+      VALUE_VIVO("vivo"),
       @SerializedName("windows_10_store")
       VALUE_WINDOWS_10_STORE("windows_10_store"),
       @SerializedName("windows_store")
       VALUE_WINDOWS_STORE("windows_store"),
+      @SerializedName("xiaomi")
+      VALUE_XIAOMI("xiaomi"),
       ;
 
       private String value;
@@ -926,6 +968,8 @@ public class AdAccountTargetingUnified extends APINode {
 
   public AdAccountTargetingUnified copyFrom(AdAccountTargetingUnified instance) {
     this.mAudienceSize = instance.mAudienceSize;
+    this.mAudienceSizeLowerBound = instance.mAudienceSizeLowerBound;
+    this.mAudienceSizeUpperBound = instance.mAudienceSizeUpperBound;
     this.mConversionLift = instance.mConversionLift;
     this.mDescription = instance.mDescription;
     this.mId = instance.mId;

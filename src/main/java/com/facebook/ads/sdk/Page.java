@@ -219,6 +219,8 @@ public class Page extends APINode {
   private String mMerchantId = null;
   @SerializedName("merchant_review_status")
   private String mMerchantReviewStatus = null;
+  @SerializedName("messaging_feature_status")
+  private MessagingFeatureStatus mMessagingFeatureStatus = null;
   @SerializedName("messenger_ads_default_icebreakers")
   private List<String> mMessengerAdsDefaultIcebreakers = null;
   @SerializedName("messenger_ads_default_page_welcome_message")
@@ -227,6 +229,8 @@ public class Page extends APINode {
   private List<String> mMessengerAdsDefaultQuickReplies = null;
   @SerializedName("messenger_ads_quick_replies_type")
   private String mMessengerAdsQuickRepliesType = null;
+  @SerializedName("mini_shop_storefront")
+  private Shop mMiniShopStorefront = null;
   @SerializedName("mission")
   private String mMission = null;
   @SerializedName("mpg")
@@ -592,10 +596,6 @@ public class Page extends APINode {
     return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetAudioIsrcs getAudioIsrcs() {
-    return new APIRequestGetAudioIsrcs(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestDeleteBlocked deleteBlocked() {
     return new APIRequestDeleteBlocked(this.getPrefixedId().toString(), context);
   }
@@ -608,12 +608,12 @@ public class Page extends APINode {
     return new APIRequestCreateBlocked(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestDeleteBusinessData deleteBusinessData() {
-    return new APIRequestDeleteBusinessData(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestCreateBusinessDatum createBusinessDatum() {
     return new APIRequestCreateBusinessDatum(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetBusinessProjects getBusinessProjects() {
+    return new APIRequestGetBusinessProjects(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetCallToActions getCallToActions() {
@@ -634,6 +634,14 @@ public class Page extends APINode {
 
   public APIRequestCreateCanvase createCanvase() {
     return new APIRequestCreateCanvase(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetChatPlugin getChatPlugin() {
+    return new APIRequestGetChatPlugin(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestCreateChatPlugin createChatPlugin() {
+    return new APIRequestCreateChatPlugin(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetClaimedUrls getClaimedUrls() {
@@ -734,6 +742,10 @@ public class Page extends APINode {
 
   public APIRequestGetInsights getInsights() {
     return new APIRequestGetInsights(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetInsightsExports getInsightsExports() {
+    return new APIRequestGetInsightsExports(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetInstagramAccounts getInstagramAccounts() {
@@ -1373,14 +1385,15 @@ public class Page extends APINode {
     return mMerchantReviewStatus;
   }
 
+  public MessagingFeatureStatus getFieldMessagingFeatureStatus() {
+    return mMessagingFeatureStatus;
+  }
+
   public List<String> getFieldMessengerAdsDefaultIcebreakers() {
     return mMessengerAdsDefaultIcebreakers;
   }
 
   public MessengerDestinationPageWelcomeMessage getFieldMessengerAdsDefaultPageWelcomeMessage() {
-    if (mMessengerAdsDefaultPageWelcomeMessage != null) {
-      mMessengerAdsDefaultPageWelcomeMessage.context = getContext();
-    }
     return mMessengerAdsDefaultPageWelcomeMessage;
   }
 
@@ -1390,6 +1403,13 @@ public class Page extends APINode {
 
   public String getFieldMessengerAdsQuickRepliesType() {
     return mMessengerAdsQuickRepliesType;
+  }
+
+  public Shop getFieldMiniShopStorefront() {
+    if (mMiniShopStorefront != null) {
+      mMiniShopStorefront.context = getContext();
+    }
+    return mMiniShopStorefront;
   }
 
   public String getFieldMission() {
@@ -2591,12 +2611,13 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "block_offline_analytics",
+      "collaborative_ads_managed_partner_business_info",
+      "collaborative_ads_managed_partner_eligibility",
       "created_by",
       "created_time",
       "extended_updated_time",
       "id",
       "is_hidden",
-      "is_instagram_enabled_in_fb_analytics",
       "link",
       "name",
       "primary_page",
@@ -2706,6 +2727,20 @@ public class Page extends APINode {
       this.requestField("block_offline_analytics", value);
       return this;
     }
+    public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField () {
+      return this.requestCollaborativeAdsManagedPartnerBusinessInfoField(true);
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_business_info", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField () {
+      return this.requestCollaborativeAdsManagedPartnerEligibilityField(true);
+    }
+    public APIRequestGetAgencies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
     public APIRequestGetAgencies requestCreatedByField () {
       return this.requestCreatedByField(true);
     }
@@ -2739,13 +2774,6 @@ public class Page extends APINode {
     }
     public APIRequestGetAgencies requestIsHiddenField (boolean value) {
       this.requestField("is_hidden", value);
-      return this;
-    }
-    public APIRequestGetAgencies requestIsInstagramEnabledInFbAnalyticsField () {
-      return this.requestIsInstagramEnabledInFbAnalyticsField(true);
-    }
-    public APIRequestGetAgencies requestIsInstagramEnabledInFbAnalyticsField (boolean value) {
-      this.requestField("is_instagram_enabled_in_fb_analytics", value);
       return this;
     }
     public APIRequestGetAgencies requestLinkField () {
@@ -3615,110 +3643,6 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestGetAudioIsrcs extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetAudioIsrcs.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetAudioIsrcs(String nodeId, APIContext context) {
-      super(context, nodeId, "/audio_isrcs", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetAudioIsrcs requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetAudioIsrcs requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetAudioIsrcs requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestDeleteBlocked extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -4215,185 +4139,48 @@ public class Page extends APINode {
 
   }
 
-  public static class APIRequestDeleteBusinessData extends APIRequest<APINode> {
+  public static class APIRequestCreateBusinessDatum extends APIRequest<APINode> {
 
-    APINodeList<APINode> lastResponse = null;
+    APINode lastResponse = null;
     @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "email",
-      "external_id",
-      "object_name",
-      "order_id",
-      "order_item_id",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestDeleteBusinessData.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestDeleteBusinessData(String nodeId, APIContext context) {
-      super(context, nodeId, "/business_data", "DELETE", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestDeleteBusinessData setEmail (String email) {
-      this.setParam("email", email);
-      return this;
-    }
-
-    public APIRequestDeleteBusinessData setExternalId (String externalId) {
-      this.setParam("external_id", externalId);
-      return this;
-    }
-
-    public APIRequestDeleteBusinessData setObjectName (EnumObjectName objectName) {
-      this.setParam("object_name", objectName);
-      return this;
-    }
-    public APIRequestDeleteBusinessData setObjectName (String objectName) {
-      this.setParam("object_name", objectName);
-      return this;
-    }
-
-    public APIRequestDeleteBusinessData setOrderId (String orderId) {
-      this.setParam("order_id", orderId);
-      return this;
-    }
-
-    public APIRequestDeleteBusinessData setOrderItemId (String orderItemId) {
-      this.setParam("order_item_id", orderItemId);
-      return this;
-    }
-
-    public APIRequestDeleteBusinessData requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestDeleteBusinessData requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestDeleteBusinessData requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateBusinessDatum extends APIRequest<Page> {
-
-    Page lastResponse = null;
-    @Override
-    public Page getLastResponse() {
+    public APINode getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
       "data",
       "partner_agent",
+      "processing_type",
     };
 
     public static final String[] FIELDS = {
     };
 
     @Override
-    public Page parseResponse(String response, String header) throws APIException {
-      return Page.parseResponse(response, getContext(), this, header).head();
+    public APINode parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Page execute() throws APIException {
+    public APINode execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Page execute(Map<String, Object> extraParams) throws APIException {
+    public APINode execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Page> executeAsync() throws APIException {
+    public ListenableFuture<APINode> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Page>() {
-           public Page apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, APINode>() {
+           public APINode apply(ResponseWrapper result) {
              try {
                return APIRequestCreateBusinessDatum.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -4435,6 +4222,11 @@ public class Page extends APINode {
       return this;
     }
 
+    public APIRequestCreateBusinessDatum setProcessingType (String processingType) {
+      this.setParam("processing_type", processingType);
+      return this;
+    }
+
     public APIRequestCreateBusinessDatum requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -4467,6 +4259,116 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateBusinessDatum requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetBusinessProjects extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "business",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBusinessProjects.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBusinessProjects(String nodeId, APIContext context) {
+      super(context, nodeId, "/businessprojects", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBusinessProjects setBusiness (String business) {
+      this.setParam("business", business);
+      return this;
+    }
+
+    public APIRequestGetBusinessProjects requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBusinessProjects requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBusinessProjects requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -5070,7 +4972,14 @@ public class Page extends APINode {
     public static final String[] FIELDS = {
       "background_color",
       "body_elements",
+      "business_id",
       "canvas_link",
+      "collection_hero_image",
+      "collection_hero_video",
+      "collection_thumbnails",
+      "element_payload",
+      "elements",
+      "fb_body_elements",
       "id",
       "is_hidden",
       "is_published",
@@ -5078,8 +4987,15 @@ public class Page extends APINode {
       "linked_documents",
       "name",
       "owner",
+      "property_list",
       "source_template",
+      "store_url",
+      "style_list",
+      "tags",
+      "ui_property_list",
+      "unused_body_elements",
       "update_time",
+      "use_retailer_item_ids",
     };
 
     @Override
@@ -5203,11 +5119,60 @@ public class Page extends APINode {
       this.requestField("body_elements", value);
       return this;
     }
+    public APIRequestGetCanvases requestBusinessIdField () {
+      return this.requestBusinessIdField(true);
+    }
+    public APIRequestGetCanvases requestBusinessIdField (boolean value) {
+      this.requestField("business_id", value);
+      return this;
+    }
     public APIRequestGetCanvases requestCanvasLinkField () {
       return this.requestCanvasLinkField(true);
     }
     public APIRequestGetCanvases requestCanvasLinkField (boolean value) {
       this.requestField("canvas_link", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestCollectionHeroImageField () {
+      return this.requestCollectionHeroImageField(true);
+    }
+    public APIRequestGetCanvases requestCollectionHeroImageField (boolean value) {
+      this.requestField("collection_hero_image", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestCollectionHeroVideoField () {
+      return this.requestCollectionHeroVideoField(true);
+    }
+    public APIRequestGetCanvases requestCollectionHeroVideoField (boolean value) {
+      this.requestField("collection_hero_video", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestCollectionThumbnailsField () {
+      return this.requestCollectionThumbnailsField(true);
+    }
+    public APIRequestGetCanvases requestCollectionThumbnailsField (boolean value) {
+      this.requestField("collection_thumbnails", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestElementPayloadField () {
+      return this.requestElementPayloadField(true);
+    }
+    public APIRequestGetCanvases requestElementPayloadField (boolean value) {
+      this.requestField("element_payload", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestElementsField () {
+      return this.requestElementsField(true);
+    }
+    public APIRequestGetCanvases requestElementsField (boolean value) {
+      this.requestField("elements", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestFbBodyElementsField () {
+      return this.requestFbBodyElementsField(true);
+    }
+    public APIRequestGetCanvases requestFbBodyElementsField (boolean value) {
+      this.requestField("fb_body_elements", value);
       return this;
     }
     public APIRequestGetCanvases requestIdField () {
@@ -5259,6 +5224,13 @@ public class Page extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetCanvases requestPropertyListField () {
+      return this.requestPropertyListField(true);
+    }
+    public APIRequestGetCanvases requestPropertyListField (boolean value) {
+      this.requestField("property_list", value);
+      return this;
+    }
     public APIRequestGetCanvases requestSourceTemplateField () {
       return this.requestSourceTemplateField(true);
     }
@@ -5266,11 +5238,53 @@ public class Page extends APINode {
       this.requestField("source_template", value);
       return this;
     }
+    public APIRequestGetCanvases requestStoreUrlField () {
+      return this.requestStoreUrlField(true);
+    }
+    public APIRequestGetCanvases requestStoreUrlField (boolean value) {
+      this.requestField("store_url", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestStyleListField () {
+      return this.requestStyleListField(true);
+    }
+    public APIRequestGetCanvases requestStyleListField (boolean value) {
+      this.requestField("style_list", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetCanvases requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestUiPropertyListField () {
+      return this.requestUiPropertyListField(true);
+    }
+    public APIRequestGetCanvases requestUiPropertyListField (boolean value) {
+      this.requestField("ui_property_list", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestUnusedBodyElementsField () {
+      return this.requestUnusedBodyElementsField(true);
+    }
+    public APIRequestGetCanvases requestUnusedBodyElementsField (boolean value) {
+      this.requestField("unused_body_elements", value);
+      return this;
+    }
     public APIRequestGetCanvases requestUpdateTimeField () {
       return this.requestUpdateTimeField(true);
     }
     public APIRequestGetCanvases requestUpdateTimeField (boolean value) {
       this.requestField("update_time", value);
+      return this;
+    }
+    public APIRequestGetCanvases requestUseRetailerItemIdsField () {
+      return this.requestUseRetailerItemIdsField(true);
+    }
+    public APIRequestGetCanvases requestUseRetailerItemIdsField (boolean value) {
+      this.requestField("use_retailer_item_ids", value);
       return this;
     }
   }
@@ -5431,6 +5445,422 @@ public class Page extends APINode {
 
     @Override
     public APIRequestCreateCanvase requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetChatPlugin extends APIRequest<ChatPlugin> {
+
+    APINodeList<ChatPlugin> lastResponse = null;
+    @Override
+    public APINodeList<ChatPlugin> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "alignment",
+      "desktop_bottom_spacing",
+      "desktop_side_spacing",
+      "entry_point_icon",
+      "entry_point_label",
+      "greeting_dialog_display",
+      "guest_chat_mode",
+      "mobile_bottom_spacing",
+      "mobile_chat_display",
+      "mobile_side_spacing",
+      "theme_color",
+      "welcome_screen_greeting",
+    };
+
+    @Override
+    public APINodeList<ChatPlugin> parseResponse(String response, String header) throws APIException {
+      return ChatPlugin.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<ChatPlugin> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<ChatPlugin> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<ChatPlugin>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<ChatPlugin>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<ChatPlugin>>() {
+           public APINodeList<ChatPlugin> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetChatPlugin.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetChatPlugin(String nodeId, APIContext context) {
+      super(context, nodeId, "/chat_plugin", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetChatPlugin setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChatPlugin setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetChatPlugin requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetChatPlugin requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChatPlugin requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetChatPlugin requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChatPlugin requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetChatPlugin requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetChatPlugin requestAlignmentField () {
+      return this.requestAlignmentField(true);
+    }
+    public APIRequestGetChatPlugin requestAlignmentField (boolean value) {
+      this.requestField("alignment", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestDesktopBottomSpacingField () {
+      return this.requestDesktopBottomSpacingField(true);
+    }
+    public APIRequestGetChatPlugin requestDesktopBottomSpacingField (boolean value) {
+      this.requestField("desktop_bottom_spacing", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestDesktopSideSpacingField () {
+      return this.requestDesktopSideSpacingField(true);
+    }
+    public APIRequestGetChatPlugin requestDesktopSideSpacingField (boolean value) {
+      this.requestField("desktop_side_spacing", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestEntryPointIconField () {
+      return this.requestEntryPointIconField(true);
+    }
+    public APIRequestGetChatPlugin requestEntryPointIconField (boolean value) {
+      this.requestField("entry_point_icon", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestEntryPointLabelField () {
+      return this.requestEntryPointLabelField(true);
+    }
+    public APIRequestGetChatPlugin requestEntryPointLabelField (boolean value) {
+      this.requestField("entry_point_label", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestGreetingDialogDisplayField () {
+      return this.requestGreetingDialogDisplayField(true);
+    }
+    public APIRequestGetChatPlugin requestGreetingDialogDisplayField (boolean value) {
+      this.requestField("greeting_dialog_display", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestGuestChatModeField () {
+      return this.requestGuestChatModeField(true);
+    }
+    public APIRequestGetChatPlugin requestGuestChatModeField (boolean value) {
+      this.requestField("guest_chat_mode", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestMobileBottomSpacingField () {
+      return this.requestMobileBottomSpacingField(true);
+    }
+    public APIRequestGetChatPlugin requestMobileBottomSpacingField (boolean value) {
+      this.requestField("mobile_bottom_spacing", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestMobileChatDisplayField () {
+      return this.requestMobileChatDisplayField(true);
+    }
+    public APIRequestGetChatPlugin requestMobileChatDisplayField (boolean value) {
+      this.requestField("mobile_chat_display", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestMobileSideSpacingField () {
+      return this.requestMobileSideSpacingField(true);
+    }
+    public APIRequestGetChatPlugin requestMobileSideSpacingField (boolean value) {
+      this.requestField("mobile_side_spacing", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestThemeColorField () {
+      return this.requestThemeColorField(true);
+    }
+    public APIRequestGetChatPlugin requestThemeColorField (boolean value) {
+      this.requestField("theme_color", value);
+      return this;
+    }
+    public APIRequestGetChatPlugin requestWelcomeScreenGreetingField () {
+      return this.requestWelcomeScreenGreetingField(true);
+    }
+    public APIRequestGetChatPlugin requestWelcomeScreenGreetingField (boolean value) {
+      this.requestField("welcome_screen_greeting", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestCreateChatPlugin extends APIRequest<Page> {
+
+    Page lastResponse = null;
+    @Override
+    public Page getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "alignment",
+      "desktop_bottom_spacing",
+      "desktop_side_spacing",
+      "entry_point_icon",
+      "entry_point_label",
+      "greeting_dialog_display",
+      "guest_chat_mode",
+      "mobile_bottom_spacing",
+      "mobile_chat_display",
+      "mobile_side_spacing",
+      "theme_color",
+      "welcome_screen_greeting",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public Page parseResponse(String response, String header) throws APIException {
+      return Page.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public Page execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public Page execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<Page> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<Page> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, Page>() {
+           public Page apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateChatPlugin.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateChatPlugin(String nodeId, APIContext context) {
+      super(context, nodeId, "/chat_plugin", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateChatPlugin setAlignment (Page.EnumAlignment alignment) {
+      this.setParam("alignment", alignment);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setAlignment (String alignment) {
+      this.setParam("alignment", alignment);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setDesktopBottomSpacing (Long desktopBottomSpacing) {
+      this.setParam("desktop_bottom_spacing", desktopBottomSpacing);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setDesktopBottomSpacing (String desktopBottomSpacing) {
+      this.setParam("desktop_bottom_spacing", desktopBottomSpacing);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setDesktopSideSpacing (Long desktopSideSpacing) {
+      this.setParam("desktop_side_spacing", desktopSideSpacing);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setDesktopSideSpacing (String desktopSideSpacing) {
+      this.setParam("desktop_side_spacing", desktopSideSpacing);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setEntryPointIcon (Page.EnumEntryPointIcon entryPointIcon) {
+      this.setParam("entry_point_icon", entryPointIcon);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setEntryPointIcon (String entryPointIcon) {
+      this.setParam("entry_point_icon", entryPointIcon);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setEntryPointLabel (Page.EnumEntryPointLabel entryPointLabel) {
+      this.setParam("entry_point_label", entryPointLabel);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setEntryPointLabel (String entryPointLabel) {
+      this.setParam("entry_point_label", entryPointLabel);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setGreetingDialogDisplay (Page.EnumGreetingDialogDisplay greetingDialogDisplay) {
+      this.setParam("greeting_dialog_display", greetingDialogDisplay);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setGreetingDialogDisplay (String greetingDialogDisplay) {
+      this.setParam("greeting_dialog_display", greetingDialogDisplay);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setGuestChatMode (Page.EnumGuestChatMode guestChatMode) {
+      this.setParam("guest_chat_mode", guestChatMode);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setGuestChatMode (String guestChatMode) {
+      this.setParam("guest_chat_mode", guestChatMode);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setMobileBottomSpacing (Long mobileBottomSpacing) {
+      this.setParam("mobile_bottom_spacing", mobileBottomSpacing);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setMobileBottomSpacing (String mobileBottomSpacing) {
+      this.setParam("mobile_bottom_spacing", mobileBottomSpacing);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setMobileChatDisplay (Page.EnumMobileChatDisplay mobileChatDisplay) {
+      this.setParam("mobile_chat_display", mobileChatDisplay);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setMobileChatDisplay (String mobileChatDisplay) {
+      this.setParam("mobile_chat_display", mobileChatDisplay);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setMobileSideSpacing (Long mobileSideSpacing) {
+      this.setParam("mobile_side_spacing", mobileSideSpacing);
+      return this;
+    }
+    public APIRequestCreateChatPlugin setMobileSideSpacing (String mobileSideSpacing) {
+      this.setParam("mobile_side_spacing", mobileSideSpacing);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setThemeColor (String themeColor) {
+      this.setParam("theme_color", themeColor);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin setWelcomeScreenGreeting (String welcomeScreenGreeting) {
+      this.setParam("welcome_screen_greeting", welcomeScreenGreeting);
+      return this;
+    }
+
+    public APIRequestCreateChatPlugin requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateChatPlugin requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateChatPlugin requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -5749,7 +6179,6 @@ public class Page extends APINode {
       "privacy_url_by_locale",
       "review_rejection_messages",
       "review_rejection_reasons",
-      "review_status",
       "supported_card_types",
       "terms",
       "terms_url_by_locale",
@@ -5990,13 +6419,6 @@ public class Page extends APINode {
     }
     public APIRequestGetCommerceMerchantSettings requestReviewRejectionReasonsField (boolean value) {
       this.requestField("review_rejection_reasons", value);
-      return this;
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewStatusField () {
-      return this.requestReviewStatusField(true);
-    }
-    public APIRequestGetCommerceMerchantSettings requestReviewStatusField (boolean value) {
-      this.requestField("review_status", value);
       return this;
     }
     public APIRequestGetCommerceMerchantSettings requestSupportedCardTypesField () {
@@ -7316,10 +7738,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -8043,6 +8467,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetCrosspostWhitelistedPages requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -8069,6 +8500,13 @@ public class Page extends APINode {
     }
     public APIRequestGetCrosspostWhitelistedPages requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetCrosspostWhitelistedPages requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetCrosspostWhitelistedPages requestMissionField () {
@@ -8491,7 +8929,7 @@ public class Page extends APINode {
 
     public static final String[] FIELDS = {
       "id",
-      "name",
+      "page_label_name",
     };
 
     @Override
@@ -8590,11 +9028,11 @@ public class Page extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGetCustomLabels requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGetCustomLabels requestPageLabelNameField () {
+      return this.requestPageLabelNameField(true);
     }
-    public APIRequestGetCustomLabels requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGetCustomLabels requestPageLabelNameField (boolean value) {
+      this.requestField("page_label_name", value);
       return this;
     }
   }
@@ -8608,6 +9046,7 @@ public class Page extends APINode {
     }
     public static final String[] PARAMS = {
       "name",
+      "page_label_name",
     };
 
     public static final String[] FIELDS = {
@@ -8668,6 +9107,11 @@ public class Page extends APINode {
 
     public APIRequestCreateCustomLabel setName (String name) {
       this.setParam("name", name);
+      return this;
+    }
+
+    public APIRequestCreateCustomLabel setPageLabelName (String pageLabelName) {
+      this.setParam("page_label_name", pageLabelName);
       return this;
     }
 
@@ -9094,6 +9538,7 @@ public class Page extends APINode {
       "can_guests_invite",
       "category",
       "cover",
+      "created_time",
       "declined_count",
       "description",
       "discount_code_enabled",
@@ -9116,6 +9561,7 @@ public class Page extends APINode {
       "place",
       "scheduled_publish_time",
       "start_time",
+      "ticket_setting",
       "ticket_uri",
       "ticket_uri_start_sales_time",
       "ticketing_privacy_uri",
@@ -9278,6 +9724,13 @@ public class Page extends APINode {
       this.requestField("cover", value);
       return this;
     }
+    public APIRequestGetEvents requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetEvents requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
     public APIRequestGetEvents requestDeclinedCountField () {
       return this.requestDeclinedCountField(true);
     }
@@ -9430,6 +9883,13 @@ public class Page extends APINode {
     }
     public APIRequestGetEvents requestStartTimeField (boolean value) {
       this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetEvents requestTicketSettingField () {
+      return this.requestTicketSettingField(true);
+    }
+    public APIRequestGetEvents requestTicketSettingField (boolean value) {
+      this.requestField("ticket_setting", value);
       return this;
     }
     public APIRequestGetEvents requestTicketUriField () {
@@ -11310,10 +11770,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -12037,6 +12499,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetGlobalBrandChildren requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -12063,6 +12532,13 @@ public class Page extends APINode {
     }
     public APIRequestGetGlobalBrandChildren requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetGlobalBrandChildren requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetGlobalBrandChildren requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetGlobalBrandChildren requestMissionField () {
@@ -13168,6 +13644,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_views",
       "premiere_living_room_status",
       "privacy",
       "published",
@@ -13178,6 +13655,7 @@ public class Page extends APINode {
       "title",
       "universal_video_id",
       "updated_time",
+      "views",
     };
 
     @Override
@@ -13479,6 +13957,13 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetIndexedVideos requestPostViewsField () {
+      return this.requestPostViewsField(true);
+    }
+    public APIRequestGetIndexedVideos requestPostViewsField (boolean value) {
+      this.requestField("post_views", value);
+      return this;
+    }
     public APIRequestGetIndexedVideos requestPremiereLivingRoomStatusField () {
       return this.requestPremiereLivingRoomStatusField(true);
     }
@@ -13547,6 +14032,13 @@ public class Page extends APINode {
     }
     public APIRequestGetIndexedVideos requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetIndexedVideos requestViewsField () {
+      return this.requestViewsField(true);
+    }
+    public APIRequestGetIndexedVideos requestViewsField (boolean value) {
+      this.requestField("views", value);
       return this;
     }
   }
@@ -13761,6 +14253,126 @@ public class Page extends APINode {
       this.requestField("values", value);
       return this;
     }
+  }
+
+  public static class APIRequestGetInsightsExports extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "data_level",
+      "from_creation_date",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetInsightsExports.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetInsightsExports(String nodeId, APIContext context) {
+      super(context, nodeId, "/insights_exports", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetInsightsExports setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsExports setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetInsightsExports setDataLevel (List<String> dataLevel) {
+      this.setParam("data_level", dataLevel);
+      return this;
+    }
+    public APIRequestGetInsightsExports setDataLevel (String dataLevel) {
+      this.setParam("data_level", dataLevel);
+      return this;
+    }
+
+    public APIRequestGetInsightsExports setFromCreationDate (String fromCreationDate) {
+      this.setParam("from_creation_date", fromCreationDate);
+      return this;
+    }
+
+    public APIRequestGetInsightsExports requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetInsightsExports requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsExports requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetInsightsExports requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsExports requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetInsightsExports requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
   }
 
   public static class APIRequestGetInstagramAccounts extends APIRequest<InstagramUser> {
@@ -15179,10 +15791,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -15911,6 +16525,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetLikes requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetLikes requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetLikes requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -15937,6 +16558,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLikes requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetLikes requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetLikes requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetLikes requestMissionField () {
@@ -16705,6 +17333,7 @@ public class Page extends APINode {
       "overlay_url",
       "permalink_url",
       "planned_start_time",
+      "recommended_encoder_settings",
       "seconds_left",
       "secure_stream_url",
       "status",
@@ -16955,6 +17584,13 @@ public class Page extends APINode {
       this.requestField("planned_start_time", value);
       return this;
     }
+    public APIRequestGetLiveVideos requestRecommendedEncoderSettingsField () {
+      return this.requestRecommendedEncoderSettingsField(true);
+    }
+    public APIRequestGetLiveVideos requestRecommendedEncoderSettingsField (boolean value) {
+      this.requestField("recommended_encoder_settings", value);
+      return this;
+    }
     public APIRequestGetLiveVideos requestSecondsLeftField () {
       return this.requestSecondsLeftField(true);
     }
@@ -17034,7 +17670,6 @@ public class Page extends APINode {
       "is_spherical",
       "live_encoders",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -17210,15 +17845,6 @@ public class Page extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -17564,10 +18190,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -18291,6 +18919,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGetLocations requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGetLocations requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGetLocations requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -18317,6 +18952,13 @@ public class Page extends APINode {
     }
     public APIRequestGetLocations requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGetLocations requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGetLocations requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGetLocations requestMissionField () {
@@ -31113,6 +31755,7 @@ public class Page extends APINode {
       "permalink_url",
       "picture",
       "place",
+      "post_views",
       "premiere_living_room_status",
       "privacy",
       "published",
@@ -31123,6 +31766,7 @@ public class Page extends APINode {
       "title",
       "universal_video_id",
       "updated_time",
+      "views",
     };
 
     @Override
@@ -31433,6 +32077,13 @@ public class Page extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetVideos requestPostViewsField () {
+      return this.requestPostViewsField(true);
+    }
+    public APIRequestGetVideos requestPostViewsField (boolean value) {
+      this.requestField("post_views", value);
+      return this;
+    }
     public APIRequestGetVideos requestPremiereLivingRoomStatusField () {
       return this.requestPremiereLivingRoomStatusField(true);
     }
@@ -31501,6 +32152,13 @@ public class Page extends APINode {
     }
     public APIRequestGetVideos requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetVideos requestViewsField () {
+      return this.requestViewsField(true);
+    }
+    public APIRequestGetVideos requestViewsField (boolean value) {
+      this.requestField("views", value);
       return this;
     }
   }
@@ -33223,10 +33881,12 @@ public class Page extends APINode {
       "members",
       "merchant_id",
       "merchant_review_status",
+      "messaging_feature_status",
       "messenger_ads_default_icebreakers",
       "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
+      "mini_shop_storefront",
       "mission",
       "mpg",
       "name",
@@ -33955,6 +34615,13 @@ public class Page extends APINode {
       this.requestField("merchant_review_status", value);
       return this;
     }
+    public APIRequestGet requestMessagingFeatureStatusField () {
+      return this.requestMessagingFeatureStatusField(true);
+    }
+    public APIRequestGet requestMessagingFeatureStatusField (boolean value) {
+      this.requestField("messaging_feature_status", value);
+      return this;
+    }
     public APIRequestGet requestMessengerAdsDefaultIcebreakersField () {
       return this.requestMessengerAdsDefaultIcebreakersField(true);
     }
@@ -33981,6 +34648,13 @@ public class Page extends APINode {
     }
     public APIRequestGet requestMessengerAdsQuickRepliesTypeField (boolean value) {
       this.requestField("messenger_ads_quick_replies_type", value);
+      return this;
+    }
+    public APIRequestGet requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGet requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
       return this;
     }
     public APIRequestGet requestMissionField () {
@@ -35206,6 +35880,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_REVENUE")
+      VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -35265,6 +35941,8 @@ public class Page extends APINode {
       VALUE_PROFILE_PLUS_MESSAGING("PROFILE_PLUS_MESSAGING"),
       @SerializedName("PROFILE_PLUS_MODERATE")
       VALUE_PROFILE_PLUS_MODERATE("PROFILE_PLUS_MODERATE"),
+      @SerializedName("PROFILE_PLUS_REVENUE")
+      VALUE_PROFILE_PLUS_REVENUE("PROFILE_PLUS_REVENUE"),
       @SerializedName("READ_PAGE_MAILBOXES")
       VALUE_READ_PAGE_MAILBOXES("READ_PAGE_MAILBOXES"),
       @SerializedName("VIEW_MONETIZATION_INSIGHTS")
@@ -35274,6 +35952,130 @@ public class Page extends APINode {
       private String value;
 
       private EnumTasks(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumAlignment {
+      @SerializedName("LEFT")
+      VALUE_LEFT("LEFT"),
+      @SerializedName("RIGHT")
+      VALUE_RIGHT("RIGHT"),
+      ;
+
+      private String value;
+
+      private EnumAlignment(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEntryPointIcon {
+      @SerializedName("CHAT_ANGULAR_ICON")
+      VALUE_CHAT_ANGULAR_ICON("CHAT_ANGULAR_ICON"),
+      @SerializedName("CHAT_ROUND_ICON")
+      VALUE_CHAT_ROUND_ICON("CHAT_ROUND_ICON"),
+      @SerializedName("MESSENGER_ICON")
+      VALUE_MESSENGER_ICON("MESSENGER_ICON"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      ;
+
+      private String value;
+
+      private EnumEntryPointIcon(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumEntryPointLabel {
+      @SerializedName("ASK_US")
+      VALUE_ASK_US("ASK_US"),
+      @SerializedName("CHAT")
+      VALUE_CHAT("CHAT"),
+      @SerializedName("HELP")
+      VALUE_HELP("HELP"),
+      @SerializedName("NONE")
+      VALUE_NONE("NONE"),
+      ;
+
+      private String value;
+
+      private EnumEntryPointLabel(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumGreetingDialogDisplay {
+      @SerializedName("HIDE")
+      VALUE_HIDE("HIDE"),
+      @SerializedName("SHOW")
+      VALUE_SHOW("SHOW"),
+      @SerializedName("WELCOME_MESSAGE")
+      VALUE_WELCOME_MESSAGE("WELCOME_MESSAGE"),
+      ;
+
+      private String value;
+
+      private EnumGreetingDialogDisplay(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumGuestChatMode {
+      @SerializedName("DISABLED")
+      VALUE_DISABLED("DISABLED"),
+      @SerializedName("ENABLED")
+      VALUE_ENABLED("ENABLED"),
+      ;
+
+      private String value;
+
+      private EnumGuestChatMode(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumMobileChatDisplay {
+      @SerializedName("APP_SWITCH")
+      VALUE_APP_SWITCH("APP_SWITCH"),
+      @SerializedName("CHAT_TAB")
+      VALUE_CHAT_TAB("CHAT_TAB"),
+      ;
+
+      private String value;
+
+      private EnumMobileChatDisplay(String value) {
         this.value = value;
       }
 
@@ -35714,6 +36516,8 @@ public class Page extends APINode {
       VALUE_MESSAGING_APPOINTMENTS("messaging_appointments"),
       @SerializedName("messaging_checkout_updates")
       VALUE_MESSAGING_CHECKOUT_UPDATES("messaging_checkout_updates"),
+      @SerializedName("messaging_customer_information")
+      VALUE_MESSAGING_CUSTOMER_INFORMATION("messaging_customer_information"),
       @SerializedName("messaging_direct_sends")
       VALUE_MESSAGING_DIRECT_SENDS("messaging_direct_sends"),
       @SerializedName("messaging_fblogin_account_linking")
@@ -35800,27 +36604,6 @@ public class Page extends APINode {
       }
   }
 
-  public static enum EnumObjectName {
-      @SerializedName("contact")
-      VALUE_CONTACT("contact"),
-      @SerializedName("order")
-      VALUE_ORDER("order"),
-      @SerializedName("order_item")
-      VALUE_ORDER_ITEM("order_item"),
-      ;
-
-      private String value;
-
-      private EnumObjectName(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumAction {
       @SerializedName("BLOCK")
       VALUE_BLOCK("BLOCK"),
@@ -35847,6 +36630,8 @@ public class Page extends APINode {
   }
 
   public static enum EnumActionReason {
+      @SerializedName("ARTICLE_17_PREFLAGGING")
+      VALUE_ARTICLE_17_PREFLAGGING("ARTICLE_17_PREFLAGGING"),
       @SerializedName("ARTIST_OBJECTION")
       VALUE_ARTIST_OBJECTION("ARTIST_OBJECTION"),
       @SerializedName("OBJECTIONABLE_CONTENT")
@@ -36047,10 +36832,12 @@ public class Page extends APINode {
     this.mMembers = instance.mMembers;
     this.mMerchantId = instance.mMerchantId;
     this.mMerchantReviewStatus = instance.mMerchantReviewStatus;
+    this.mMessagingFeatureStatus = instance.mMessagingFeatureStatus;
     this.mMessengerAdsDefaultIcebreakers = instance.mMessengerAdsDefaultIcebreakers;
     this.mMessengerAdsDefaultPageWelcomeMessage = instance.mMessengerAdsDefaultPageWelcomeMessage;
     this.mMessengerAdsDefaultQuickReplies = instance.mMessengerAdsDefaultQuickReplies;
     this.mMessengerAdsQuickRepliesType = instance.mMessengerAdsQuickRepliesType;
+    this.mMiniShopStorefront = instance.mMiniShopStorefront;
     this.mMission = instance.mMission;
     this.mMpg = instance.mMpg;
     this.mName = instance.mName;

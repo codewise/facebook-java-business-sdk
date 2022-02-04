@@ -101,6 +101,8 @@ public class AdSet extends APINode {
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("end_time")
   private String mEndTime = null;
+  @SerializedName("existing_customer_budget_percentage")
+  private Long mExistingCustomerBudgetPercentage = null;
   @SerializedName("frequency_control_specs")
   private List<AdCampaignFrequencyControlSpecs> mFrequencyControlSpecs = null;
   @SerializedName("full_funnel_exploration_mode")
@@ -153,6 +155,8 @@ public class AdSet extends APINode {
   private EnumStatus mStatus = null;
   @SerializedName("targeting")
   private Targeting mTargeting = null;
+  @SerializedName("targeting_optimization_types")
+  private Map<String, Long> mTargetingOptimizationTypes = null;
   @SerializedName("time_based_ad_rotation_id_blocks")
   private List<List<Long>> mTimeBasedAdRotationIdBlocks = null;
   @SerializedName("time_based_ad_rotation_intervals")
@@ -683,6 +687,15 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public Long getFieldExistingCustomerBudgetPercentage() {
+    return mExistingCustomerBudgetPercentage;
+  }
+
+  public AdSet setFieldExistingCustomerBudgetPercentage(Long value) {
+    this.mExistingCustomerBudgetPercentage = value;
+    return this;
+  }
+
   public List<AdCampaignFrequencyControlSpecs> getFieldFrequencyControlSpecs() {
     return mFrequencyControlSpecs;
   }
@@ -955,6 +968,15 @@ public class AdSet extends APINode {
     this.mTargeting = Targeting.getGson().fromJson(value, type);
     return this;
   }
+  public Map<String, Long> getFieldTargetingOptimizationTypes() {
+    return mTargetingOptimizationTypes;
+  }
+
+  public AdSet setFieldTargetingOptimizationTypes(Map<String, Long> value) {
+    this.mTargetingOptimizationTypes = value;
+    return this;
+  }
+
   public List<List<Long>> getFieldTimeBasedAdRotationIdBlocks() {
     return mTimeBasedAdRotationIdBlocks;
   }
@@ -3299,6 +3321,7 @@ public class AdSet extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
+      "existing_customer_budget_percentage",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
@@ -3325,6 +3348,7 @@ public class AdSet extends APINode {
       "start_time",
       "status",
       "targeting",
+      "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
       "updated_time",
@@ -3617,6 +3641,13 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGetCopies requestExistingCustomerBudgetPercentageField () {
+      return this.requestExistingCustomerBudgetPercentageField(true);
+    }
+    public APIRequestGetCopies requestExistingCustomerBudgetPercentageField (boolean value) {
+      this.requestField("existing_customer_budget_percentage", value);
+      return this;
+    }
     public APIRequestGetCopies requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -3797,6 +3828,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestTargetingField (boolean value) {
       this.requestField("targeting", value);
+      return this;
+    }
+    public APIRequestGetCopies requestTargetingOptimizationTypesField () {
+      return this.requestTargetingOptimizationTypesField(true);
+    }
+    public APIRequestGetCopies requestTargetingOptimizationTypesField (boolean value) {
+      this.requestField("targeting_optimization_types", value);
       return this;
     }
     public APIRequestGetCopies requestTimeBasedAdRotationIdBlocksField () {
@@ -4008,7 +4046,10 @@ public class AdSet extends APINode {
       "daily_outcomes_curve",
       "estimate_dau",
       "estimate_mau",
+      "estimate_mau_lower_bound",
+      "estimate_mau_upper_bound",
       "estimate_ready",
+      "targeting_optimization_types",
     };
 
     @Override
@@ -4148,11 +4189,32 @@ public class AdSet extends APINode {
       this.requestField("estimate_mau", value);
       return this;
     }
+    public APIRequestGetDeliveryEstimate requestEstimateMauLowerBoundField () {
+      return this.requestEstimateMauLowerBoundField(true);
+    }
+    public APIRequestGetDeliveryEstimate requestEstimateMauLowerBoundField (boolean value) {
+      this.requestField("estimate_mau_lower_bound", value);
+      return this;
+    }
+    public APIRequestGetDeliveryEstimate requestEstimateMauUpperBoundField () {
+      return this.requestEstimateMauUpperBoundField(true);
+    }
+    public APIRequestGetDeliveryEstimate requestEstimateMauUpperBoundField (boolean value) {
+      this.requestField("estimate_mau_upper_bound", value);
+      return this;
+    }
     public APIRequestGetDeliveryEstimate requestEstimateReadyField () {
       return this.requestEstimateReadyField(true);
     }
     public APIRequestGetDeliveryEstimate requestEstimateReadyField (boolean value) {
       this.requestField("estimate_ready", value);
+      return this;
+    }
+    public APIRequestGetDeliveryEstimate requestTargetingOptimizationTypesField () {
+      return this.requestTargetingOptimizationTypesField(true);
+    }
+    public APIRequestGetDeliveryEstimate requestTargetingOptimizationTypesField (boolean value) {
+      this.requestField("targeting_optimization_types", value);
       return this;
     }
   }
@@ -5031,6 +5093,7 @@ public class AdSet extends APINode {
       "destination_type",
       "effective_status",
       "end_time",
+      "existing_customer_budget_percentage",
       "frequency_control_specs",
       "full_funnel_exploration_mode",
       "id",
@@ -5057,6 +5120,7 @@ public class AdSet extends APINode {
       "start_time",
       "status",
       "targeting",
+      "targeting_optimization_types",
       "time_based_ad_rotation_id_blocks",
       "time_based_ad_rotation_intervals",
       "updated_time",
@@ -5349,6 +5413,13 @@ public class AdSet extends APINode {
       this.requestField("end_time", value);
       return this;
     }
+    public APIRequestGet requestExistingCustomerBudgetPercentageField () {
+      return this.requestExistingCustomerBudgetPercentageField(true);
+    }
+    public APIRequestGet requestExistingCustomerBudgetPercentageField (boolean value) {
+      this.requestField("existing_customer_budget_percentage", value);
+      return this;
+    }
     public APIRequestGet requestFrequencyControlSpecsField () {
       return this.requestFrequencyControlSpecsField(true);
     }
@@ -5531,6 +5602,13 @@ public class AdSet extends APINode {
       this.requestField("targeting", value);
       return this;
     }
+    public APIRequestGet requestTargetingOptimizationTypesField () {
+      return this.requestTargetingOptimizationTypesField(true);
+    }
+    public APIRequestGet requestTargetingOptimizationTypesField (boolean value) {
+      this.requestField("targeting_optimization_types", value);
+      return this;
+    }
     public APIRequestGet requestTimeBasedAdRotationIdBlocksField () {
       return this.requestTimeBasedAdRotationIdBlocksField(true);
     }
@@ -5588,6 +5666,7 @@ public class AdSet extends APINode {
       "destination_type",
       "end_time",
       "execution_options",
+      "existing_customer_budget_percentage",
       "full_funnel_exploration_mode",
       "lifetime_budget",
       "lifetime_imps",
@@ -5824,6 +5903,15 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setExecutionOptions (String executionOptions) {
       this.setParam("execution_options", executionOptions);
+      return this;
+    }
+
+    public APIRequestUpdate setExistingCustomerBudgetPercentage (Long existingCustomerBudgetPercentage) {
+      this.setParam("existing_customer_budget_percentage", existingCustomerBudgetPercentage);
+      return this;
+    }
+    public APIRequestUpdate setExistingCustomerBudgetPercentage (String existingCustomerBudgetPercentage) {
+      this.setParam("existing_customer_budget_percentage", existingCustomerBudgetPercentage);
       return this;
     }
 
@@ -6152,14 +6240,12 @@ public class AdSet extends APINode {
   public static enum EnumOptimizationGoal {
       @SerializedName("AD_RECALL_LIFT")
       VALUE_AD_RECALL_LIFT("AD_RECALL_LIFT"),
-      @SerializedName("APP_DOWNLOADS")
-      VALUE_APP_DOWNLOADS("APP_DOWNLOADS"),
       @SerializedName("APP_INSTALLS")
       VALUE_APP_INSTALLS("APP_INSTALLS"),
-      @SerializedName("BRAND_AWARENESS")
-      VALUE_BRAND_AWARENESS("BRAND_AWARENESS"),
-      @SerializedName("CLICKS")
-      VALUE_CLICKS("CLICKS"),
+      @SerializedName("APP_INSTALLS_AND_OFFSITE_CONVERSIONS")
+      VALUE_APP_INSTALLS_AND_OFFSITE_CONVERSIONS("APP_INSTALLS_AND_OFFSITE_CONVERSIONS"),
+      @SerializedName("CONVERSATIONS")
+      VALUE_CONVERSATIONS("CONVERSATIONS"),
       @SerializedName("DERIVED_EVENTS")
       VALUE_DERIVED_EVENTS("DERIVED_EVENTS"),
       @SerializedName("ENGAGED_USERS")
@@ -6176,12 +6262,8 @@ public class AdSet extends APINode {
       VALUE_LINK_CLICKS("LINK_CLICKS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OFFER_CLAIMS")
-      VALUE_OFFER_CLAIMS("OFFER_CLAIMS"),
       @SerializedName("OFFSITE_CONVERSIONS")
       VALUE_OFFSITE_CONVERSIONS("OFFSITE_CONVERSIONS"),
-      @SerializedName("PAGE_ENGAGEMENT")
-      VALUE_PAGE_ENGAGEMENT("PAGE_ENGAGEMENT"),
       @SerializedName("PAGE_LIKES")
       VALUE_PAGE_LIKES("PAGE_LIKES"),
       @SerializedName("POST_ENGAGEMENT")
@@ -6192,14 +6274,8 @@ public class AdSet extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
-      @SerializedName("REPLIES")
-      VALUE_REPLIES("REPLIES"),
-      @SerializedName("SOCIAL_IMPRESSIONS")
-      VALUE_SOCIAL_IMPRESSIONS("SOCIAL_IMPRESSIONS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
-      @SerializedName("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS")
-      VALUE_TWO_SECOND_CONTINUOUS_VIDEO_VIEWS("TWO_SECOND_CONTINUOUS_VIDEO_VIEWS"),
       @SerializedName("VALUE")
       VALUE_VALUE("VALUE"),
       @SerializedName("VISIT_INSTAGRAM_PROFILE")
@@ -6430,6 +6506,8 @@ public class AdSet extends APINode {
       VALUE_ISSUES_ELECTIONS_POLITICS("ISSUES_ELECTIONS_POLITICS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
+      @SerializedName("ONLINE_GAMBLING_AND_GAMING")
+      VALUE_ONLINE_GAMBLING_AND_GAMING("ONLINE_GAMBLING_AND_GAMING"),
       ;
 
       private String value;
@@ -6522,6 +6600,7 @@ public class AdSet extends APINode {
     this.mDestinationType = instance.mDestinationType;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
+    this.mExistingCustomerBudgetPercentage = instance.mExistingCustomerBudgetPercentage;
     this.mFrequencyControlSpecs = instance.mFrequencyControlSpecs;
     this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
@@ -6548,6 +6627,7 @@ public class AdSet extends APINode {
     this.mStartTime = instance.mStartTime;
     this.mStatus = instance.mStatus;
     this.mTargeting = instance.mTargeting;
+    this.mTargetingOptimizationTypes = instance.mTargetingOptimizationTypes;
     this.mTimeBasedAdRotationIdBlocks = instance.mTimeBasedAdRotationIdBlocks;
     this.mTimeBasedAdRotationIntervals = instance.mTimeBasedAdRotationIntervals;
     this.mUpdatedTime = instance.mUpdatedTime;

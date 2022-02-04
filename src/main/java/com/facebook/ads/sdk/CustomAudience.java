@@ -59,6 +59,10 @@ public class CustomAudience extends APINode {
   private String mAccountId = null;
   @SerializedName("approximate_count")
   private Long mApproximateCount = null;
+  @SerializedName("approximate_count_lower_bound")
+  private Long mApproximateCountLowerBound = null;
+  @SerializedName("approximate_count_upper_bound")
+  private Long mApproximateCountUpperBound = null;
   @SerializedName("customer_file_source")
   private String mCustomerFileSource = null;
   @SerializedName("data_source")
@@ -99,6 +103,8 @@ public class CustomAudience extends APINode {
   private CustomAudienceStatus mOperationStatus = null;
   @SerializedName("opt_out_link")
   private String mOptOutLink = null;
+  @SerializedName("page_deletion_marked_delete_time")
+  private Long mPageDeletionMarkedDeleteTime = null;
   @SerializedName("permission_for_actions")
   private AudiencePermissionForActions mPermissionForActions = null;
   @SerializedName("pixel_id")
@@ -393,6 +399,14 @@ public class CustomAudience extends APINode {
     return mApproximateCount;
   }
 
+  public Long getFieldApproximateCountLowerBound() {
+    return mApproximateCountLowerBound;
+  }
+
+  public Long getFieldApproximateCountUpperBound() {
+    return mApproximateCountUpperBound;
+  }
+
   public String getFieldCustomerFileSource() {
     return mCustomerFileSource;
   }
@@ -474,6 +488,10 @@ public class CustomAudience extends APINode {
 
   public String getFieldOptOutLink() {
     return mOptOutLink;
+  }
+
+  public Long getFieldPageDeletionMarkedDeleteTime() {
+    return mPageDeletionMarkedDeleteTime;
   }
 
   public AudiencePermissionForActions getFieldPermissionForActions() {
@@ -682,11 +700,13 @@ public class CustomAudience extends APINode {
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
+      "existing_customers",
       "extended_credit_invoice_group",
       "failed_delivery_checks",
       "fb_entity",
       "funding_source",
       "funding_source_details",
+      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -694,7 +714,6 @@ public class CustomAudience extends APINode {
       "is_attribution_spec_system_default",
       "is_direct_deals_enabled",
       "is_in_3ds_authorization_enabled_market",
-      "is_in_middle_of_local_entity_migration",
       "is_notifications_enabled",
       "is_personal",
       "is_prepay_account",
@@ -969,6 +988,13 @@ public class CustomAudience extends APINode {
       this.requestField("end_advertiser_name", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestExistingCustomersField () {
+      return this.requestExistingCustomersField(true);
+    }
+    public APIRequestGetAdAccounts requestExistingCustomersField (boolean value) {
+      this.requestField("existing_customers", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestExtendedCreditInvoiceGroupField () {
       return this.requestExtendedCreditInvoiceGroupField(true);
     }
@@ -1002,6 +1028,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
+      return this.requestHasAdvertiserOptedInOdaxField(true);
+    }
+    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
+      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -1051,13 +1084,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestIsIn3dsAuthorizationEnabledMarketField (boolean value) {
       this.requestField("is_in_3ds_authorization_enabled_market", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField () {
-      return this.requestIsInMiddleOfLocalEntityMigrationField(true);
-    }
-    public APIRequestGetAdAccounts requestIsInMiddleOfLocalEntityMigrationField (boolean value) {
-      this.requestField("is_in_middle_of_local_entity_migration", value);
       return this;
     }
     public APIRequestGetAdAccounts requestIsNotificationsEnabledField () {
@@ -2597,6 +2623,8 @@ public class CustomAudience extends APINode {
     public static final String[] FIELDS = {
       "account_id",
       "approximate_count",
+      "approximate_count_lower_bound",
+      "approximate_count_upper_bound",
       "customer_file_source",
       "data_source",
       "data_source_types",
@@ -2617,6 +2645,7 @@ public class CustomAudience extends APINode {
       "name",
       "operation_status",
       "opt_out_link",
+      "page_deletion_marked_delete_time",
       "permission_for_actions",
       "pixel_id",
       "regulated_audience_spec",
@@ -2748,6 +2777,20 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestApproximateCountField (boolean value) {
       this.requestField("approximate_count", value);
+      return this;
+    }
+    public APIRequestGet requestApproximateCountLowerBoundField () {
+      return this.requestApproximateCountLowerBoundField(true);
+    }
+    public APIRequestGet requestApproximateCountLowerBoundField (boolean value) {
+      this.requestField("approximate_count_lower_bound", value);
+      return this;
+    }
+    public APIRequestGet requestApproximateCountUpperBoundField () {
+      return this.requestApproximateCountUpperBoundField(true);
+    }
+    public APIRequestGet requestApproximateCountUpperBoundField (boolean value) {
+      this.requestField("approximate_count_upper_bound", value);
       return this;
     }
     public APIRequestGet requestCustomerFileSourceField () {
@@ -2888,6 +2931,13 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGet requestOptOutLinkField (boolean value) {
       this.requestField("opt_out_link", value);
+      return this;
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField () {
+      return this.requestPageDeletionMarkedDeleteTimeField(true);
+    }
+    public APIRequestGet requestPageDeletionMarkedDeleteTimeField (boolean value) {
+      this.requestField("page_deletion_marked_delete_time", value);
       return this;
     }
     public APIRequestGet requestPermissionForActionsField () {
@@ -3310,6 +3360,8 @@ public class CustomAudience extends APINode {
       VALUE_HOME_LISTING("HOME_LISTING"),
       @SerializedName("HOTEL")
       VALUE_HOTEL("HOTEL"),
+      @SerializedName("JOB")
+      VALUE_JOB("JOB"),
       @SerializedName("LOCAL_SERVICE_BUSINESS")
       VALUE_LOCAL_SERVICE_BUSINESS("LOCAL_SERVICE_BUSINESS"),
       @SerializedName("LOCATION_BASED_ITEM")
@@ -3421,6 +3473,8 @@ public class CustomAudience extends APINode {
   public CustomAudience copyFrom(CustomAudience instance) {
     this.mAccountId = instance.mAccountId;
     this.mApproximateCount = instance.mApproximateCount;
+    this.mApproximateCountLowerBound = instance.mApproximateCountLowerBound;
+    this.mApproximateCountUpperBound = instance.mApproximateCountUpperBound;
     this.mCustomerFileSource = instance.mCustomerFileSource;
     this.mDataSource = instance.mDataSource;
     this.mDataSourceTypes = instance.mDataSourceTypes;
@@ -3441,6 +3495,7 @@ public class CustomAudience extends APINode {
     this.mName = instance.mName;
     this.mOperationStatus = instance.mOperationStatus;
     this.mOptOutLink = instance.mOptOutLink;
+    this.mPageDeletionMarkedDeleteTime = instance.mPageDeletionMarkedDeleteTime;
     this.mPermissionForActions = instance.mPermissionForActions;
     this.mPixelId = instance.mPixelId;
     this.mRegulatedAudienceSpec = instance.mRegulatedAudienceSpec;
