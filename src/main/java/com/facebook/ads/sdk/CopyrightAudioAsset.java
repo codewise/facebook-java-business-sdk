@@ -54,68 +54,72 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class Domain extends APINode {
+public class CopyrightAudioAsset extends APINode {
+  @SerializedName("copyright")
+  private AudioCopyright mCopyright = null;
+  @SerializedName("creation_time")
+  private String mCreationTime = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("name")
-  private String mName = null;
-  @SerializedName("url")
-  private String mUrl = null;
+  @SerializedName("title")
+  private String mTitle = null;
+  @SerializedName("update_time")
+  private String mUpdateTime = null;
   protected static Gson gson = null;
 
-  Domain() {
+  CopyrightAudioAsset() {
   }
 
-  public Domain(Long id, APIContext context) {
+  public CopyrightAudioAsset(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public Domain(String id, APIContext context) {
+  public CopyrightAudioAsset(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public Domain fetch() throws APIException{
-    Domain newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CopyrightAudioAsset fetch() throws APIException{
+    CopyrightAudioAsset newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static Domain fetchById(Long id, APIContext context) throws APIException {
+  public static CopyrightAudioAsset fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CopyrightAudioAsset> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static Domain fetchById(String id, APIContext context) throws APIException {
+  public static CopyrightAudioAsset fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<Domain> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CopyrightAudioAsset> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<Domain> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<Domain>)(
-      new APIRequest<Domain>(context, "", "/", "GET", Domain.getParser())
+  public static APINodeList<CopyrightAudioAsset> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CopyrightAudioAsset>)(
+      new APIRequest<CopyrightAudioAsset>(context, "", "/", "GET", CopyrightAudioAsset.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<Domain>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CopyrightAudioAsset>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", Domain.getParser())
+      new APIRequest(context, "", "/", "GET", CopyrightAudioAsset.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -128,12 +132,12 @@ public class Domain extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static Domain loadJSON(String json, APIContext context, String header) {
-    Domain domain = getGson().fromJson(json, Domain.class);
+  public static CopyrightAudioAsset loadJSON(String json, APIContext context, String header) {
+    CopyrightAudioAsset copyrightAudioAsset = getGson().fromJson(json, CopyrightAudioAsset.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(domain.toString());
+      JsonElement o2 = parser.parse(copyrightAudioAsset.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -143,14 +147,14 @@ public class Domain extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    domain.context = context;
-    domain.rawValue = json;
-    domain.header = header;
-    return domain;
+    copyrightAudioAsset.context = context;
+    copyrightAudioAsset.rawValue = json;
+    copyrightAudioAsset.header = header;
+    return copyrightAudioAsset;
   }
 
-  public static APINodeList<Domain> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<Domain> domains = new APINodeList<Domain>(request, json, header);
+  public static APINodeList<CopyrightAudioAsset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CopyrightAudioAsset> copyrightAudioAssets = new APINodeList<CopyrightAudioAsset>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -161,9 +165,9 @@ public class Domain extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          copyrightAudioAssets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return domains;
+        return copyrightAudioAssets;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -173,20 +177,20 @@ public class Domain extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                domains.setCursors(before, after);
+                copyrightAudioAssets.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            domains.setPaging(previous, next);
+            copyrightAudioAssets.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              domains.setAppSecret(context.getAppSecretProof());
+              copyrightAudioAssets.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              domains.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              copyrightAudioAssets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -197,23 +201,23 @@ public class Domain extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  domains.add(loadJSON(entry.getValue().toString(), context, header));
+                  copyrightAudioAssets.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              domains.add(loadJSON(obj.toString(), context, header));
+              copyrightAudioAssets.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return domains;
+          return copyrightAudioAssets;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              domains.add(loadJSON(entry.getValue().toString(), context, header));
+              copyrightAudioAssets.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return domains;
+          return copyrightAudioAssets;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -230,20 +234,20 @@ public class Domain extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              domains.add(loadJSON(value.toString(), context, header));
+              copyrightAudioAssets.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return domains;
+            return copyrightAudioAssets;
           }
 
           // Sixth, check if it's pure JsonObject
-          domains.clear();
-          domains.add(loadJSON(json, context, header));
-          return domains;
+          copyrightAudioAssets.clear();
+          copyrightAudioAssets.add(loadJSON(json, context, header));
+          return copyrightAudioAssets;
         }
       }
     } catch (Exception e) {
@@ -275,62 +279,75 @@ public class Domain extends APINode {
   }
 
 
+  public AudioCopyright getFieldCopyright() {
+    if (mCopyright != null) {
+      mCopyright.context = getContext();
+    }
+    return mCopyright;
+  }
+
+  public String getFieldCreationTime() {
+    return mCreationTime;
+  }
+
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldName() {
-    return mName;
+  public String getFieldTitle() {
+    return mTitle;
   }
 
-  public String getFieldUrl() {
-    return mUrl;
+  public String getFieldUpdateTime() {
+    return mUpdateTime;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<Domain> {
+  public static class APIRequestGet extends APIRequest<CopyrightAudioAsset> {
 
-    Domain lastResponse = null;
+    CopyrightAudioAsset lastResponse = null;
     @Override
-    public Domain getLastResponse() {
+    public CopyrightAudioAsset getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
+      "copyright",
+      "creation_time",
       "id",
-      "name",
-      "url",
+      "title",
+      "update_time",
     };
 
     @Override
-    public Domain parseResponse(String response, String header) throws APIException {
-      return Domain.parseResponse(response, getContext(), this, header).head();
+    public CopyrightAudioAsset parseResponse(String response, String header) throws APIException {
+      return CopyrightAudioAsset.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public Domain execute() throws APIException {
+    public CopyrightAudioAsset execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public Domain execute(Map<String, Object> extraParams) throws APIException {
+    public CopyrightAudioAsset execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<Domain> executeAsync() throws APIException {
+    public ListenableFuture<CopyrightAudioAsset> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<Domain> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CopyrightAudioAsset> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, Domain>() {
-           public Domain apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CopyrightAudioAsset>() {
+           public CopyrightAudioAsset apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -394,6 +411,20 @@ public class Domain extends APINode {
       return this;
     }
 
+    public APIRequestGet requestCopyrightField () {
+      return this.requestCopyrightField(true);
+    }
+    public APIRequestGet requestCopyrightField (boolean value) {
+      this.requestField("copyright", value);
+      return this;
+    }
+    public APIRequestGet requestCreationTimeField () {
+      return this.requestCreationTimeField(true);
+    }
+    public APIRequestGet requestCreationTimeField (boolean value) {
+      this.requestField("creation_time", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -401,18 +432,18 @@ public class Domain extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNameField () {
-      return this.requestNameField(true);
+    public APIRequestGet requestTitleField () {
+      return this.requestTitleField(true);
     }
-    public APIRequestGet requestNameField (boolean value) {
-      this.requestField("name", value);
+    public APIRequestGet requestTitleField (boolean value) {
+      this.requestField("title", value);
       return this;
     }
-    public APIRequestGet requestUrlField () {
-      return this.requestUrlField(true);
+    public APIRequestGet requestUpdateTimeField () {
+      return this.requestUpdateTimeField(true);
     }
-    public APIRequestGet requestUrlField (boolean value) {
-      this.requestField("url", value);
+    public APIRequestGet requestUpdateTimeField (boolean value) {
+      this.requestField("update_time", value);
       return this;
     }
   }
@@ -431,19 +462,21 @@ public class Domain extends APINode {
     return gson;
   }
 
-  public Domain copyFrom(Domain instance) {
+  public CopyrightAudioAsset copyFrom(CopyrightAudioAsset instance) {
+    this.mCopyright = instance.mCopyright;
+    this.mCreationTime = instance.mCreationTime;
     this.mId = instance.mId;
-    this.mName = instance.mName;
-    this.mUrl = instance.mUrl;
+    this.mTitle = instance.mTitle;
+    this.mUpdateTime = instance.mUpdateTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<Domain> getParser() {
-    return new APIRequest.ResponseParser<Domain>() {
-      public APINodeList<Domain> parseResponse(String response, APIContext context, APIRequest<Domain> request, String header) throws MalformedResponseException {
-        return Domain.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CopyrightAudioAsset> getParser() {
+    return new APIRequest.ResponseParser<CopyrightAudioAsset>() {
+      public APINodeList<CopyrightAudioAsset> parseResponse(String response, APIContext context, APIRequest<CopyrightAudioAsset> request, String header) throws MalformedResponseException {
+        return CopyrightAudioAsset.parseResponse(response, context, request, header);
       }
     };
   }

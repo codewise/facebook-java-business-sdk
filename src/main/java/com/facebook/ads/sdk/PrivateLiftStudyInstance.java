@@ -59,6 +59,8 @@ public class PrivateLiftStudyInstance extends APINode {
   private String mBreakdownKey = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("feature_list")
+  private List<String> mFeatureList = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("latest_status_update_time")
@@ -67,6 +69,8 @@ public class PrivateLiftStudyInstance extends APINode {
   private List<String> mServerIps = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("tier")
+  private String mTier = null;
   protected static Gson gson = null;
 
   PrivateLiftStudyInstance() {
@@ -293,6 +297,10 @@ public class PrivateLiftStudyInstance extends APINode {
     return mCreatedTime;
   }
 
+  public List<String> getFieldFeatureList() {
+    return mFeatureList;
+  }
+
   public String getFieldId() {
     return mId;
   }
@@ -307,6 +315,10 @@ public class PrivateLiftStudyInstance extends APINode {
 
   public String getFieldStatus() {
     return mStatus;
+  }
+
+  public String getFieldTier() {
+    return mTier;
   }
 
 
@@ -324,10 +336,12 @@ public class PrivateLiftStudyInstance extends APINode {
     public static final String[] FIELDS = {
       "breakdown_key",
       "created_time",
+      "feature_list",
       "id",
       "latest_status_update_time",
       "server_ips",
       "status",
+      "tier",
     };
 
     @Override
@@ -433,6 +447,13 @@ public class PrivateLiftStudyInstance extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGet requestFeatureListField () {
+      return this.requestFeatureListField(true);
+    }
+    public APIRequestGet requestFeatureListField (boolean value) {
+      this.requestField("feature_list", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -459,6 +480,13 @@ public class PrivateLiftStudyInstance extends APINode {
     }
     public APIRequestGet requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGet requestTierField () {
+      return this.requestTierField(true);
+    }
+    public APIRequestGet requestTierField (boolean value) {
+      this.requestField("tier", value);
       return this;
     }
   }
@@ -584,6 +612,8 @@ public class PrivateLiftStudyInstance extends APINode {
       VALUE_COMPUTE("COMPUTE"),
       @SerializedName("ID_MATCH")
       VALUE_ID_MATCH("ID_MATCH"),
+      @SerializedName("NEXT")
+      VALUE_NEXT("NEXT"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
       ;
@@ -617,10 +647,12 @@ public class PrivateLiftStudyInstance extends APINode {
   public PrivateLiftStudyInstance copyFrom(PrivateLiftStudyInstance instance) {
     this.mBreakdownKey = instance.mBreakdownKey;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mFeatureList = instance.mFeatureList;
     this.mId = instance.mId;
     this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
     this.mServerIps = instance.mServerIps;
     this.mStatus = instance.mStatus;
+    this.mTier = instance.mTier;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

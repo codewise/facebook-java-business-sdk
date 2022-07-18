@@ -304,10 +304,6 @@ public class ProductSet extends APINode {
     return new APIRequestGetHotels(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetMediaTitles getMediaTitles() {
-    return new APIRequestGetMediaTitles(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetProducts getProducts() {
     return new APIRequestGetProducts(this.getPrefixedId().toString(), context);
   }
@@ -2038,130 +2034,6 @@ public class ProductSet extends APINode {
     }
   }
 
-  public static class APIRequestGetMediaTitles extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "bulk_pagination",
-      "filter",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetMediaTitles.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetMediaTitles(String nodeId, APIContext context) {
-      super(context, nodeId, "/media_titles", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetMediaTitles setBulkPagination (Boolean bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-    public APIRequestGetMediaTitles setBulkPagination (String bulkPagination) {
-      this.setParam("bulk_pagination", bulkPagination);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles setFilter (Object filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-    public APIRequestGetMediaTitles setFilter (String filter) {
-      this.setParam("filter", filter);
-      return this;
-    }
-
-    public APIRequestGetMediaTitles requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetMediaTitles requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetMediaTitles requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetProducts extends APIRequest<ProductItem> {
 
     APINodeList<ProductItem> lastResponse = null;
@@ -2171,6 +2043,8 @@ public class ProductSet extends APINode {
     }
     public static final String[] PARAMS = {
       "bulk_pagination",
+      "error_priority",
+      "error_type",
       "filter",
     };
 
@@ -2196,7 +2070,13 @@ public class ProductSet extends APINode {
       "custom_label_2",
       "custom_label_3",
       "custom_label_4",
+      "custom_number_0",
+      "custom_number_1",
+      "custom_number_2",
+      "custom_number_3",
+      "custom_number_4",
       "description",
+      "errors",
       "expiration_date",
       "fb_product_category",
       "gender",
@@ -2240,6 +2120,7 @@ public class ProductSet extends APINode {
       "start_date",
       "url",
       "visibility",
+      "wa_compliance_category",
     };
 
     @Override
@@ -2301,6 +2182,24 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts setBulkPagination (String bulkPagination) {
       this.setParam("bulk_pagination", bulkPagination);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorPriority (ProductItem.EnumErrorPriority errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+    public APIRequestGetProducts setErrorPriority (String errorPriority) {
+      this.setParam("error_priority", errorPriority);
+      return this;
+    }
+
+    public APIRequestGetProducts setErrorType (ProductItem.EnumErrorType errorType) {
+      this.setParam("error_type", errorType);
+      return this;
+    }
+    public APIRequestGetProducts setErrorType (String errorType) {
+      this.setParam("error_type", errorType);
       return this;
     }
 
@@ -2496,11 +2395,53 @@ public class ProductSet extends APINode {
       this.requestField("custom_label_4", value);
       return this;
     }
+    public APIRequestGetProducts requestCustomNumber0Field () {
+      return this.requestCustomNumber0Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber0Field (boolean value) {
+      this.requestField("custom_number_0", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber1Field () {
+      return this.requestCustomNumber1Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber1Field (boolean value) {
+      this.requestField("custom_number_1", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber2Field () {
+      return this.requestCustomNumber2Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber2Field (boolean value) {
+      this.requestField("custom_number_2", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber3Field () {
+      return this.requestCustomNumber3Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber3Field (boolean value) {
+      this.requestField("custom_number_3", value);
+      return this;
+    }
+    public APIRequestGetProducts requestCustomNumber4Field () {
+      return this.requestCustomNumber4Field(true);
+    }
+    public APIRequestGetProducts requestCustomNumber4Field (boolean value) {
+      this.requestField("custom_number_4", value);
+      return this;
+    }
     public APIRequestGetProducts requestDescriptionField () {
       return this.requestDescriptionField(true);
     }
     public APIRequestGetProducts requestDescriptionField (boolean value) {
       this.requestField("description", value);
+      return this;
+    }
+    public APIRequestGetProducts requestErrorsField () {
+      return this.requestErrorsField(true);
+    }
+    public APIRequestGetProducts requestErrorsField (boolean value) {
+      this.requestField("errors", value);
       return this;
     }
     public APIRequestGetProducts requestExpirationDateField () {
@@ -2802,6 +2743,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestVisibilityField (boolean value) {
       this.requestField("visibility", value);
+      return this;
+    }
+    public APIRequestGetProducts requestWaComplianceCategoryField () {
+      return this.requestWaComplianceCategoryField(true);
+    }
+    public APIRequestGetProducts requestWaComplianceCategoryField (boolean value) {
+      this.requestField("wa_compliance_category", value);
       return this;
     }
   }

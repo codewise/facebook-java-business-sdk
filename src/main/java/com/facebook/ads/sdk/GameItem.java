@@ -54,72 +54,78 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
-  @SerializedName("business_owned_object")
-  private String mBusinessOwnedObject = null;
+public class GameItem extends APINode {
+  @SerializedName("count")
+  private Long mCount = null;
+  @SerializedName("created")
+  private String mCreated = null;
+  @SerializedName("ext_id")
+  private String mExtId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("receiving_business")
-  private Business mReceivingBusiness = null;
-  @SerializedName("requesting_business")
-  private Business mRequestingBusiness = null;
+  @SerializedName("item_def")
+  private String mItemDef = null;
+  @SerializedName("owner")
+  private User mOwner = null;
   @SerializedName("status")
   private String mStatus = null;
+  @SerializedName("updated")
+  private String mUpdated = null;
   protected static Gson gson = null;
 
-  BusinessOwnedObjectOnBehalfOfRequest() {
+  GameItem() {
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest(Long id, APIContext context) {
+  public GameItem(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest(String id, APIContext context) {
+  public GameItem(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest fetch() throws APIException{
-    BusinessOwnedObjectOnBehalfOfRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public GameItem fetch() throws APIException{
+    GameItem newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static BusinessOwnedObjectOnBehalfOfRequest fetchById(Long id, APIContext context) throws APIException {
+  public static GameItem fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<GameItem> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static BusinessOwnedObjectOnBehalfOfRequest fetchById(String id, APIContext context) throws APIException {
+  public static GameItem fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<GameItem> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<BusinessOwnedObjectOnBehalfOfRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessOwnedObjectOnBehalfOfRequest>)(
-      new APIRequest<BusinessOwnedObjectOnBehalfOfRequest>(context, "", "/", "GET", BusinessOwnedObjectOnBehalfOfRequest.getParser())
+  public static APINodeList<GameItem> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<GameItem>)(
+      new APIRequest<GameItem>(context, "", "/", "GET", GameItem.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<BusinessOwnedObjectOnBehalfOfRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<GameItem>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", BusinessOwnedObjectOnBehalfOfRequest.getParser())
+      new APIRequest(context, "", "/", "GET", GameItem.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +138,12 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessOwnedObjectOnBehalfOfRequest loadJSON(String json, APIContext context, String header) {
-    BusinessOwnedObjectOnBehalfOfRequest businessOwnedObjectOnBehalfOfRequest = getGson().fromJson(json, BusinessOwnedObjectOnBehalfOfRequest.class);
+  public static GameItem loadJSON(String json, APIContext context, String header) {
+    GameItem gameItem = getGson().fromJson(json, GameItem.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessOwnedObjectOnBehalfOfRequest.toString());
+      JsonElement o2 = parser.parse(gameItem.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +153,14 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    businessOwnedObjectOnBehalfOfRequest.context = context;
-    businessOwnedObjectOnBehalfOfRequest.rawValue = json;
-    businessOwnedObjectOnBehalfOfRequest.header = header;
-    return businessOwnedObjectOnBehalfOfRequest;
+    gameItem.context = context;
+    gameItem.rawValue = json;
+    gameItem.header = header;
+    return gameItem;
   }
 
-  public static APINodeList<BusinessOwnedObjectOnBehalfOfRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessOwnedObjectOnBehalfOfRequest> businessOwnedObjectOnBehalfOfRequests = new APINodeList<BusinessOwnedObjectOnBehalfOfRequest>(request, json, header);
+  public static APINodeList<GameItem> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<GameItem> gameItems = new APINodeList<GameItem>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +171,9 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessOwnedObjectOnBehalfOfRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessOwnedObjectOnBehalfOfRequests;
+        return gameItems;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +183,20 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessOwnedObjectOnBehalfOfRequests.setCursors(before, after);
+                gameItems.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessOwnedObjectOnBehalfOfRequests.setPaging(previous, next);
+            gameItems.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessOwnedObjectOnBehalfOfRequests.setAppSecret(context.getAppSecretProof());
+              gameItems.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              gameItems.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +207,23 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessOwnedObjectOnBehalfOfRequests.add(loadJSON(entry.getValue().toString(), context, header));
+                  gameItems.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(obj.toString(), context, header));
+              gameItems.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessOwnedObjectOnBehalfOfRequests;
+          return gameItems;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(entry.getValue().toString(), context, header));
+              gameItems.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessOwnedObjectOnBehalfOfRequests;
+          return gameItems;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +240,20 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(value.toString(), context, header));
+              gameItems.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessOwnedObjectOnBehalfOfRequests;
+            return gameItems;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessOwnedObjectOnBehalfOfRequests.clear();
-          businessOwnedObjectOnBehalfOfRequests.add(loadJSON(json, context, header));
-          return businessOwnedObjectOnBehalfOfRequests;
+          gameItems.clear();
+          gameItems.add(loadJSON(json, context, header));
+          return gameItems;
         }
       }
     } catch (Exception e) {
@@ -279,78 +285,90 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
   }
 
 
-  public String getFieldBusinessOwnedObject() {
-    return mBusinessOwnedObject;
+  public Long getFieldCount() {
+    return mCount;
+  }
+
+  public String getFieldCreated() {
+    return mCreated;
+  }
+
+  public String getFieldExtId() {
+    return mExtId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public Business getFieldReceivingBusiness() {
-    if (mReceivingBusiness != null) {
-      mReceivingBusiness.context = getContext();
-    }
-    return mReceivingBusiness;
+  public String getFieldItemDef() {
+    return mItemDef;
   }
 
-  public Business getFieldRequestingBusiness() {
-    if (mRequestingBusiness != null) {
-      mRequestingBusiness.context = getContext();
+  public User getFieldOwner() {
+    if (mOwner != null) {
+      mOwner.context = getContext();
     }
-    return mRequestingBusiness;
+    return mOwner;
   }
 
   public String getFieldStatus() {
     return mStatus;
   }
 
+  public String getFieldUpdated() {
+    return mUpdated;
+  }
 
 
-  public static class APIRequestGet extends APIRequest<BusinessOwnedObjectOnBehalfOfRequest> {
 
-    BusinessOwnedObjectOnBehalfOfRequest lastResponse = null;
+  public static class APIRequestGet extends APIRequest<GameItem> {
+
+    GameItem lastResponse = null;
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest getLastResponse() {
+    public GameItem getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "business_owned_object",
+      "count",
+      "created",
+      "ext_id",
       "id",
-      "receiving_business",
-      "requesting_business",
+      "item_def",
+      "owner",
       "status",
+      "updated",
     };
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest parseResponse(String response, String header) throws APIException {
-      return BusinessOwnedObjectOnBehalfOfRequest.parseResponse(response, getContext(), this, header).head();
+    public GameItem parseResponse(String response, String header) throws APIException {
+      return GameItem.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest execute() throws APIException {
+    public GameItem execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest execute(Map<String, Object> extraParams) throws APIException {
+    public GameItem execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> executeAsync() throws APIException {
+    public ListenableFuture<GameItem> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<GameItem> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessOwnedObjectOnBehalfOfRequest>() {
-           public BusinessOwnedObjectOnBehalfOfRequest apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, GameItem>() {
+           public GameItem apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,11 +432,25 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBusinessOwnedObjectField () {
-      return this.requestBusinessOwnedObjectField(true);
+    public APIRequestGet requestCountField () {
+      return this.requestCountField(true);
     }
-    public APIRequestGet requestBusinessOwnedObjectField (boolean value) {
-      this.requestField("business_owned_object", value);
+    public APIRequestGet requestCountField (boolean value) {
+      this.requestField("count", value);
+      return this;
+    }
+    public APIRequestGet requestCreatedField () {
+      return this.requestCreatedField(true);
+    }
+    public APIRequestGet requestCreatedField (boolean value) {
+      this.requestField("created", value);
+      return this;
+    }
+    public APIRequestGet requestExtIdField () {
+      return this.requestExtIdField(true);
+    }
+    public APIRequestGet requestExtIdField (boolean value) {
+      this.requestField("ext_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -428,18 +460,18 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestReceivingBusinessField () {
-      return this.requestReceivingBusinessField(true);
+    public APIRequestGet requestItemDefField () {
+      return this.requestItemDefField(true);
     }
-    public APIRequestGet requestReceivingBusinessField (boolean value) {
-      this.requestField("receiving_business", value);
+    public APIRequestGet requestItemDefField (boolean value) {
+      this.requestField("item_def", value);
       return this;
     }
-    public APIRequestGet requestRequestingBusinessField () {
-      return this.requestRequestingBusinessField(true);
+    public APIRequestGet requestOwnerField () {
+      return this.requestOwnerField(true);
     }
-    public APIRequestGet requestRequestingBusinessField (boolean value) {
-      this.requestField("requesting_business", value);
+    public APIRequestGet requestOwnerField (boolean value) {
+      this.requestField("owner", value);
       return this;
     }
     public APIRequestGet requestStatusField () {
@@ -449,26 +481,27 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       this.requestField("status", value);
       return this;
     }
+    public APIRequestGet requestUpdatedField () {
+      return this.requestUpdatedField(true);
+    }
+    public APIRequestGet requestUpdatedField (boolean value) {
+      this.requestField("updated", value);
+      return this;
+    }
   }
 
-  public static enum EnumStatus {
-      @SerializedName("APPROVE")
-      VALUE_APPROVE("APPROVE"),
-      @SerializedName("DECLINE")
-      VALUE_DECLINE("DECLINE"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      @SerializedName("PENDING_INTEGRITY_REVIEW")
-      VALUE_PENDING_INTEGRITY_REVIEW("PENDING_INTEGRITY_REVIEW"),
+  public static enum EnumAction {
+      @SerializedName("CONSUME")
+      VALUE_CONSUME("CONSUME"),
+      @SerializedName("DROP")
+      VALUE_DROP("DROP"),
+      @SerializedName("MARK")
+      VALUE_MARK("MARK"),
       ;
 
       private String value;
 
-      private EnumStatus(String value) {
+      private EnumAction(String value) {
         this.value = value;
       }
 
@@ -492,21 +525,24 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
     return gson;
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest copyFrom(BusinessOwnedObjectOnBehalfOfRequest instance) {
-    this.mBusinessOwnedObject = instance.mBusinessOwnedObject;
+  public GameItem copyFrom(GameItem instance) {
+    this.mCount = instance.mCount;
+    this.mCreated = instance.mCreated;
+    this.mExtId = instance.mExtId;
     this.mId = instance.mId;
-    this.mReceivingBusiness = instance.mReceivingBusiness;
-    this.mRequestingBusiness = instance.mRequestingBusiness;
+    this.mItemDef = instance.mItemDef;
+    this.mOwner = instance.mOwner;
     this.mStatus = instance.mStatus;
+    this.mUpdated = instance.mUpdated;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessOwnedObjectOnBehalfOfRequest> getParser() {
-    return new APIRequest.ResponseParser<BusinessOwnedObjectOnBehalfOfRequest>() {
-      public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> parseResponse(String response, APIContext context, APIRequest<BusinessOwnedObjectOnBehalfOfRequest> request, String header) throws MalformedResponseException {
-        return BusinessOwnedObjectOnBehalfOfRequest.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<GameItem> getParser() {
+    return new APIRequest.ResponseParser<GameItem>() {
+      public APINodeList<GameItem> parseResponse(String response, APIContext context, APIRequest<GameItem> request, String header) throws MalformedResponseException {
+        return GameItem.parseResponse(response, context, request, header);
       }
     };
   }

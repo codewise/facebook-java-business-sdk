@@ -286,6 +286,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("GET_SHOWTIMES")
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
+      @SerializedName("GET_STARTED")
+      VALUE_GET_STARTED("GET_STARTED"),
       @SerializedName("INSTALL_APP")
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("INSTALL_MOBILE_APP")
@@ -314,6 +316,8 @@ public class AdCreativeLinkDataCallToAction extends APINode {
       VALUE_PAY_TO_ACCESS("PAY_TO_ACCESS"),
       @SerializedName("PLAY_GAME")
       VALUE_PLAY_GAME("PLAY_GAME"),
+      @SerializedName("PLAY_GAME_ON_FACEBOOK")
+      VALUE_PLAY_GAME_ON_FACEBOOK("PLAY_GAME_ON_FACEBOOK"),
       @SerializedName("PURCHASE_GIFT_CARDS")
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
       @SerializedName("RECORD_NOW")

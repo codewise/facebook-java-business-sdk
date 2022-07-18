@@ -54,39 +54,43 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class InvoiceCampaign extends APINode {
-  @SerializedName("ad_account_id")
-  private String mAdAccountId = null;
-  @SerializedName("billed_amount_details")
-  private BilledAmountDetails mBilledAmountDetails = null;
-  @SerializedName("campaign_id")
-  private String mCampaignId = null;
-  @SerializedName("campaign_name")
-  private String mCampaignName = null;
-  @SerializedName("clicks")
-  private Long mClicks = null;
-  @SerializedName("conversions")
-  private Long mConversions = null;
-  @SerializedName("description")
-  private String mDescription = null;
-  @SerializedName("impressions")
-  private Long mImpressions = null;
-  @SerializedName("tags")
-  private List<String> mTags = null;
+public class ShadowIGMediaProductTags extends APINode {
+  @SerializedName("image_url")
+  private String mImageUrl = null;
+  @SerializedName("is_checkout")
+  private Boolean mIsCheckout = null;
+  @SerializedName("merchant_id")
+  private Long mMerchantId = null;
+  @SerializedName("name")
+  private String mName = null;
+  @SerializedName("price_string")
+  private String mPriceString = null;
+  @SerializedName("product_id")
+  private Long mProductId = null;
+  @SerializedName("review_status")
+  private String mReviewStatus = null;
+  @SerializedName("stripped_price_string")
+  private String mStrippedPriceString = null;
+  @SerializedName("stripped_sale_price_string")
+  private String mStrippedSalePriceString = null;
+  @SerializedName("x")
+  private Double mX = null;
+  @SerializedName("y")
+  private Double mY = null;
   protected static Gson gson = null;
 
-  public InvoiceCampaign() {
+  public ShadowIGMediaProductTags() {
   }
 
   public String getId() {
     return null;
   }
-  public static InvoiceCampaign loadJSON(String json, APIContext context, String header) {
-    InvoiceCampaign invoiceCampaign = getGson().fromJson(json, InvoiceCampaign.class);
+  public static ShadowIGMediaProductTags loadJSON(String json, APIContext context, String header) {
+    ShadowIGMediaProductTags shadowIGMediaProductTags = getGson().fromJson(json, ShadowIGMediaProductTags.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(invoiceCampaign.toString());
+      JsonElement o2 = parser.parse(shadowIGMediaProductTags.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -96,14 +100,14 @@ public class InvoiceCampaign extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    invoiceCampaign.context = context;
-    invoiceCampaign.rawValue = json;
-    invoiceCampaign.header = header;
-    return invoiceCampaign;
+    shadowIGMediaProductTags.context = context;
+    shadowIGMediaProductTags.rawValue = json;
+    shadowIGMediaProductTags.header = header;
+    return shadowIGMediaProductTags;
   }
 
-  public static APINodeList<InvoiceCampaign> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<InvoiceCampaign> invoiceCampaigns = new APINodeList<InvoiceCampaign>(request, json, header);
+  public static APINodeList<ShadowIGMediaProductTags> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ShadowIGMediaProductTags> shadowIGMediaProductTagss = new APINodeList<ShadowIGMediaProductTags>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -114,9 +118,9 @@ public class InvoiceCampaign extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          shadowIGMediaProductTagss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return invoiceCampaigns;
+        return shadowIGMediaProductTagss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -126,20 +130,20 @@ public class InvoiceCampaign extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                invoiceCampaigns.setCursors(before, after);
+                shadowIGMediaProductTagss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            invoiceCampaigns.setPaging(previous, next);
+            shadowIGMediaProductTagss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              invoiceCampaigns.setAppSecret(context.getAppSecretProof());
+              shadowIGMediaProductTagss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              invoiceCampaigns.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -150,23 +154,23 @@ public class InvoiceCampaign extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+                  shadowIGMediaProductTagss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              invoiceCampaigns.add(loadJSON(obj.toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return invoiceCampaigns;
+          return shadowIGMediaProductTagss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              invoiceCampaigns.add(loadJSON(entry.getValue().toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return invoiceCampaigns;
+          return shadowIGMediaProductTagss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -183,20 +187,20 @@ public class InvoiceCampaign extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              invoiceCampaigns.add(loadJSON(value.toString(), context, header));
+              shadowIGMediaProductTagss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return invoiceCampaigns;
+            return shadowIGMediaProductTagss;
           }
 
           // Sixth, check if it's pure JsonObject
-          invoiceCampaigns.clear();
-          invoiceCampaigns.add(loadJSON(json, context, header));
-          return invoiceCampaigns;
+          shadowIGMediaProductTagss.clear();
+          shadowIGMediaProductTagss.add(loadJSON(json, context, header));
+          return shadowIGMediaProductTagss;
         }
       }
     } catch (Exception e) {
@@ -224,89 +228,102 @@ public class InvoiceCampaign extends APINode {
   }
 
 
-  public String getFieldAdAccountId() {
-    return mAdAccountId;
+  public String getFieldImageUrl() {
+    return mImageUrl;
   }
 
-  public InvoiceCampaign setFieldAdAccountId(String value) {
-    this.mAdAccountId = value;
+  public ShadowIGMediaProductTags setFieldImageUrl(String value) {
+    this.mImageUrl = value;
     return this;
   }
 
-  public BilledAmountDetails getFieldBilledAmountDetails() {
-    return mBilledAmountDetails;
+  public Boolean getFieldIsCheckout() {
+    return mIsCheckout;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(BilledAmountDetails value) {
-    this.mBilledAmountDetails = value;
+  public ShadowIGMediaProductTags setFieldIsCheckout(Boolean value) {
+    this.mIsCheckout = value;
     return this;
   }
 
-  public InvoiceCampaign setFieldBilledAmountDetails(String value) {
-    Type type = new TypeToken<BilledAmountDetails>(){}.getType();
-    this.mBilledAmountDetails = BilledAmountDetails.getGson().fromJson(value, type);
-    return this;
-  }
-  public String getFieldCampaignId() {
-    return mCampaignId;
+  public Long getFieldMerchantId() {
+    return mMerchantId;
   }
 
-  public InvoiceCampaign setFieldCampaignId(String value) {
-    this.mCampaignId = value;
+  public ShadowIGMediaProductTags setFieldMerchantId(Long value) {
+    this.mMerchantId = value;
     return this;
   }
 
-  public String getFieldCampaignName() {
-    return mCampaignName;
+  public String getFieldName() {
+    return mName;
   }
 
-  public InvoiceCampaign setFieldCampaignName(String value) {
-    this.mCampaignName = value;
+  public ShadowIGMediaProductTags setFieldName(String value) {
+    this.mName = value;
     return this;
   }
 
-  public Long getFieldClicks() {
-    return mClicks;
+  public String getFieldPriceString() {
+    return mPriceString;
   }
 
-  public InvoiceCampaign setFieldClicks(Long value) {
-    this.mClicks = value;
+  public ShadowIGMediaProductTags setFieldPriceString(String value) {
+    this.mPriceString = value;
     return this;
   }
 
-  public Long getFieldConversions() {
-    return mConversions;
+  public Long getFieldProductId() {
+    return mProductId;
   }
 
-  public InvoiceCampaign setFieldConversions(Long value) {
-    this.mConversions = value;
+  public ShadowIGMediaProductTags setFieldProductId(Long value) {
+    this.mProductId = value;
     return this;
   }
 
-  public String getFieldDescription() {
-    return mDescription;
+  public String getFieldReviewStatus() {
+    return mReviewStatus;
   }
 
-  public InvoiceCampaign setFieldDescription(String value) {
-    this.mDescription = value;
+  public ShadowIGMediaProductTags setFieldReviewStatus(String value) {
+    this.mReviewStatus = value;
     return this;
   }
 
-  public Long getFieldImpressions() {
-    return mImpressions;
+  public String getFieldStrippedPriceString() {
+    return mStrippedPriceString;
   }
 
-  public InvoiceCampaign setFieldImpressions(Long value) {
-    this.mImpressions = value;
+  public ShadowIGMediaProductTags setFieldStrippedPriceString(String value) {
+    this.mStrippedPriceString = value;
     return this;
   }
 
-  public List<String> getFieldTags() {
-    return mTags;
+  public String getFieldStrippedSalePriceString() {
+    return mStrippedSalePriceString;
   }
 
-  public InvoiceCampaign setFieldTags(List<String> value) {
-    this.mTags = value;
+  public ShadowIGMediaProductTags setFieldStrippedSalePriceString(String value) {
+    this.mStrippedSalePriceString = value;
+    return this;
+  }
+
+  public Double getFieldX() {
+    return mX;
+  }
+
+  public ShadowIGMediaProductTags setFieldX(Double value) {
+    this.mX = value;
+    return this;
+  }
+
+  public Double getFieldY() {
+    return mY;
+  }
+
+  public ShadowIGMediaProductTags setFieldY(Double value) {
+    this.mY = value;
     return this;
   }
 
@@ -326,25 +343,27 @@ public class InvoiceCampaign extends APINode {
     return gson;
   }
 
-  public InvoiceCampaign copyFrom(InvoiceCampaign instance) {
-    this.mAdAccountId = instance.mAdAccountId;
-    this.mBilledAmountDetails = instance.mBilledAmountDetails;
-    this.mCampaignId = instance.mCampaignId;
-    this.mCampaignName = instance.mCampaignName;
-    this.mClicks = instance.mClicks;
-    this.mConversions = instance.mConversions;
-    this.mDescription = instance.mDescription;
-    this.mImpressions = instance.mImpressions;
-    this.mTags = instance.mTags;
+  public ShadowIGMediaProductTags copyFrom(ShadowIGMediaProductTags instance) {
+    this.mImageUrl = instance.mImageUrl;
+    this.mIsCheckout = instance.mIsCheckout;
+    this.mMerchantId = instance.mMerchantId;
+    this.mName = instance.mName;
+    this.mPriceString = instance.mPriceString;
+    this.mProductId = instance.mProductId;
+    this.mReviewStatus = instance.mReviewStatus;
+    this.mStrippedPriceString = instance.mStrippedPriceString;
+    this.mStrippedSalePriceString = instance.mStrippedSalePriceString;
+    this.mX = instance.mX;
+    this.mY = instance.mY;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<InvoiceCampaign> getParser() {
-    return new APIRequest.ResponseParser<InvoiceCampaign>() {
-      public APINodeList<InvoiceCampaign> parseResponse(String response, APIContext context, APIRequest<InvoiceCampaign> request, String header) throws MalformedResponseException {
-        return InvoiceCampaign.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ShadowIGMediaProductTags> getParser() {
+    return new APIRequest.ResponseParser<ShadowIGMediaProductTags>() {
+      public APINodeList<ShadowIGMediaProductTags> parseResponse(String response, APIContext context, APIRequest<ShadowIGMediaProductTags> request, String header) throws MalformedResponseException {
+        return ShadowIGMediaProductTags.parseResponse(response, context, request, header);
       }
     };
   }

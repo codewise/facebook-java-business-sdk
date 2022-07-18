@@ -873,6 +873,7 @@ public class AdsPixel extends APINode {
       "data",
       "namespace_id",
       "partner_agent",
+      "platforms",
       "test_event_code",
       "trace",
       "upload_id",
@@ -952,6 +953,15 @@ public class AdsPixel extends APINode {
 
     public APIRequestCreateEvent setPartnerAgent (String partnerAgent) {
       this.setParam("partner_agent", partnerAgent);
+      return this;
+    }
+
+    public APIRequestCreateEvent setPlatforms (List<Map<String, String>> platforms) {
+      this.setParam("platforms", platforms);
+      return this;
+    }
+    public APIRequestCreateEvent setPlatforms (String platforms) {
+      this.setParam("platforms", platforms);
       return this;
     }
 

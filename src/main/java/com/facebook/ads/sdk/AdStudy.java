@@ -551,10 +551,12 @@ public class AdStudy extends APINode {
     public static final String[] FIELDS = {
       "breakdown_key",
       "created_time",
+      "feature_list",
       "id",
       "latest_status_update_time",
       "server_ips",
       "status",
+      "tier",
     };
 
     @Override
@@ -660,6 +662,13 @@ public class AdStudy extends APINode {
       this.requestField("created_time", value);
       return this;
     }
+    public APIRequestGetInstances requestFeatureListField () {
+      return this.requestFeatureListField(true);
+    }
+    public APIRequestGetInstances requestFeatureListField (boolean value) {
+      this.requestField("feature_list", value);
+      return this;
+    }
     public APIRequestGetInstances requestIdField () {
       return this.requestIdField(true);
     }
@@ -686,6 +695,13 @@ public class AdStudy extends APINode {
     }
     public APIRequestGetInstances requestStatusField (boolean value) {
       this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetInstances requestTierField () {
+      return this.requestTierField(true);
+    }
+    public APIRequestGetInstances requestTierField (boolean value) {
+      this.requestField("tier", value);
       return this;
     }
   }

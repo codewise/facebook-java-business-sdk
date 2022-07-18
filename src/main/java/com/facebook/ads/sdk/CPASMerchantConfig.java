@@ -54,72 +54,76 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class PageAdminNote extends APINode {
-  @SerializedName("body")
-  private String mBody = null;
-  @SerializedName("from")
-  private Page mFrom = null;
+public class CPASMerchantConfig extends APINode {
+  @SerializedName("accepted_tos")
+  private Boolean mAcceptedTos = null;
+  @SerializedName("beta_features")
+  private List<String> mBetaFeatures = null;
+  @SerializedName("business_outcomes_status")
+  private Map<String, String> mBusinessOutcomesStatus = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("note_label")
-  private String mNoteLabel = null;
-  @SerializedName("user")
-  private User mUser = null;
+  @SerializedName("is_test_merchant")
+  private Boolean mIsTestMerchant = null;
+  @SerializedName("outcomes_compliance_status")
+  private Map<String, Object> mOutcomesComplianceStatus = null;
+  @SerializedName("qualified_to_onboard")
+  private Boolean mQualifiedToOnboard = null;
   protected static Gson gson = null;
 
-  PageAdminNote() {
+  CPASMerchantConfig() {
   }
 
-  public PageAdminNote(Long id, APIContext context) {
+  public CPASMerchantConfig(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public PageAdminNote(String id, APIContext context) {
+  public CPASMerchantConfig(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public PageAdminNote fetch() throws APIException{
-    PageAdminNote newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CPASMerchantConfig fetch() throws APIException{
+    CPASMerchantConfig newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static PageAdminNote fetchById(Long id, APIContext context) throws APIException {
+  public static CPASMerchantConfig fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASMerchantConfig> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static PageAdminNote fetchById(String id, APIContext context) throws APIException {
+  public static CPASMerchantConfig fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<PageAdminNote> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CPASMerchantConfig> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<PageAdminNote> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<PageAdminNote>)(
-      new APIRequest<PageAdminNote>(context, "", "/", "GET", PageAdminNote.getParser())
+  public static APINodeList<CPASMerchantConfig> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CPASMerchantConfig>)(
+      new APIRequest<CPASMerchantConfig>(context, "", "/", "GET", CPASMerchantConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<PageAdminNote>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CPASMerchantConfig>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", PageAdminNote.getParser())
+      new APIRequest(context, "", "/", "GET", CPASMerchantConfig.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +136,12 @@ public class PageAdminNote extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static PageAdminNote loadJSON(String json, APIContext context, String header) {
-    PageAdminNote pageAdminNote = getGson().fromJson(json, PageAdminNote.class);
+  public static CPASMerchantConfig loadJSON(String json, APIContext context, String header) {
+    CPASMerchantConfig cpasMerchantConfig = getGson().fromJson(json, CPASMerchantConfig.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(pageAdminNote.toString());
+      JsonElement o2 = parser.parse(cpasMerchantConfig.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +151,14 @@ public class PageAdminNote extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    pageAdminNote.context = context;
-    pageAdminNote.rawValue = json;
-    pageAdminNote.header = header;
-    return pageAdminNote;
+    cpasMerchantConfig.context = context;
+    cpasMerchantConfig.rawValue = json;
+    cpasMerchantConfig.header = header;
+    return cpasMerchantConfig;
   }
 
-  public static APINodeList<PageAdminNote> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<PageAdminNote> pageAdminNotes = new APINodeList<PageAdminNote>(request, json, header);
+  public static APINodeList<CPASMerchantConfig> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CPASMerchantConfig> cpasMerchantConfigs = new APINodeList<CPASMerchantConfig>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +169,9 @@ public class PageAdminNote extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          cpasMerchantConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return pageAdminNotes;
+        return cpasMerchantConfigs;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +181,20 @@ public class PageAdminNote extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                pageAdminNotes.setCursors(before, after);
+                cpasMerchantConfigs.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            pageAdminNotes.setPaging(previous, next);
+            cpasMerchantConfigs.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              pageAdminNotes.setAppSecret(context.getAppSecretProof());
+              cpasMerchantConfigs.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              pageAdminNotes.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +205,23 @@ public class PageAdminNote extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+                  cpasMerchantConfigs.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              pageAdminNotes.add(loadJSON(obj.toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return pageAdminNotes;
+          return cpasMerchantConfigs;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              pageAdminNotes.add(loadJSON(entry.getValue().toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return pageAdminNotes;
+          return cpasMerchantConfigs;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +238,20 @@ public class PageAdminNote extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              pageAdminNotes.add(loadJSON(value.toString(), context, header));
+              cpasMerchantConfigs.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return pageAdminNotes;
+            return cpasMerchantConfigs;
           }
 
           // Sixth, check if it's pure JsonObject
-          pageAdminNotes.clear();
-          pageAdminNotes.add(loadJSON(json, context, header));
-          return pageAdminNotes;
+          cpasMerchantConfigs.clear();
+          cpasMerchantConfigs.add(loadJSON(json, context, header));
+          return cpasMerchantConfigs;
         }
       }
     } catch (Exception e) {
@@ -279,78 +283,82 @@ public class PageAdminNote extends APINode {
   }
 
 
-  public String getFieldBody() {
-    return mBody;
+  public Boolean getFieldAcceptedTos() {
+    return mAcceptedTos;
   }
 
-  public Page getFieldFrom() {
-    if (mFrom != null) {
-      mFrom.context = getContext();
-    }
-    return mFrom;
+  public List<String> getFieldBetaFeatures() {
+    return mBetaFeatures;
+  }
+
+  public Map<String, String> getFieldBusinessOutcomesStatus() {
+    return mBusinessOutcomesStatus;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldNoteLabel() {
-    return mNoteLabel;
+  public Boolean getFieldIsTestMerchant() {
+    return mIsTestMerchant;
   }
 
-  public User getFieldUser() {
-    if (mUser != null) {
-      mUser.context = getContext();
-    }
-    return mUser;
+  public Map<String, Object> getFieldOutcomesComplianceStatus() {
+    return mOutcomesComplianceStatus;
+  }
+
+  public Boolean getFieldQualifiedToOnboard() {
+    return mQualifiedToOnboard;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<PageAdminNote> {
+  public static class APIRequestGet extends APIRequest<CPASMerchantConfig> {
 
-    PageAdminNote lastResponse = null;
+    CPASMerchantConfig lastResponse = null;
     @Override
-    public PageAdminNote getLastResponse() {
+    public CPASMerchantConfig getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "body",
-      "from",
+      "accepted_tos",
+      "beta_features",
+      "business_outcomes_status",
       "id",
-      "note_label",
-      "user",
+      "is_test_merchant",
+      "outcomes_compliance_status",
+      "qualified_to_onboard",
     };
 
     @Override
-    public PageAdminNote parseResponse(String response, String header) throws APIException {
-      return PageAdminNote.parseResponse(response, getContext(), this, header).head();
+    public CPASMerchantConfig parseResponse(String response, String header) throws APIException {
+      return CPASMerchantConfig.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public PageAdminNote execute() throws APIException {
+    public CPASMerchantConfig execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public PageAdminNote execute(Map<String, Object> extraParams) throws APIException {
+    public CPASMerchantConfig execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<PageAdminNote> executeAsync() throws APIException {
+    public ListenableFuture<CPASMerchantConfig> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<PageAdminNote> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CPASMerchantConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, PageAdminNote>() {
-           public PageAdminNote apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CPASMerchantConfig>() {
+           public CPASMerchantConfig apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,18 +422,25 @@ public class PageAdminNote extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBodyField () {
-      return this.requestBodyField(true);
+    public APIRequestGet requestAcceptedTosField () {
+      return this.requestAcceptedTosField(true);
     }
-    public APIRequestGet requestBodyField (boolean value) {
-      this.requestField("body", value);
+    public APIRequestGet requestAcceptedTosField (boolean value) {
+      this.requestField("accepted_tos", value);
       return this;
     }
-    public APIRequestGet requestFromField () {
-      return this.requestFromField(true);
+    public APIRequestGet requestBetaFeaturesField () {
+      return this.requestBetaFeaturesField(true);
     }
-    public APIRequestGet requestFromField (boolean value) {
-      this.requestField("from", value);
+    public APIRequestGet requestBetaFeaturesField (boolean value) {
+      this.requestField("beta_features", value);
+      return this;
+    }
+    public APIRequestGet requestBusinessOutcomesStatusField () {
+      return this.requestBusinessOutcomesStatusField(true);
+    }
+    public APIRequestGet requestBusinessOutcomesStatusField (boolean value) {
+      this.requestField("business_outcomes_status", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -435,18 +450,25 @@ public class PageAdminNote extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestNoteLabelField () {
-      return this.requestNoteLabelField(true);
+    public APIRequestGet requestIsTestMerchantField () {
+      return this.requestIsTestMerchantField(true);
     }
-    public APIRequestGet requestNoteLabelField (boolean value) {
-      this.requestField("note_label", value);
+    public APIRequestGet requestIsTestMerchantField (boolean value) {
+      this.requestField("is_test_merchant", value);
       return this;
     }
-    public APIRequestGet requestUserField () {
-      return this.requestUserField(true);
+    public APIRequestGet requestOutcomesComplianceStatusField () {
+      return this.requestOutcomesComplianceStatusField(true);
     }
-    public APIRequestGet requestUserField (boolean value) {
-      this.requestField("user", value);
+    public APIRequestGet requestOutcomesComplianceStatusField (boolean value) {
+      this.requestField("outcomes_compliance_status", value);
+      return this;
+    }
+    public APIRequestGet requestQualifiedToOnboardField () {
+      return this.requestQualifiedToOnboardField(true);
+    }
+    public APIRequestGet requestQualifiedToOnboardField (boolean value) {
+      this.requestField("qualified_to_onboard", value);
       return this;
     }
   }
@@ -465,21 +487,23 @@ public class PageAdminNote extends APINode {
     return gson;
   }
 
-  public PageAdminNote copyFrom(PageAdminNote instance) {
-    this.mBody = instance.mBody;
-    this.mFrom = instance.mFrom;
+  public CPASMerchantConfig copyFrom(CPASMerchantConfig instance) {
+    this.mAcceptedTos = instance.mAcceptedTos;
+    this.mBetaFeatures = instance.mBetaFeatures;
+    this.mBusinessOutcomesStatus = instance.mBusinessOutcomesStatus;
     this.mId = instance.mId;
-    this.mNoteLabel = instance.mNoteLabel;
-    this.mUser = instance.mUser;
+    this.mIsTestMerchant = instance.mIsTestMerchant;
+    this.mOutcomesComplianceStatus = instance.mOutcomesComplianceStatus;
+    this.mQualifiedToOnboard = instance.mQualifiedToOnboard;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<PageAdminNote> getParser() {
-    return new APIRequest.ResponseParser<PageAdminNote>() {
-      public APINodeList<PageAdminNote> parseResponse(String response, APIContext context, APIRequest<PageAdminNote> request, String header) throws MalformedResponseException {
-        return PageAdminNote.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CPASMerchantConfig> getParser() {
+    return new APIRequest.ResponseParser<CPASMerchantConfig>() {
+      public APINodeList<CPASMerchantConfig> parseResponse(String response, APIContext context, APIRequest<CPASMerchantConfig> request, String header) throws MalformedResponseException {
+        return CPASMerchantConfig.parseResponse(response, context, request, header);
       }
     };
   }

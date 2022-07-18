@@ -69,6 +69,8 @@ public class InstagramUser extends APINode {
   private Boolean mIsPublished = null;
   @SerializedName("media_count")
   private Long mMediaCount = null;
+  @SerializedName("mini_shop_storefront")
+  private Shop mMiniShopStorefront = null;
   @SerializedName("profile_pic")
   private String mProfilePic = null;
   @SerializedName("username")
@@ -325,6 +327,13 @@ public class InstagramUser extends APINode {
 
   public Long getFieldMediaCount() {
     return mMediaCount;
+  }
+
+  public Shop getFieldMiniShopStorefront() {
+    if (mMiniShopStorefront != null) {
+      mMiniShopStorefront.context = getContext();
+    }
+    return mMiniShopStorefront;
   }
 
   public String getFieldProfilePic() {
@@ -1318,6 +1327,7 @@ public class InstagramUser extends APINode {
       "is_private",
       "is_published",
       "media_count",
+      "mini_shop_storefront",
       "profile_pic",
       "username",
     };
@@ -1465,6 +1475,13 @@ public class InstagramUser extends APINode {
       this.requestField("media_count", value);
       return this;
     }
+    public APIRequestGet requestMiniShopStorefrontField () {
+      return this.requestMiniShopStorefrontField(true);
+    }
+    public APIRequestGet requestMiniShopStorefrontField (boolean value) {
+      this.requestField("mini_shop_storefront", value);
+      return this;
+    }
     public APIRequestGet requestProfilePicField () {
       return this.requestProfilePicField(true);
     }
@@ -1503,6 +1520,7 @@ public class InstagramUser extends APINode {
     this.mIsPrivate = instance.mIsPrivate;
     this.mIsPublished = instance.mIsPublished;
     this.mMediaCount = instance.mMediaCount;
+    this.mMiniShopStorefront = instance.mMiniShopStorefront;
     this.mProfilePic = instance.mProfilePic;
     this.mUsername = instance.mUsername;
     this.context = instance.context;

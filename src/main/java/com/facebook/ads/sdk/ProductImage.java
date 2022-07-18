@@ -54,72 +54,66 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
-  @SerializedName("business_owned_object")
-  private String mBusinessOwnedObject = null;
+public class ProductImage extends APINode {
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("receiving_business")
-  private Business mReceivingBusiness = null;
-  @SerializedName("requesting_business")
-  private Business mRequestingBusiness = null;
-  @SerializedName("status")
-  private String mStatus = null;
+  @SerializedName("image_url")
+  private String mImageUrl = null;
   protected static Gson gson = null;
 
-  BusinessOwnedObjectOnBehalfOfRequest() {
+  ProductImage() {
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest(Long id, APIContext context) {
+  public ProductImage(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest(String id, APIContext context) {
+  public ProductImage(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest fetch() throws APIException{
-    BusinessOwnedObjectOnBehalfOfRequest newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public ProductImage fetch() throws APIException{
+    ProductImage newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static BusinessOwnedObjectOnBehalfOfRequest fetchById(Long id, APIContext context) throws APIException {
+  public static ProductImage fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<ProductImage> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static BusinessOwnedObjectOnBehalfOfRequest fetchById(String id, APIContext context) throws APIException {
+  public static ProductImage fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<ProductImage> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<BusinessOwnedObjectOnBehalfOfRequest> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<BusinessOwnedObjectOnBehalfOfRequest>)(
-      new APIRequest<BusinessOwnedObjectOnBehalfOfRequest>(context, "", "/", "GET", BusinessOwnedObjectOnBehalfOfRequest.getParser())
+  public static APINodeList<ProductImage> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<ProductImage>)(
+      new APIRequest<ProductImage>(context, "", "/", "GET", ProductImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<BusinessOwnedObjectOnBehalfOfRequest>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<ProductImage>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", BusinessOwnedObjectOnBehalfOfRequest.getParser())
+      new APIRequest(context, "", "/", "GET", ProductImage.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +126,12 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static BusinessOwnedObjectOnBehalfOfRequest loadJSON(String json, APIContext context, String header) {
-    BusinessOwnedObjectOnBehalfOfRequest businessOwnedObjectOnBehalfOfRequest = getGson().fromJson(json, BusinessOwnedObjectOnBehalfOfRequest.class);
+  public static ProductImage loadJSON(String json, APIContext context, String header) {
+    ProductImage productImage = getGson().fromJson(json, ProductImage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(businessOwnedObjectOnBehalfOfRequest.toString());
+      JsonElement o2 = parser.parse(productImage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +141,14 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    businessOwnedObjectOnBehalfOfRequest.context = context;
-    businessOwnedObjectOnBehalfOfRequest.rawValue = json;
-    businessOwnedObjectOnBehalfOfRequest.header = header;
-    return businessOwnedObjectOnBehalfOfRequest;
+    productImage.context = context;
+    productImage.rawValue = json;
+    productImage.header = header;
+    return productImage;
   }
 
-  public static APINodeList<BusinessOwnedObjectOnBehalfOfRequest> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BusinessOwnedObjectOnBehalfOfRequest> businessOwnedObjectOnBehalfOfRequests = new APINodeList<BusinessOwnedObjectOnBehalfOfRequest>(request, json, header);
+  public static APINodeList<ProductImage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductImage> productImages = new APINodeList<ProductImage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +159,9 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          businessOwnedObjectOnBehalfOfRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return businessOwnedObjectOnBehalfOfRequests;
+        return productImages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +171,20 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                businessOwnedObjectOnBehalfOfRequests.setCursors(before, after);
+                productImages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            businessOwnedObjectOnBehalfOfRequests.setPaging(previous, next);
+            productImages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              businessOwnedObjectOnBehalfOfRequests.setAppSecret(context.getAppSecretProof());
+              productImages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productImages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +195,23 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  businessOwnedObjectOnBehalfOfRequests.add(loadJSON(entry.getValue().toString(), context, header));
+                  productImages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(obj.toString(), context, header));
+              productImages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return businessOwnedObjectOnBehalfOfRequests;
+          return productImages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(entry.getValue().toString(), context, header));
+              productImages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return businessOwnedObjectOnBehalfOfRequests;
+          return productImages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +228,20 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              businessOwnedObjectOnBehalfOfRequests.add(loadJSON(value.toString(), context, header));
+              productImages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return businessOwnedObjectOnBehalfOfRequests;
+            return productImages;
           }
 
           // Sixth, check if it's pure JsonObject
-          businessOwnedObjectOnBehalfOfRequests.clear();
-          businessOwnedObjectOnBehalfOfRequests.add(loadJSON(json, context, header));
-          return businessOwnedObjectOnBehalfOfRequests;
+          productImages.clear();
+          productImages.add(loadJSON(json, context, header));
+          return productImages;
         }
       }
     } catch (Exception e) {
@@ -279,78 +273,57 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
   }
 
 
-  public String getFieldBusinessOwnedObject() {
-    return mBusinessOwnedObject;
-  }
-
   public String getFieldId() {
     return mId;
   }
 
-  public Business getFieldReceivingBusiness() {
-    if (mReceivingBusiness != null) {
-      mReceivingBusiness.context = getContext();
-    }
-    return mReceivingBusiness;
-  }
-
-  public Business getFieldRequestingBusiness() {
-    if (mRequestingBusiness != null) {
-      mRequestingBusiness.context = getContext();
-    }
-    return mRequestingBusiness;
-  }
-
-  public String getFieldStatus() {
-    return mStatus;
+  public String getFieldImageUrl() {
+    return mImageUrl;
   }
 
 
 
-  public static class APIRequestGet extends APIRequest<BusinessOwnedObjectOnBehalfOfRequest> {
+  public static class APIRequestGet extends APIRequest<ProductImage> {
 
-    BusinessOwnedObjectOnBehalfOfRequest lastResponse = null;
+    ProductImage lastResponse = null;
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest getLastResponse() {
+    public ProductImage getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "business_owned_object",
       "id",
-      "receiving_business",
-      "requesting_business",
-      "status",
+      "image_url",
     };
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest parseResponse(String response, String header) throws APIException {
-      return BusinessOwnedObjectOnBehalfOfRequest.parseResponse(response, getContext(), this, header).head();
+    public ProductImage parseResponse(String response, String header) throws APIException {
+      return ProductImage.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest execute() throws APIException {
+    public ProductImage execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public BusinessOwnedObjectOnBehalfOfRequest execute(Map<String, Object> extraParams) throws APIException {
+    public ProductImage execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> executeAsync() throws APIException {
+    public ListenableFuture<ProductImage> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<BusinessOwnedObjectOnBehalfOfRequest> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<ProductImage> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, BusinessOwnedObjectOnBehalfOfRequest>() {
-           public BusinessOwnedObjectOnBehalfOfRequest apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, ProductImage>() {
+           public ProductImage apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -414,13 +387,6 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       return this;
     }
 
-    public APIRequestGet requestBusinessOwnedObjectField () {
-      return this.requestBusinessOwnedObjectField(true);
-    }
-    public APIRequestGet requestBusinessOwnedObjectField (boolean value) {
-      this.requestField("business_owned_object", value);
-      return this;
-    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -428,54 +394,13 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
       this.requestField("id", value);
       return this;
     }
-    public APIRequestGet requestReceivingBusinessField () {
-      return this.requestReceivingBusinessField(true);
+    public APIRequestGet requestImageUrlField () {
+      return this.requestImageUrlField(true);
     }
-    public APIRequestGet requestReceivingBusinessField (boolean value) {
-      this.requestField("receiving_business", value);
+    public APIRequestGet requestImageUrlField (boolean value) {
+      this.requestField("image_url", value);
       return this;
     }
-    public APIRequestGet requestRequestingBusinessField () {
-      return this.requestRequestingBusinessField(true);
-    }
-    public APIRequestGet requestRequestingBusinessField (boolean value) {
-      this.requestField("requesting_business", value);
-      return this;
-    }
-    public APIRequestGet requestStatusField () {
-      return this.requestStatusField(true);
-    }
-    public APIRequestGet requestStatusField (boolean value) {
-      this.requestField("status", value);
-      return this;
-    }
-  }
-
-  public static enum EnumStatus {
-      @SerializedName("APPROVE")
-      VALUE_APPROVE("APPROVE"),
-      @SerializedName("DECLINE")
-      VALUE_DECLINE("DECLINE"),
-      @SerializedName("EXPIRED")
-      VALUE_EXPIRED("EXPIRED"),
-      @SerializedName("IN_PROGRESS")
-      VALUE_IN_PROGRESS("IN_PROGRESS"),
-      @SerializedName("PENDING")
-      VALUE_PENDING("PENDING"),
-      @SerializedName("PENDING_INTEGRITY_REVIEW")
-      VALUE_PENDING_INTEGRITY_REVIEW("PENDING_INTEGRITY_REVIEW"),
-      ;
-
-      private String value;
-
-      private EnumStatus(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
   }
 
 
@@ -492,21 +417,18 @@ public class BusinessOwnedObjectOnBehalfOfRequest extends APINode {
     return gson;
   }
 
-  public BusinessOwnedObjectOnBehalfOfRequest copyFrom(BusinessOwnedObjectOnBehalfOfRequest instance) {
-    this.mBusinessOwnedObject = instance.mBusinessOwnedObject;
+  public ProductImage copyFrom(ProductImage instance) {
     this.mId = instance.mId;
-    this.mReceivingBusiness = instance.mReceivingBusiness;
-    this.mRequestingBusiness = instance.mRequestingBusiness;
-    this.mStatus = instance.mStatus;
+    this.mImageUrl = instance.mImageUrl;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BusinessOwnedObjectOnBehalfOfRequest> getParser() {
-    return new APIRequest.ResponseParser<BusinessOwnedObjectOnBehalfOfRequest>() {
-      public APINodeList<BusinessOwnedObjectOnBehalfOfRequest> parseResponse(String response, APIContext context, APIRequest<BusinessOwnedObjectOnBehalfOfRequest> request, String header) throws MalformedResponseException {
-        return BusinessOwnedObjectOnBehalfOfRequest.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductImage> getParser() {
+    return new APIRequest.ResponseParser<ProductImage>() {
+      public APINodeList<ProductImage> parseResponse(String response, APIContext context, APIRequest<ProductImage> request, String header) throws MalformedResponseException {
+        return ProductImage.parseResponse(response, context, request, header);
       }
     };
   }

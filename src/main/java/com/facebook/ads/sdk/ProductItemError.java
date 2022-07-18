@@ -54,29 +54,29 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class BilledAmountDetails extends APINode {
-  @SerializedName("currency")
-  private String mCurrency = null;
-  @SerializedName("net_amount")
-  private String mNetAmount = null;
-  @SerializedName("tax_amount")
-  private String mTaxAmount = null;
-  @SerializedName("total_amount")
-  private String mTotalAmount = null;
+public class ProductItemError extends APINode {
+  @SerializedName("description")
+  private String mDescription = null;
+  @SerializedName("error_priority")
+  private String mErrorPriority = null;
+  @SerializedName("error_type")
+  private String mErrorType = null;
+  @SerializedName("title")
+  private String mTitle = null;
   protected static Gson gson = null;
 
-  public BilledAmountDetails() {
+  public ProductItemError() {
   }
 
   public String getId() {
     return null;
   }
-  public static BilledAmountDetails loadJSON(String json, APIContext context, String header) {
-    BilledAmountDetails billedAmountDetails = getGson().fromJson(json, BilledAmountDetails.class);
+  public static ProductItemError loadJSON(String json, APIContext context, String header) {
+    ProductItemError productItemError = getGson().fromJson(json, ProductItemError.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(billedAmountDetails.toString());
+      JsonElement o2 = parser.parse(productItemError.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +86,14 @@ public class BilledAmountDetails extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    billedAmountDetails.context = context;
-    billedAmountDetails.rawValue = json;
-    billedAmountDetails.header = header;
-    return billedAmountDetails;
+    productItemError.context = context;
+    productItemError.rawValue = json;
+    productItemError.header = header;
+    return productItemError;
   }
 
-  public static APINodeList<BilledAmountDetails> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<BilledAmountDetails> billedAmountDetailss = new APINodeList<BilledAmountDetails>(request, json, header);
+  public static APINodeList<ProductItemError> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<ProductItemError> productItemErrors = new APINodeList<ProductItemError>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +104,9 @@ public class BilledAmountDetails extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          productItemErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return billedAmountDetailss;
+        return productItemErrors;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +116,20 @@ public class BilledAmountDetails extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                billedAmountDetailss.setCursors(before, after);
+                productItemErrors.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            billedAmountDetailss.setPaging(previous, next);
+            productItemErrors.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              billedAmountDetailss.setAppSecret(context.getAppSecretProof());
+              productItemErrors.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              billedAmountDetailss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              productItemErrors.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +140,23 @@ public class BilledAmountDetails extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+                  productItemErrors.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              billedAmountDetailss.add(loadJSON(obj.toString(), context, header));
+              productItemErrors.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return billedAmountDetailss;
+          return productItemErrors;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              billedAmountDetailss.add(loadJSON(entry.getValue().toString(), context, header));
+              productItemErrors.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return billedAmountDetailss;
+          return productItemErrors;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +173,20 @@ public class BilledAmountDetails extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              billedAmountDetailss.add(loadJSON(value.toString(), context, header));
+              productItemErrors.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return billedAmountDetailss;
+            return productItemErrors;
           }
 
           // Sixth, check if it's pure JsonObject
-          billedAmountDetailss.clear();
-          billedAmountDetailss.add(loadJSON(json, context, header));
-          return billedAmountDetailss;
+          productItemErrors.clear();
+          productItemErrors.add(loadJSON(json, context, header));
+          return productItemErrors;
         }
       }
     } catch (Exception e) {
@@ -214,39 +214,39 @@ public class BilledAmountDetails extends APINode {
   }
 
 
-  public String getFieldCurrency() {
-    return mCurrency;
+  public String getFieldDescription() {
+    return mDescription;
   }
 
-  public BilledAmountDetails setFieldCurrency(String value) {
-    this.mCurrency = value;
+  public ProductItemError setFieldDescription(String value) {
+    this.mDescription = value;
     return this;
   }
 
-  public String getFieldNetAmount() {
-    return mNetAmount;
+  public String getFieldErrorPriority() {
+    return mErrorPriority;
   }
 
-  public BilledAmountDetails setFieldNetAmount(String value) {
-    this.mNetAmount = value;
+  public ProductItemError setFieldErrorPriority(String value) {
+    this.mErrorPriority = value;
     return this;
   }
 
-  public String getFieldTaxAmount() {
-    return mTaxAmount;
+  public String getFieldErrorType() {
+    return mErrorType;
   }
 
-  public BilledAmountDetails setFieldTaxAmount(String value) {
-    this.mTaxAmount = value;
+  public ProductItemError setFieldErrorType(String value) {
+    this.mErrorType = value;
     return this;
   }
 
-  public String getFieldTotalAmount() {
-    return mTotalAmount;
+  public String getFieldTitle() {
+    return mTitle;
   }
 
-  public BilledAmountDetails setFieldTotalAmount(String value) {
-    this.mTotalAmount = value;
+  public ProductItemError setFieldTitle(String value) {
+    this.mTitle = value;
     return this;
   }
 
@@ -266,20 +266,20 @@ public class BilledAmountDetails extends APINode {
     return gson;
   }
 
-  public BilledAmountDetails copyFrom(BilledAmountDetails instance) {
-    this.mCurrency = instance.mCurrency;
-    this.mNetAmount = instance.mNetAmount;
-    this.mTaxAmount = instance.mTaxAmount;
-    this.mTotalAmount = instance.mTotalAmount;
+  public ProductItemError copyFrom(ProductItemError instance) {
+    this.mDescription = instance.mDescription;
+    this.mErrorPriority = instance.mErrorPriority;
+    this.mErrorType = instance.mErrorType;
+    this.mTitle = instance.mTitle;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<BilledAmountDetails> getParser() {
-    return new APIRequest.ResponseParser<BilledAmountDetails>() {
-      public APINodeList<BilledAmountDetails> parseResponse(String response, APIContext context, APIRequest<BilledAmountDetails> request, String header) throws MalformedResponseException {
-        return BilledAmountDetails.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<ProductItemError> getParser() {
+    return new APIRequest.ResponseParser<ProductItemError>() {
+      public APINodeList<ProductItemError> parseResponse(String response, APIContext context, APIRequest<ProductItemError> request, String header) throws MalformedResponseException {
+        return ProductItemError.parseResponse(response, context, request, header);
       }
     };
   }

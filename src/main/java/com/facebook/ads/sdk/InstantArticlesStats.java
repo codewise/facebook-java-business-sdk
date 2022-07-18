@@ -54,29 +54,31 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdgroupRelevanceScore extends APINode {
-  @SerializedName("negative_feedback")
-  private String mNegativeFeedback = null;
-  @SerializedName("positive_feedback")
-  private String mPositiveFeedback = null;
-  @SerializedName("score")
-  private String mScore = null;
-  @SerializedName("status")
-  private String mStatus = null;
+public class InstantArticlesStats extends APINode {
+  @SerializedName("error")
+  private String mError = null;
+  @SerializedName("metadata")
+  private Map<String, Object> mMetadata = null;
+  @SerializedName("metric")
+  private Object mMetric = null;
+  @SerializedName("totals")
+  private Map<String, Object> mTotals = null;
+  @SerializedName("x_axis_breakdown")
+  private List<Map<String, Object>> mXAxisBreakdown = null;
   protected static Gson gson = null;
 
-  public AdgroupRelevanceScore() {
+  public InstantArticlesStats() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdgroupRelevanceScore loadJSON(String json, APIContext context, String header) {
-    AdgroupRelevanceScore adgroupRelevanceScore = getGson().fromJson(json, AdgroupRelevanceScore.class);
+  public static InstantArticlesStats loadJSON(String json, APIContext context, String header) {
+    InstantArticlesStats instantArticlesStats = getGson().fromJson(json, InstantArticlesStats.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adgroupRelevanceScore.toString());
+      JsonElement o2 = parser.parse(instantArticlesStats.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -86,14 +88,14 @@ public class AdgroupRelevanceScore extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adgroupRelevanceScore.context = context;
-    adgroupRelevanceScore.rawValue = json;
-    adgroupRelevanceScore.header = header;
-    return adgroupRelevanceScore;
+    instantArticlesStats.context = context;
+    instantArticlesStats.rawValue = json;
+    instantArticlesStats.header = header;
+    return instantArticlesStats;
   }
 
-  public static APINodeList<AdgroupRelevanceScore> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdgroupRelevanceScore> adgroupRelevanceScores = new APINodeList<AdgroupRelevanceScore>(request, json, header);
+  public static APINodeList<InstantArticlesStats> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<InstantArticlesStats> instantArticlesStatss = new APINodeList<InstantArticlesStats>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -104,9 +106,9 @@ public class AdgroupRelevanceScore extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adgroupRelevanceScores.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adgroupRelevanceScores;
+        return instantArticlesStatss;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -116,20 +118,20 @@ public class AdgroupRelevanceScore extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adgroupRelevanceScores.setCursors(before, after);
+                instantArticlesStatss.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adgroupRelevanceScores.setPaging(previous, next);
+            instantArticlesStatss.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adgroupRelevanceScores.setAppSecret(context.getAppSecretProof());
+              instantArticlesStatss.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adgroupRelevanceScores.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              instantArticlesStatss.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -140,23 +142,23 @@ public class AdgroupRelevanceScore extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adgroupRelevanceScores.add(loadJSON(entry.getValue().toString(), context, header));
+                  instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adgroupRelevanceScores.add(loadJSON(obj.toString(), context, header));
+              instantArticlesStatss.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adgroupRelevanceScores;
+          return instantArticlesStatss;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adgroupRelevanceScores.add(loadJSON(entry.getValue().toString(), context, header));
+              instantArticlesStatss.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adgroupRelevanceScores;
+          return instantArticlesStatss;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -173,20 +175,20 @@ public class AdgroupRelevanceScore extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adgroupRelevanceScores.add(loadJSON(value.toString(), context, header));
+              instantArticlesStatss.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adgroupRelevanceScores;
+            return instantArticlesStatss;
           }
 
           // Sixth, check if it's pure JsonObject
-          adgroupRelevanceScores.clear();
-          adgroupRelevanceScores.add(loadJSON(json, context, header));
-          return adgroupRelevanceScores;
+          instantArticlesStatss.clear();
+          instantArticlesStatss.add(loadJSON(json, context, header));
+          return instantArticlesStatss;
         }
       }
     } catch (Exception e) {
@@ -214,39 +216,48 @@ public class AdgroupRelevanceScore extends APINode {
   }
 
 
-  public String getFieldNegativeFeedback() {
-    return mNegativeFeedback;
+  public String getFieldError() {
+    return mError;
   }
 
-  public AdgroupRelevanceScore setFieldNegativeFeedback(String value) {
-    this.mNegativeFeedback = value;
+  public InstantArticlesStats setFieldError(String value) {
+    this.mError = value;
     return this;
   }
 
-  public String getFieldPositiveFeedback() {
-    return mPositiveFeedback;
+  public Map<String, Object> getFieldMetadata() {
+    return mMetadata;
   }
 
-  public AdgroupRelevanceScore setFieldPositiveFeedback(String value) {
-    this.mPositiveFeedback = value;
+  public InstantArticlesStats setFieldMetadata(Map<String, Object> value) {
+    this.mMetadata = value;
     return this;
   }
 
-  public String getFieldScore() {
-    return mScore;
+  public Object getFieldMetric() {
+    return mMetric;
   }
 
-  public AdgroupRelevanceScore setFieldScore(String value) {
-    this.mScore = value;
+  public InstantArticlesStats setFieldMetric(Object value) {
+    this.mMetric = value;
     return this;
   }
 
-  public String getFieldStatus() {
-    return mStatus;
+  public Map<String, Object> getFieldTotals() {
+    return mTotals;
   }
 
-  public AdgroupRelevanceScore setFieldStatus(String value) {
-    this.mStatus = value;
+  public InstantArticlesStats setFieldTotals(Map<String, Object> value) {
+    this.mTotals = value;
+    return this;
+  }
+
+  public List<Map<String, Object>> getFieldXAxisBreakdown() {
+    return mXAxisBreakdown;
+  }
+
+  public InstantArticlesStats setFieldXAxisBreakdown(List<Map<String, Object>> value) {
+    this.mXAxisBreakdown = value;
     return this;
   }
 
@@ -266,20 +277,21 @@ public class AdgroupRelevanceScore extends APINode {
     return gson;
   }
 
-  public AdgroupRelevanceScore copyFrom(AdgroupRelevanceScore instance) {
-    this.mNegativeFeedback = instance.mNegativeFeedback;
-    this.mPositiveFeedback = instance.mPositiveFeedback;
-    this.mScore = instance.mScore;
-    this.mStatus = instance.mStatus;
+  public InstantArticlesStats copyFrom(InstantArticlesStats instance) {
+    this.mError = instance.mError;
+    this.mMetadata = instance.mMetadata;
+    this.mMetric = instance.mMetric;
+    this.mTotals = instance.mTotals;
+    this.mXAxisBreakdown = instance.mXAxisBreakdown;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdgroupRelevanceScore> getParser() {
-    return new APIRequest.ResponseParser<AdgroupRelevanceScore>() {
-      public APINodeList<AdgroupRelevanceScore> parseResponse(String response, APIContext context, APIRequest<AdgroupRelevanceScore> request, String header) throws MalformedResponseException {
-        return AdgroupRelevanceScore.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<InstantArticlesStats> getParser() {
+    return new APIRequest.ResponseParser<InstantArticlesStats>() {
+      public APINodeList<InstantArticlesStats> parseResponse(String response, APIContext context, APIRequest<InstantArticlesStats> request, String header) throws MalformedResponseException {
+        return InstantArticlesStats.parseResponse(response, context, request, header);
       }
     };
   }

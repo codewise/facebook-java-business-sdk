@@ -54,27 +54,23 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class AdAccountReachEstimate extends APINode {
-  @SerializedName("estimate_ready")
-  private Boolean mEstimateReady = null;
-  @SerializedName("users_lower_bound")
-  private Long mUsersLowerBound = null;
-  @SerializedName("users_upper_bound")
-  private Long mUsersUpperBound = null;
+public class OfflineConversionDataSetUsage extends APINode {
+  @SerializedName("num_lift_studies")
+  private Long mNumLiftStudies = null;
   protected static Gson gson = null;
 
-  public AdAccountReachEstimate() {
+  public OfflineConversionDataSetUsage() {
   }
 
   public String getId() {
     return null;
   }
-  public static AdAccountReachEstimate loadJSON(String json, APIContext context, String header) {
-    AdAccountReachEstimate adAccountReachEstimate = getGson().fromJson(json, AdAccountReachEstimate.class);
+  public static OfflineConversionDataSetUsage loadJSON(String json, APIContext context, String header) {
+    OfflineConversionDataSetUsage offlineConversionDataSetUsage = getGson().fromJson(json, OfflineConversionDataSetUsage.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(adAccountReachEstimate.toString());
+      JsonElement o2 = parser.parse(offlineConversionDataSetUsage.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -84,14 +80,14 @@ public class AdAccountReachEstimate extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    adAccountReachEstimate.context = context;
-    adAccountReachEstimate.rawValue = json;
-    adAccountReachEstimate.header = header;
-    return adAccountReachEstimate;
+    offlineConversionDataSetUsage.context = context;
+    offlineConversionDataSetUsage.rawValue = json;
+    offlineConversionDataSetUsage.header = header;
+    return offlineConversionDataSetUsage;
   }
 
-  public static APINodeList<AdAccountReachEstimate> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<AdAccountReachEstimate> adAccountReachEstimates = new APINodeList<AdAccountReachEstimate>(request, json, header);
+  public static APINodeList<OfflineConversionDataSetUsage> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<OfflineConversionDataSetUsage> offlineConversionDataSetUsages = new APINodeList<OfflineConversionDataSetUsage>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -102,9 +98,9 @@ public class AdAccountReachEstimate extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          offlineConversionDataSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return adAccountReachEstimates;
+        return offlineConversionDataSetUsages;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -114,20 +110,20 @@ public class AdAccountReachEstimate extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                adAccountReachEstimates.setCursors(before, after);
+                offlineConversionDataSetUsages.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            adAccountReachEstimates.setPaging(previous, next);
+            offlineConversionDataSetUsages.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              adAccountReachEstimates.setAppSecret(context.getAppSecretProof());
+              offlineConversionDataSetUsages.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              adAccountReachEstimates.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -138,23 +134,23 @@ public class AdAccountReachEstimate extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+                  offlineConversionDataSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              adAccountReachEstimates.add(loadJSON(obj.toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return adAccountReachEstimates;
+          return offlineConversionDataSetUsages;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              adAccountReachEstimates.add(loadJSON(entry.getValue().toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return adAccountReachEstimates;
+          return offlineConversionDataSetUsages;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -171,20 +167,20 @@ public class AdAccountReachEstimate extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              adAccountReachEstimates.add(loadJSON(value.toString(), context, header));
+              offlineConversionDataSetUsages.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return adAccountReachEstimates;
+            return offlineConversionDataSetUsages;
           }
 
           // Sixth, check if it's pure JsonObject
-          adAccountReachEstimates.clear();
-          adAccountReachEstimates.add(loadJSON(json, context, header));
-          return adAccountReachEstimates;
+          offlineConversionDataSetUsages.clear();
+          offlineConversionDataSetUsages.add(loadJSON(json, context, header));
+          return offlineConversionDataSetUsages;
         }
       }
     } catch (Exception e) {
@@ -212,30 +208,12 @@ public class AdAccountReachEstimate extends APINode {
   }
 
 
-  public Boolean getFieldEstimateReady() {
-    return mEstimateReady;
+  public Long getFieldNumLiftStudies() {
+    return mNumLiftStudies;
   }
 
-  public AdAccountReachEstimate setFieldEstimateReady(Boolean value) {
-    this.mEstimateReady = value;
-    return this;
-  }
-
-  public Long getFieldUsersLowerBound() {
-    return mUsersLowerBound;
-  }
-
-  public AdAccountReachEstimate setFieldUsersLowerBound(Long value) {
-    this.mUsersLowerBound = value;
-    return this;
-  }
-
-  public Long getFieldUsersUpperBound() {
-    return mUsersUpperBound;
-  }
-
-  public AdAccountReachEstimate setFieldUsersUpperBound(Long value) {
-    this.mUsersUpperBound = value;
+  public OfflineConversionDataSetUsage setFieldNumLiftStudies(Long value) {
+    this.mNumLiftStudies = value;
     return this;
   }
 
@@ -255,19 +233,17 @@ public class AdAccountReachEstimate extends APINode {
     return gson;
   }
 
-  public AdAccountReachEstimate copyFrom(AdAccountReachEstimate instance) {
-    this.mEstimateReady = instance.mEstimateReady;
-    this.mUsersLowerBound = instance.mUsersLowerBound;
-    this.mUsersUpperBound = instance.mUsersUpperBound;
+  public OfflineConversionDataSetUsage copyFrom(OfflineConversionDataSetUsage instance) {
+    this.mNumLiftStudies = instance.mNumLiftStudies;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<AdAccountReachEstimate> getParser() {
-    return new APIRequest.ResponseParser<AdAccountReachEstimate>() {
-      public APINodeList<AdAccountReachEstimate> parseResponse(String response, APIContext context, APIRequest<AdAccountReachEstimate> request, String header) throws MalformedResponseException {
-        return AdAccountReachEstimate.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<OfflineConversionDataSetUsage> getParser() {
+    return new APIRequest.ResponseParser<OfflineConversionDataSetUsage>() {
+      public APINodeList<OfflineConversionDataSetUsage> parseResponse(String response, APIContext context, APIRequest<OfflineConversionDataSetUsage> request, String header) throws MalformedResponseException {
+        return OfflineConversionDataSetUsage.parseResponse(response, context, request, header);
       }
     };
   }
