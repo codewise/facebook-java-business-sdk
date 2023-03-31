@@ -1,5 +1,6 @@
 /**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
  * You are hereby granted a non-exclusive, worldwide, royalty-free license to
  * use, copy, modify, and distribute this software in source code or binary
@@ -25,18 +26,18 @@
 import java.io.File;
 import java.util.Arrays;
 
-public class BusinessOwnedProductCatalogsPostFlightCatalog {
+public class PagePageWhatsAppNumberVerificationPost {
   public static void main (String args[]) throws APIException {
 
     String access_token = "<ACCESS_TOKEN>";
     String app_secret = "<APP_SECRET>";
     String app_id = "<APP_ID>";
-    String id = "<BUSINESS_ID>";
+    String id = "<PAGE_ID>";
     APIContext context = new APIContext(access_token).enableDebug(true);
 
-    new Business(id, context).createOwnedProductCatalog()
-      .setName("Test Flight Catalog")
-      .setVertical(ProductCatalog.EnumVertical.VALUE_FLIGHTS)
+    new Page(id, context).createPageWhatsappNumberVerification()
+      .setWhatsappNumber("123456789")
+      .setVerificationCode("12345")
       .execute();
 
   }

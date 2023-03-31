@@ -83,6 +83,8 @@ public class AdCreative extends APINode {
   private String mCategoryMediaSource = null;
   @SerializedName("collaborative_ads_lsb_image_bank_id")
   private String mCollaborativeAdsLsbImageBankId = null;
+  @SerializedName("degrees_of_freedom_spec")
+  private AdCreativeDegreesOfFreedomSpec mDegreesOfFreedomSpec = null;
   @SerializedName("destination_set_id")
   private String mDestinationSetId = null;
   @SerializedName("dynamic_ad_voice")
@@ -550,6 +552,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeDegreesOfFreedomSpec getFieldDegreesOfFreedomSpec() {
+    return mDegreesOfFreedomSpec;
+  }
+
+  public AdCreative setFieldDegreesOfFreedomSpec(AdCreativeDegreesOfFreedomSpec value) {
+    this.mDegreesOfFreedomSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldDegreesOfFreedomSpec(String value) {
+    Type type = new TypeToken<AdCreativeDegreesOfFreedomSpec>(){}.getType();
+    this.mDegreesOfFreedomSpec = AdCreativeDegreesOfFreedomSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldDestinationSetId() {
     return mDestinationSetId;
   }
@@ -1622,6 +1638,7 @@ public class AdCreative extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -1873,6 +1890,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGet requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGet requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGet requestDestinationSetIdField () {
@@ -2340,6 +2364,8 @@ public class AdCreative extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("APPLY_NOW")
       VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("AUDIO_CALL")
+      VALUE_AUDIO_CALL("AUDIO_CALL"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("BUY")
@@ -2408,6 +2434,8 @@ public class AdCreative extends APINode {
       VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("OPEN_INSTANT_APP")
+      VALUE_OPEN_INSTANT_APP("OPEN_INSTANT_APP"),
       @SerializedName("OPEN_LINK")
       VALUE_OPEN_LINK("OPEN_LINK"),
       @SerializedName("ORDER_NOW")
@@ -2420,6 +2448,8 @@ public class AdCreative extends APINode {
       VALUE_PLAY_GAME_ON_FACEBOOK("PLAY_GAME_ON_FACEBOOK"),
       @SerializedName("PURCHASE_GIFT_CARDS")
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
+      @SerializedName("RAISE_MONEY")
+      VALUE_RAISE_MONEY("RAISE_MONEY"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("REFER_FRIENDS")
@@ -2436,6 +2466,8 @@ public class AdCreative extends APINode {
       VALUE_SEND_A_GIFT("SEND_A_GIFT"),
       @SerializedName("SEND_GIFT_MONEY")
       VALUE_SEND_GIFT_MONEY("SEND_GIFT_MONEY"),
+      @SerializedName("SEND_UPDATES")
+      VALUE_SEND_UPDATES("SEND_UPDATES"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")
@@ -2655,25 +2687,6 @@ public class AdCreative extends APINode {
       }
   }
 
-  public static enum EnumInstantCheckoutSetting {
-      @SerializedName("off")
-      VALUE_OFF("off"),
-      @SerializedName("on")
-      VALUE_ON("on"),
-      ;
-
-      private String value;
-
-      private EnumInstantCheckoutSetting(String value) {
-        this.value = value;
-      }
-
-      @Override
-      public String toString() {
-        return value;
-      }
-  }
-
   public static enum EnumOperator {
       @SerializedName("ALL")
       VALUE_ALL("ALL"),
@@ -2722,6 +2735,7 @@ public class AdCreative extends APINode {
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;
     this.mCollaborativeAdsLsbImageBankId = instance.mCollaborativeAdsLsbImageBankId;
+    this.mDegreesOfFreedomSpec = instance.mDegreesOfFreedomSpec;
     this.mDestinationSetId = instance.mDestinationSetId;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
     this.mEffectiveAuthorizationCategory = instance.mEffectiveAuthorizationCategory;

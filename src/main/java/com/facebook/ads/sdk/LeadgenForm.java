@@ -63,6 +63,8 @@ public class LeadgenForm extends APINode {
   private Object mContextCard = null;
   @SerializedName("created_time")
   private String mCreatedTime = null;
+  @SerializedName("creator")
+  private User mCreator = null;
   @SerializedName("expired_leads_count")
   private Long mExpiredLeadsCount = null;
   @SerializedName("follow_up_action_text")
@@ -345,6 +347,13 @@ public class LeadgenForm extends APINode {
     return mCreatedTime;
   }
 
+  public User getFieldCreator() {
+    if (mCreator != null) {
+      mCreator.context = getContext();
+    }
+    return mCreator;
+  }
+
   public Long getFieldExpiredLeadsCount() {
     return mExpiredLeadsCount;
   }
@@ -448,6 +457,7 @@ public class LeadgenForm extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -646,6 +656,13 @@ public class LeadgenForm extends APINode {
       this.requestField("platform", value);
       return this;
     }
+    public APIRequestGetLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetLeads requestPostField (boolean value) {
+      this.requestField("post", value);
+      return this;
+    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -688,6 +705,7 @@ public class LeadgenForm extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -886,6 +904,13 @@ public class LeadgenForm extends APINode {
       this.requestField("platform", value);
       return this;
     }
+    public APIRequestGetTestLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetTestLeads requestPostField (boolean value) {
+      this.requestField("post", value);
+      return this;
+    }
     public APIRequestGetTestLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -1041,6 +1066,7 @@ public class LeadgenForm extends APINode {
       "block_display_for_non_targeted_viewer",
       "context_card",
       "created_time",
+      "creator",
       "expired_leads_count",
       "follow_up_action_text",
       "follow_up_action_url",
@@ -1176,6 +1202,13 @@ public class LeadgenForm extends APINode {
     }
     public APIRequestGet requestCreatedTimeField (boolean value) {
       this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGet requestCreatorField () {
+      return this.requestCreatorField(true);
+    }
+    public APIRequestGet requestCreatorField (boolean value) {
+      this.requestField("creator", value);
       return this;
     }
     public APIRequestGet requestExpiredLeadsCountField () {
@@ -1452,6 +1485,8 @@ public class LeadgenForm extends APINode {
       VALUE_DA_DK("DA_DK"),
       @SerializedName("DE_DE")
       VALUE_DE_DE("DE_DE"),
+      @SerializedName("EL_GR")
+      VALUE_EL_GR("EL_GR"),
       @SerializedName("EN_GB")
       VALUE_EN_GB("EN_GB"),
       @SerializedName("EN_US")
@@ -1539,6 +1574,7 @@ public class LeadgenForm extends APINode {
     this.mBlockDisplayForNonTargetedViewer = instance.mBlockDisplayForNonTargetedViewer;
     this.mContextCard = instance.mContextCard;
     this.mCreatedTime = instance.mCreatedTime;
+    this.mCreator = instance.mCreator;
     this.mExpiredLeadsCount = instance.mExpiredLeadsCount;
     this.mFollowUpActionText = instance.mFollowUpActionText;
     this.mFollowUpActionUrl = instance.mFollowUpActionUrl;

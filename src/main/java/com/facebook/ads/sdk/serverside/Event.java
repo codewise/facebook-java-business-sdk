@@ -58,6 +58,9 @@ public class Event {
   @SerializedName("action_source")
   private ActionSource actionSource = null;
 
+  @SerializedName("app_data")
+  private AppData appData = null;
+
   /**
    * Default Constructor.
    */
@@ -78,10 +81,11 @@ public class Event {
    * @param dataProcessingOptionsCountry country that you want to associate to this data processing option.
    * @param dataProcessingOptionsState state that you want to associate with this data processing option.
    * @param actionSource Where the conversion occurred.
+   * @param appData AppData object that contains app data and device information
    */
   public Event(String eventName, Long eventTime, String eventSourceUrl, Boolean optOut,
       String eventId, UserData userData, CustomData customData, String[] dataProcessingOptions,
-      Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource) {
+      Integer dataProcessingOptionsCountry, Integer dataProcessingOptionsState, ActionSource actionSource, AppData appData) {
     this.eventName = eventName;
     this.eventTime = eventTime;
     this.eventSourceUrl = eventSourceUrl;
@@ -93,6 +97,7 @@ public class Event {
     this.dataProcessingOptionsCountry = dataProcessingOptionsCountry;
     this.dataProcessingOptionsState = dataProcessingOptionsState;
     this.actionSource = actionSource;
+    this.appData = appData;
   }
 
   /**
@@ -208,9 +213,9 @@ public class Event {
    * Get flag that indicates we should not use this event for ads delivery optimization. If set to
    * true, we only use the event for attribution.
    *
-   * @return boolean
+   * @return Boolean
    */
-  public boolean getOptOut() {
+  public Boolean getOptOut() {
     return this.optOut;
   }
 
@@ -427,6 +432,35 @@ public class Event {
    */
   public void setActionSource(ActionSource actionSource) {
     this.actionSource = actionSource;
+  }
+
+  /**
+   * Set appData for the event.
+   * @param appData contains app data and device information for events happening from an app
+   * @see <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#app_data">App Data for the event</a>
+   * @return Event
+   */
+  public Event appData(AppData appData) {
+    this.appData = appData;
+    return this;
+  }
+
+  /**
+   * Get appData
+   *
+   * @return AppData
+   */
+   public AppData getAppData() {
+     return appData;
+   }
+
+  /**
+   * Set appData for the event.
+   * @param appData contains app data and device information for events happening from an app
+   * @see <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/server-event#app_data">App Data for the event</a>
+   */
+  public void setAppData(AppData appData) {
+    this.appData = appData;
   }
 
   @Override

@@ -560,6 +560,7 @@ public class Ad extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -793,6 +794,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDestinationSetIdField () {
@@ -2613,6 +2621,7 @@ public class Ad extends APINode {
       "is_organic",
       "partner_name",
       "platform",
+      "post",
       "retailer_item_id",
       "vehicle",
     };
@@ -2809,6 +2818,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetLeads requestPlatformField (boolean value) {
       this.requestField("platform", value);
+      return this;
+    }
+    public APIRequestGetLeads requestPostField () {
+      return this.requestPostField(true);
+    }
+    public APIRequestGetLeads requestPostField (boolean value) {
+      this.requestField("post", value);
       return this;
     }
     public APIRequestGetLeads requestRetailerItemIdField () {

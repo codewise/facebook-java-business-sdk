@@ -334,14 +334,6 @@ public class Group extends APINode {
     return new APIRequestGetEvents(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestGetFeaturedCards getFeaturedCards() {
-    return new APIRequestGetFeaturedCards(this.getPrefixedId().toString(), context);
-  }
-
-  public APIRequestCreateFeaturedCard createFeaturedCard() {
-    return new APIRequestCreateFeaturedCard(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetFeed getFeed() {
     return new APIRequestGetFeed(this.getPrefixedId().toString(), context);
   }
@@ -1553,6 +1545,7 @@ public class Group extends APINode {
       "owner",
       "parent_group",
       "place",
+      "registration_setting",
       "scheduled_publish_time",
       "start_time",
       "ticket_setting",
@@ -1829,6 +1822,13 @@ public class Group extends APINode {
       this.requestField("place", value);
       return this;
     }
+    public APIRequestGetEvents requestRegistrationSettingField () {
+      return this.requestRegistrationSettingField(true);
+    }
+    public APIRequestGetEvents requestRegistrationSettingField (boolean value) {
+      this.requestField("registration_setting", value);
+      return this;
+    }
     public APIRequestGetEvents requestScheduledPublishTimeField () {
       return this.requestScheduledPublishTimeField(true);
     }
@@ -1899,244 +1899,6 @@ public class Group extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
-  }
-
-  public static class APIRequestGetFeaturedCards extends APIRequest<APINode> {
-
-    APINodeList<APINode> lastResponse = null;
-    @Override
-    public APINodeList<APINode> getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header);
-    }
-
-    @Override
-    public APINodeList<APINode> execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINodeList<APINode>>() {
-           public APINodeList<APINode> apply(ResponseWrapper result) {
-             try {
-               return APIRequestGetFeaturedCards.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestGetFeaturedCards(String nodeId, APIContext context) {
-      super(context, nodeId, "/featured_cards", "GET", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestGetFeaturedCards requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestGetFeaturedCards requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestGetFeaturedCards requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
-  public static class APIRequestCreateFeaturedCard extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "body",
-      "description",
-      "title",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateFeaturedCard.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateFeaturedCard(String nodeId, APIContext context) {
-      super(context, nodeId, "/featured_cards", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateFeaturedCard setBody (Map<String, String> body) {
-      this.setParam("body", body);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setBody (String body) {
-      this.setParam("body", body);
-      return this;
-    }
-
-    public APIRequestCreateFeaturedCard setDescription (Map<String, String> description) {
-      this.setParam("description", description);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setDescription (String description) {
-      this.setParam("description", description);
-      return this;
-    }
-
-    public APIRequestCreateFeaturedCard setTitle (Map<String, String> title) {
-      this.setParam("title", title);
-      return this;
-    }
-    public APIRequestCreateFeaturedCard setTitle (String title) {
-      this.setParam("title", title);
-      return this;
-    }
-
-    public APIRequestCreateFeaturedCard requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateFeaturedCard requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateFeaturedCard requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
   public static class APIRequestGetFeed extends APIRequest<Post> {
@@ -4705,7 +4467,6 @@ public class Group extends APINode {
       "is_audio_only",
       "is_spherical",
       "original_fov",
-      "planned_start_time",
       "privacy",
       "projection",
       "published",
@@ -4853,15 +4614,6 @@ public class Group extends APINode {
     }
     public APIRequestCreateLiveVideo setOriginalFov (String originalFov) {
       this.setParam("original_fov", originalFov);
-      return this;
-    }
-
-    public APIRequestCreateLiveVideo setPlannedStartTime (Long plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
-      return this;
-    }
-    public APIRequestCreateLiveVideo setPlannedStartTime (String plannedStartTime) {
-      this.setParam("planned_start_time", plannedStartTime);
       return this;
     }
 
@@ -5275,6 +5027,7 @@ public class Group extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -5487,6 +5240,13 @@ public class Group extends APINode {
     }
     public APIRequestGetOptedInMembers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetOptedInMembers requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetOptedInMembers requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetOptedInMembers requestInspirationalPeopleField () {
@@ -6604,6 +6364,7 @@ public class Group extends APINode {
 
     public static final String[] FIELDS = {
       "ad_breaks",
+      "admin_creator",
       "audio_isrc",
       "backdated_time",
       "backdated_time_granularity",
@@ -6751,6 +6512,13 @@ public class Group extends APINode {
     }
     public APIRequestGetVideos requestAdBreaksField (boolean value) {
       this.requestField("ad_breaks", value);
+      return this;
+    }
+    public APIRequestGetVideos requestAdminCreatorField () {
+      return this.requestAdminCreatorField(true);
+    }
+    public APIRequestGetVideos requestAdminCreatorField (boolean value) {
+      this.requestField("admin_creator", value);
       return this;
     }
     public APIRequestGetVideos requestAudioIsrcField () {
@@ -8302,94 +8070,30 @@ public class Group extends APINode {
   }
 
   public static enum EnumPurpose {
-      @SerializedName("BOOKS")
-      VALUE_BOOKS("BOOKS"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
       @SerializedName("COWORKERS")
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("DEALS")
-      VALUE_DEALS("DEALS"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("FANDOM_RADAR")
-      VALUE_FANDOM_RADAR("FANDOM_RADAR"),
-      @SerializedName("FANTASY_LEAGUE")
-      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
       VALUE_FOR_SALE("FOR_SALE"),
       @SerializedName("FOR_WORK")
       VALUE_FOR_WORK("FOR_WORK"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HEALTH_SUPPORT")
       VALUE_HEALTH_SUPPORT("HEALTH_SUPPORT"),
-      @SerializedName("HIGH_SCHOOL_FORUM")
-      VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MENTORSHIP")
-      VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("MUSIC_CASA_BUNDLE")
-      VALUE_MUSIC_CASA_BUNDLE("MUSIC_CASA_BUNDLE"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OCULUS")
-      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("RESTYLE")
-      VALUE_RESTYLE("RESTYLE"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("SPORTS")
-      VALUE_SPORTS("SPORTS"),
-      @SerializedName("SPORTS_ACTIVITY")
-      VALUE_SPORTS_ACTIVITY("SPORTS_ACTIVITY"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("THEME")
-      VALUE_THEME("THEME"),
-      @SerializedName("TOGETHER_VR")
-      VALUE_TOGETHER_VR("TOGETHER_VR"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")
@@ -8404,8 +8108,6 @@ public class Group extends APINode {
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
       @SerializedName("WORK_GARDEN")
       VALUE_WORK_GARDEN("WORK_GARDEN"),
-      @SerializedName("WORK_GUEST_GROUP")
-      VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
       @SerializedName("WORK_INTEGRITY")
       VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
@@ -8416,8 +8118,6 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
-      @SerializedName("WORK_RESUME_REVIEW")
-      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_STAGES")
@@ -8426,8 +8126,6 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_VC_CALL")
-      VALUE_WORK_VC_CALL("WORK_VC_CALL"),
       ;
 
       private String value;
@@ -8443,94 +8141,30 @@ public class Group extends APINode {
   }
 
   public static enum EnumGroupType {
-      @SerializedName("BOOKS")
-      VALUE_BOOKS("BOOKS"),
       @SerializedName("CASUAL")
       VALUE_CASUAL("CASUAL"),
-      @SerializedName("CLOSE_FRIENDS")
-      VALUE_CLOSE_FRIENDS("CLOSE_FRIENDS"),
-      @SerializedName("CLUB")
-      VALUE_CLUB("CLUB"),
-      @SerializedName("COUPLE")
-      VALUE_COUPLE("COUPLE"),
       @SerializedName("COWORKERS")
       VALUE_COWORKERS("COWORKERS"),
       @SerializedName("CUSTOM")
       VALUE_CUSTOM("CUSTOM"),
-      @SerializedName("DEALS")
-      VALUE_DEALS("DEALS"),
-      @SerializedName("EPHEMERAL")
-      VALUE_EPHEMERAL("EPHEMERAL"),
-      @SerializedName("EVENT_PLANNING")
-      VALUE_EVENT_PLANNING("EVENT_PLANNING"),
-      @SerializedName("FAMILY")
-      VALUE_FAMILY("FAMILY"),
-      @SerializedName("FANDOM_RADAR")
-      VALUE_FANDOM_RADAR("FANDOM_RADAR"),
-      @SerializedName("FANTASY_LEAGUE")
-      VALUE_FANTASY_LEAGUE("FANTASY_LEAGUE"),
-      @SerializedName("FITNESS")
-      VALUE_FITNESS("FITNESS"),
       @SerializedName("FOR_SALE")
       VALUE_FOR_SALE("FOR_SALE"),
       @SerializedName("FOR_WORK")
       VALUE_FOR_WORK("FOR_WORK"),
-      @SerializedName("FRATERNITY")
-      VALUE_FRATERNITY("FRATERNITY"),
       @SerializedName("GAME")
       VALUE_GAME("GAME"),
       @SerializedName("HEALTH_SUPPORT")
       VALUE_HEALTH_SUPPORT("HEALTH_SUPPORT"),
-      @SerializedName("HIGH_SCHOOL_FORUM")
-      VALUE_HIGH_SCHOOL_FORUM("HIGH_SCHOOL_FORUM"),
       @SerializedName("JOBS")
       VALUE_JOBS("JOBS"),
       @SerializedName("LEARNING")
       VALUE_LEARNING("LEARNING"),
-      @SerializedName("MENTORSHIP")
-      VALUE_MENTORSHIP("MENTORSHIP"),
-      @SerializedName("MUSIC_CASA_BUNDLE")
-      VALUE_MUSIC_CASA_BUNDLE("MUSIC_CASA_BUNDLE"),
-      @SerializedName("NEIGHBORS")
-      VALUE_NEIGHBORS("NEIGHBORS"),
       @SerializedName("NONE")
       VALUE_NONE("NONE"),
-      @SerializedName("OCULUS")
-      VALUE_OCULUS("OCULUS"),
       @SerializedName("PARENTING")
       VALUE_PARENTING("PARENTING"),
-      @SerializedName("PARENTS")
-      VALUE_PARENTS("PARENTS"),
-      @SerializedName("PROJECT")
-      VALUE_PROJECT("PROJECT"),
-      @SerializedName("REAL_WORLD")
-      VALUE_REAL_WORLD("REAL_WORLD"),
-      @SerializedName("REAL_WORLD_AT_WORK")
-      VALUE_REAL_WORLD_AT_WORK("REAL_WORLD_AT_WORK"),
-      @SerializedName("RESTYLE")
-      VALUE_RESTYLE("RESTYLE"),
-      @SerializedName("SCHOOL_CLASS")
-      VALUE_SCHOOL_CLASS("SCHOOL_CLASS"),
-      @SerializedName("SORORITY")
-      VALUE_SORORITY("SORORITY"),
-      @SerializedName("SPORTS")
-      VALUE_SPORTS("SPORTS"),
-      @SerializedName("SPORTS_ACTIVITY")
-      VALUE_SPORTS_ACTIVITY("SPORTS_ACTIVITY"),
       @SerializedName("STREAMER")
       VALUE_STREAMER("STREAMER"),
-      @SerializedName("STUDY_GROUP")
-      VALUE_STUDY_GROUP("STUDY_GROUP"),
-      @SerializedName("SUPPORT")
-      VALUE_SUPPORT("SUPPORT"),
-      @SerializedName("TEAMMATES")
-      VALUE_TEAMMATES("TEAMMATES"),
-      @SerializedName("THEME")
-      VALUE_THEME("THEME"),
-      @SerializedName("TOGETHER_VR")
-      VALUE_TOGETHER_VR("TOGETHER_VR"),
-      @SerializedName("TRAVEL_PLANNING")
-      VALUE_TRAVEL_PLANNING("TRAVEL_PLANNING"),
       @SerializedName("WORK_ANNOUNCEMENT")
       VALUE_WORK_ANNOUNCEMENT("WORK_ANNOUNCEMENT"),
       @SerializedName("WORK_DEMO_GROUP")
@@ -8545,8 +8179,6 @@ public class Group extends APINode {
       VALUE_WORK_FOR_SALE("WORK_FOR_SALE"),
       @SerializedName("WORK_GARDEN")
       VALUE_WORK_GARDEN("WORK_GARDEN"),
-      @SerializedName("WORK_GUEST_GROUP")
-      VALUE_WORK_GUEST_GROUP("WORK_GUEST_GROUP"),
       @SerializedName("WORK_INTEGRITY")
       VALUE_WORK_INTEGRITY("WORK_INTEGRITY"),
       @SerializedName("WORK_LEARNING")
@@ -8557,8 +8189,6 @@ public class Group extends APINode {
       VALUE_WORK_MULTI_COMPANY("WORK_MULTI_COMPANY"),
       @SerializedName("WORK_RECRUITING")
       VALUE_WORK_RECRUITING("WORK_RECRUITING"),
-      @SerializedName("WORK_RESUME_REVIEW")
-      VALUE_WORK_RESUME_REVIEW("WORK_RESUME_REVIEW"),
       @SerializedName("WORK_SOCIAL")
       VALUE_WORK_SOCIAL("WORK_SOCIAL"),
       @SerializedName("WORK_STAGES")
@@ -8567,8 +8197,6 @@ public class Group extends APINode {
       VALUE_WORK_TEAM("WORK_TEAM"),
       @SerializedName("WORK_TEAMWORK")
       VALUE_WORK_TEAMWORK("WORK_TEAMWORK"),
-      @SerializedName("WORK_VC_CALL")
-      VALUE_WORK_VC_CALL("WORK_VC_CALL"),
       ;
 
       private String value;

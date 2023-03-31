@@ -75,6 +75,8 @@ public class IGUser extends APINode {
   private IGMedia mMentionedMedia = null;
   @SerializedName("name")
   private String mName = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("profile_picture_url")
   private String mProfilePictureUrl = null;
   @SerializedName("shopping_product_tag_eligibility")
@@ -330,6 +332,10 @@ public class IGUser extends APINode {
     return new APIRequestCreateMention(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetNotificationMessageTokens getNotificationMessageTokens() {
+    return new APIRequestGetNotificationMessageTokens(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetProductAppeal getProductAppeal() {
     return new APIRequestGetProductAppeal(this.getPrefixedId().toString(), context);
   }
@@ -402,6 +408,13 @@ public class IGUser extends APINode {
 
   public String getFieldName() {
     return mName;
+  }
+
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
   }
 
   public String getFieldProfilePictureUrl() {
@@ -764,9 +777,12 @@ public class IGUser extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "breakdown",
       "metric",
+      "metric_type",
       "period",
       "since",
+      "timeframe",
       "until",
     };
 
@@ -776,6 +792,7 @@ public class IGUser extends APINode {
       "name",
       "period",
       "title",
+      "total_value",
       "values",
     };
 
@@ -832,12 +849,30 @@ public class IGUser extends APINode {
     }
 
 
+    public APIRequestGetInsights setBreakdown (List<InstagramInsightsResult.EnumBreakdown> breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+    public APIRequestGetInsights setBreakdown (String breakdown) {
+      this.setParam("breakdown", breakdown);
+      return this;
+    }
+
     public APIRequestGetInsights setMetric (List<InstagramInsightsResult.EnumMetric> metric) {
       this.setParam("metric", metric);
       return this;
     }
     public APIRequestGetInsights setMetric (String metric) {
       this.setParam("metric", metric);
+      return this;
+    }
+
+    public APIRequestGetInsights setMetricType (InstagramInsightsResult.EnumMetricType metricType) {
+      this.setParam("metric_type", metricType);
+      return this;
+    }
+    public APIRequestGetInsights setMetricType (String metricType) {
+      this.setParam("metric_type", metricType);
       return this;
     }
 
@@ -852,6 +887,15 @@ public class IGUser extends APINode {
 
     public APIRequestGetInsights setSince (String since) {
       this.setParam("since", since);
+      return this;
+    }
+
+    public APIRequestGetInsights setTimeframe (InstagramInsightsResult.EnumTimeframe timeframe) {
+      this.setParam("timeframe", timeframe);
+      return this;
+    }
+    public APIRequestGetInsights setTimeframe (String timeframe) {
+      this.setParam("timeframe", timeframe);
       return this;
     }
 
@@ -929,6 +973,13 @@ public class IGUser extends APINode {
     }
     public APIRequestGetInsights requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetInsights requestTotalValueField () {
+      return this.requestTotalValueField(true);
+    }
+    public APIRequestGetInsights requestTotalValueField (boolean value) {
+      this.requestField("total_value", value);
       return this;
     }
     public APIRequestGetInsights requestValuesField () {
@@ -1438,6 +1489,7 @@ public class IGUser extends APINode {
     public static final String[] PARAMS = {
       "caption",
       "children",
+      "cover_url",
       "image_url",
       "is_carousel_item",
       "location_id",
@@ -1516,6 +1568,11 @@ public class IGUser extends APINode {
     }
     public APIRequestCreateMedia setChildren (String children) {
       this.setParam("children", children);
+      return this;
+    }
+
+    public APIRequestCreateMedia setCoverUrl (String coverUrl) {
+      this.setParam("cover_url", coverUrl);
       return this;
     }
 
@@ -1852,6 +1909,198 @@ public class IGUser extends APINode {
       return this;
     }
 
+  }
+
+  public static class APIRequestGetNotificationMessageTokens extends APIRequest<UserPageOneTimeOptInTokenSettings> {
+
+    APINodeList<UserPageOneTimeOptInTokenSettings> lastResponse = null;
+    @Override
+    public APINodeList<UserPageOneTimeOptInTokenSettings> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "creation_timestamp",
+      "next_eligible_time",
+      "notification_messages_frequency",
+      "notification_messages_reoptin",
+      "notification_messages_timezone",
+      "notification_messages_token",
+      "recipient_id",
+      "token_expiry_timestamp",
+      "topic_title",
+      "user_token_status",
+      "id",
+    };
+
+    @Override
+    public APINodeList<UserPageOneTimeOptInTokenSettings> parseResponse(String response, String header) throws APIException {
+      return UserPageOneTimeOptInTokenSettings.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<UserPageOneTimeOptInTokenSettings> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<UserPageOneTimeOptInTokenSettings> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<UserPageOneTimeOptInTokenSettings>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<UserPageOneTimeOptInTokenSettings>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<UserPageOneTimeOptInTokenSettings>>() {
+           public APINodeList<UserPageOneTimeOptInTokenSettings> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetNotificationMessageTokens.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetNotificationMessageTokens(String nodeId, APIContext context) {
+      super(context, nodeId, "/notification_message_tokens", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetNotificationMessageTokens requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetNotificationMessageTokens requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetNotificationMessageTokens requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetNotificationMessageTokens requestCreationTimestampField () {
+      return this.requestCreationTimestampField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestCreationTimestampField (boolean value) {
+      this.requestField("creation_timestamp", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeField () {
+      return this.requestNextEligibleTimeField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNextEligibleTimeField (boolean value) {
+      this.requestField("next_eligible_time", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesFrequencyField () {
+      return this.requestNotificationMessagesFrequencyField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesFrequencyField (boolean value) {
+      this.requestField("notification_messages_frequency", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesReoptinField () {
+      return this.requestNotificationMessagesReoptinField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesReoptinField (boolean value) {
+      this.requestField("notification_messages_reoptin", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesTimezoneField () {
+      return this.requestNotificationMessagesTimezoneField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesTimezoneField (boolean value) {
+      this.requestField("notification_messages_timezone", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesTokenField () {
+      return this.requestNotificationMessagesTokenField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestNotificationMessagesTokenField (boolean value) {
+      this.requestField("notification_messages_token", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestRecipientIdField () {
+      return this.requestRecipientIdField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestRecipientIdField (boolean value) {
+      this.requestField("recipient_id", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestTokenExpiryTimestampField () {
+      return this.requestTokenExpiryTimestampField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestTokenExpiryTimestampField (boolean value) {
+      this.requestField("token_expiry_timestamp", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestTopicTitleField () {
+      return this.requestTopicTitleField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestTopicTitleField (boolean value) {
+      this.requestField("topic_title", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestUserTokenStatusField () {
+      return this.requestUserTokenStatusField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestUserTokenStatusField (boolean value) {
+      this.requestField("user_token_status", value);
+      return this;
+    }
+    public APIRequestGetNotificationMessageTokens requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetNotificationMessageTokens requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
   }
 
   public static class APIRequestGetProductAppeal extends APIRequest<APINode> {
@@ -2670,6 +2919,7 @@ public class IGUser extends APINode {
       "mentioned_comment",
       "mentioned_media",
       "name",
+      "owner_business",
       "profile_picture_url",
       "shopping_product_tag_eligibility",
       "shopping_review_status",
@@ -2841,6 +3091,13 @@ public class IGUser extends APINode {
       this.requestField("name", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestProfilePictureUrlField () {
       return this.requestProfilePictureUrlField(true);
     }
@@ -2903,6 +3160,7 @@ public class IGUser extends APINode {
     this.mMentionedComment = instance.mMentionedComment;
     this.mMentionedMedia = instance.mMentionedMedia;
     this.mName = instance.mName;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mProfilePictureUrl = instance.mProfilePictureUrl;
     this.mShoppingProductTagEligibility = instance.mShoppingProductTagEligibility;
     this.mShoppingReviewStatus = instance.mShoppingReviewStatus;

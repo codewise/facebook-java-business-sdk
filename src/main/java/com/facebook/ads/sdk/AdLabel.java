@@ -353,6 +353,7 @@ public class AdLabel extends APINode {
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
       "effective_authorization_category",
@@ -586,6 +587,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
+      return this.requestDegreesOfFreedomSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField (boolean value) {
+      this.requestField("degrees_of_freedom_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDestinationSetIdField () {
@@ -1312,6 +1320,7 @@ public class AdLabel extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_attribution",
       "campaign_id",
       "configured_status",
       "created_time",
@@ -1534,6 +1543,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetAdSets requestCampaignField (boolean value) {
       this.requestField("campaign", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestCampaignAttributionField () {
+      return this.requestCampaignAttributionField(true);
+    }
+    public APIRequestGetAdSets requestCampaignAttributionField (boolean value) {
+      this.requestField("campaign_attribution", value);
       return this;
     }
     public APIRequestGetAdSets requestCampaignIdField () {
@@ -1859,6 +1875,7 @@ public class AdLabel extends APINode {
       "created_time",
       "daily_budget",
       "effective_status",
+      "has_secondary_skadnetwork_reporting",
       "id",
       "is_skadnetwork_attribution",
       "issues_info",
@@ -1867,6 +1884,7 @@ public class AdLabel extends APINode {
       "name",
       "objective",
       "pacing_type",
+      "primary_attribution",
       "promoted_object",
       "recommendations",
       "smart_promotion_type",
@@ -2084,6 +2102,13 @@ public class AdLabel extends APINode {
       this.requestField("effective_status", value);
       return this;
     }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField () {
+      return this.requestHasSecondarySkadnetworkReportingField(true);
+    }
+    public APIRequestGetCampaigns requestHasSecondarySkadnetworkReportingField (boolean value) {
+      this.requestField("has_secondary_skadnetwork_reporting", value);
+      return this;
+    }
     public APIRequestGetCampaigns requestIdField () {
       return this.requestIdField(true);
     }
@@ -2138,6 +2163,13 @@ public class AdLabel extends APINode {
     }
     public APIRequestGetCampaigns requestPacingTypeField (boolean value) {
       this.requestField("pacing_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField () {
+      return this.requestPrimaryAttributionField(true);
+    }
+    public APIRequestGetCampaigns requestPrimaryAttributionField (boolean value) {
+      this.requestField("primary_attribution", value);
       return this;
     }
     public APIRequestGetCampaigns requestPromotedObjectField () {

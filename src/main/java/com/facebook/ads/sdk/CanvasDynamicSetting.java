@@ -54,72 +54,68 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
  * pull request for this class.
  *
  */
-public class CopyrightAudioAsset extends APINode {
-  @SerializedName("copyright")
-  private AudioCopyright mCopyright = null;
-  @SerializedName("creation_time")
-  private String mCreationTime = null;
+public class CanvasDynamicSetting extends APINode {
+  @SerializedName("child_documents")
+  private List<Canvas> mChildDocuments = null;
+  @SerializedName("product_set_id")
+  private String mProductSetId = null;
   @SerializedName("id")
   private String mId = null;
-  @SerializedName("title")
-  private String mTitle = null;
-  @SerializedName("update_time")
-  private String mUpdateTime = null;
   protected static Gson gson = null;
 
-  CopyrightAudioAsset() {
+  CanvasDynamicSetting() {
   }
 
-  public CopyrightAudioAsset(Long id, APIContext context) {
+  public CanvasDynamicSetting(Long id, APIContext context) {
     this(id.toString(), context);
   }
 
-  public CopyrightAudioAsset(String id, APIContext context) {
+  public CanvasDynamicSetting(String id, APIContext context) {
     this.mId = id;
 
     this.context = context;
   }
 
-  public CopyrightAudioAsset fetch() throws APIException{
-    CopyrightAudioAsset newInstance = fetchById(this.getPrefixedId().toString(), this.context);
+  public CanvasDynamicSetting fetch() throws APIException{
+    CanvasDynamicSetting newInstance = fetchById(this.getPrefixedId().toString(), this.context);
     this.copyFrom(newInstance);
     return this;
   }
 
-  public static CopyrightAudioAsset fetchById(Long id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(Long id, APIContext context) throws APIException {
     return fetchById(id.toString(), context);
   }
 
-  public static ListenableFuture<CopyrightAudioAsset> fetchByIdAsync(Long id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(Long id, APIContext context) throws APIException {
     return fetchByIdAsync(id.toString(), context);
   }
 
-  public static CopyrightAudioAsset fetchById(String id, APIContext context) throws APIException {
+  public static CanvasDynamicSetting fetchById(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .execute();
   }
 
-  public static ListenableFuture<CopyrightAudioAsset> fetchByIdAsync(String id, APIContext context) throws APIException {
+  public static ListenableFuture<CanvasDynamicSetting> fetchByIdAsync(String id, APIContext context) throws APIException {
     return
       new APIRequestGet(id, context)
       .requestAllFields()
       .executeAsync();
   }
 
-  public static APINodeList<CopyrightAudioAsset> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
-    return (APINodeList<CopyrightAudioAsset>)(
-      new APIRequest<CopyrightAudioAsset>(context, "", "/", "GET", CopyrightAudioAsset.getParser())
+  public static APINodeList<CanvasDynamicSetting> fetchByIds(List<String> ids, List<String> fields, APIContext context) throws APIException {
+    return (APINodeList<CanvasDynamicSetting>)(
+      new APIRequest<CanvasDynamicSetting>(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .execute()
     );
   }
 
-  public static ListenableFuture<APINodeList<CopyrightAudioAsset>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
+  public static ListenableFuture<APINodeList<CanvasDynamicSetting>> fetchByIdsAsync(List<String> ids, List<String> fields, APIContext context) throws APIException {
     return
-      new APIRequest(context, "", "/", "GET", CopyrightAudioAsset.getParser())
+      new APIRequest(context, "", "/", "GET", CanvasDynamicSetting.getParser())
         .setParam("ids", APIRequest.joinStringList(ids))
         .requestFields(fields)
         .executeAsyncBase();
@@ -132,12 +128,12 @@ public class CopyrightAudioAsset extends APINode {
   public String getId() {
     return getFieldId().toString();
   }
-  public static CopyrightAudioAsset loadJSON(String json, APIContext context, String header) {
-    CopyrightAudioAsset copyrightAudioAsset = getGson().fromJson(json, CopyrightAudioAsset.class);
+  public static CanvasDynamicSetting loadJSON(String json, APIContext context, String header) {
+    CanvasDynamicSetting canvasDynamicSetting = getGson().fromJson(json, CanvasDynamicSetting.class);
     if (context.isDebug()) {
       JsonParser parser = new JsonParser();
       JsonElement o1 = parser.parse(json);
-      JsonElement o2 = parser.parse(copyrightAudioAsset.toString());
+      JsonElement o2 = parser.parse(canvasDynamicSetting.toString());
       if (o1.getAsJsonObject().get("__fb_trace_id__") != null) {
         o2.getAsJsonObject().add("__fb_trace_id__", o1.getAsJsonObject().get("__fb_trace_id__"));
       }
@@ -147,14 +143,14 @@ public class CopyrightAudioAsset extends APINode {
         context.log("[Object]" + o2);
       }
     }
-    copyrightAudioAsset.context = context;
-    copyrightAudioAsset.rawValue = json;
-    copyrightAudioAsset.header = header;
-    return copyrightAudioAsset;
+    canvasDynamicSetting.context = context;
+    canvasDynamicSetting.rawValue = json;
+    canvasDynamicSetting.header = header;
+    return canvasDynamicSetting;
   }
 
-  public static APINodeList<CopyrightAudioAsset> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
-    APINodeList<CopyrightAudioAsset> copyrightAudioAssets = new APINodeList<CopyrightAudioAsset>(request, json, header);
+  public static APINodeList<CanvasDynamicSetting> parseResponse(String json, APIContext context, APIRequest request, String header) throws MalformedResponseException {
+    APINodeList<CanvasDynamicSetting> canvasDynamicSettings = new APINodeList<CanvasDynamicSetting>(request, json, header);
     JsonArray arr;
     JsonObject obj;
     JsonParser parser = new JsonParser();
@@ -165,9 +161,9 @@ public class CopyrightAudioAsset extends APINode {
         // First, check if it's a pure JSON Array
         arr = result.getAsJsonArray();
         for (int i = 0; i < arr.size(); i++) {
-          copyrightAudioAssets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+          canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
         };
-        return copyrightAudioAssets;
+        return canvasDynamicSettings;
       } else if (result.isJsonObject()) {
         obj = result.getAsJsonObject();
         if (obj.has("data")) {
@@ -177,20 +173,20 @@ public class CopyrightAudioAsset extends APINode {
                 JsonObject cursors = paging.get("cursors").getAsJsonObject();
                 String before = cursors.has("before") ? cursors.get("before").getAsString() : null;
                 String after = cursors.has("after") ? cursors.get("after").getAsString() : null;
-                copyrightAudioAssets.setCursors(before, after);
+                canvasDynamicSettings.setCursors(before, after);
             }
             String previous = paging.has("previous") ? paging.get("previous").getAsString() : null;
             String next = paging.has("next") ? paging.get("next").getAsString() : null;
-            copyrightAudioAssets.setPaging(previous, next);
+            canvasDynamicSettings.setPaging(previous, next);
             if (context.hasAppSecret()) {
-              copyrightAudioAssets.setAppSecret(context.getAppSecretProof());
+              canvasDynamicSettings.setAppSecret(context.getAppSecretProof());
             }
           }
           if (obj.get("data").isJsonArray()) {
             // Second, check if it's a JSON array with "data"
             arr = obj.get("data").getAsJsonArray();
             for (int i = 0; i < arr.size(); i++) {
-              copyrightAudioAssets.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(arr.get(i).getAsJsonObject().toString(), context, header));
             };
           } else if (obj.get("data").isJsonObject()) {
             // Third, check if it's a JSON object with "data"
@@ -201,23 +197,23 @@ public class CopyrightAudioAsset extends APINode {
                 isRedownload = true;
                 obj = obj.getAsJsonObject(s);
                 for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-                  copyrightAudioAssets.add(loadJSON(entry.getValue().toString(), context, header));
+                  canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
                 }
                 break;
               }
             }
             if (!isRedownload) {
-              copyrightAudioAssets.add(loadJSON(obj.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(obj.toString(), context, header));
             }
           }
-          return copyrightAudioAssets;
+          return canvasDynamicSettings;
         } else if (obj.has("images")) {
           // Fourth, check if it's a map of image objects
           obj = obj.get("images").getAsJsonObject();
           for (Map.Entry<String, JsonElement> entry : obj.entrySet()) {
-              copyrightAudioAssets.add(loadJSON(entry.getValue().toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(entry.getValue().toString(), context, header));
           }
-          return copyrightAudioAssets;
+          return canvasDynamicSettings;
         } else {
           // Fifth, check if it's an array of objects indexed by id
           boolean isIdIndexedArray = true;
@@ -234,20 +230,20 @@ public class CopyrightAudioAsset extends APINode {
               value.getAsJsonObject().get("id") != null &&
               value.getAsJsonObject().get("id").getAsString().equals(key)
             ) {
-              copyrightAudioAssets.add(loadJSON(value.toString(), context, header));
+              canvasDynamicSettings.add(loadJSON(value.toString(), context, header));
             } else {
               isIdIndexedArray = false;
               break;
             }
           }
           if (isIdIndexedArray) {
-            return copyrightAudioAssets;
+            return canvasDynamicSettings;
           }
 
           // Sixth, check if it's pure JsonObject
-          copyrightAudioAssets.clear();
-          copyrightAudioAssets.add(loadJSON(json, context, header));
-          return copyrightAudioAssets;
+          canvasDynamicSettings.clear();
+          canvasDynamicSettings.add(loadJSON(json, context, header));
+          return canvasDynamicSettings;
         }
       }
     } catch (Exception e) {
@@ -279,75 +275,62 @@ public class CopyrightAudioAsset extends APINode {
   }
 
 
-  public AudioCopyright getFieldCopyright() {
-    if (mCopyright != null) {
-      mCopyright.context = getContext();
-    }
-    return mCopyright;
+  public List<Canvas> getFieldChildDocuments() {
+    return mChildDocuments;
   }
 
-  public String getFieldCreationTime() {
-    return mCreationTime;
+  public String getFieldProductSetId() {
+    return mProductSetId;
   }
 
   public String getFieldId() {
     return mId;
   }
 
-  public String getFieldTitle() {
-    return mTitle;
-  }
-
-  public String getFieldUpdateTime() {
-    return mUpdateTime;
-  }
 
 
+  public static class APIRequestGet extends APIRequest<CanvasDynamicSetting> {
 
-  public static class APIRequestGet extends APIRequest<CopyrightAudioAsset> {
-
-    CopyrightAudioAsset lastResponse = null;
+    CanvasDynamicSetting lastResponse = null;
     @Override
-    public CopyrightAudioAsset getLastResponse() {
+    public CanvasDynamicSetting getLastResponse() {
       return lastResponse;
     }
     public static final String[] PARAMS = {
     };
 
     public static final String[] FIELDS = {
-      "copyright",
-      "creation_time",
+      "child_documents",
+      "product_set_id",
       "id",
-      "title",
-      "update_time",
     };
 
     @Override
-    public CopyrightAudioAsset parseResponse(String response, String header) throws APIException {
-      return CopyrightAudioAsset.parseResponse(response, getContext(), this, header).head();
+    public CanvasDynamicSetting parseResponse(String response, String header) throws APIException {
+      return CanvasDynamicSetting.parseResponse(response, getContext(), this, header).head();
     }
 
     @Override
-    public CopyrightAudioAsset execute() throws APIException {
+    public CanvasDynamicSetting execute() throws APIException {
       return execute(new HashMap<String, Object>());
     }
 
     @Override
-    public CopyrightAudioAsset execute(Map<String, Object> extraParams) throws APIException {
+    public CanvasDynamicSetting execute(Map<String, Object> extraParams) throws APIException {
       ResponseWrapper rw = executeInternal(extraParams);
       lastResponse = parseResponse(rw.getBody(), rw.getHeader());
       return lastResponse;
     }
 
-    public ListenableFuture<CopyrightAudioAsset> executeAsync() throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync() throws APIException {
       return executeAsync(new HashMap<String, Object>());
     };
 
-    public ListenableFuture<CopyrightAudioAsset> executeAsync(Map<String, Object> extraParams) throws APIException {
+    public ListenableFuture<CanvasDynamicSetting> executeAsync(Map<String, Object> extraParams) throws APIException {
       return Futures.transform(
         executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CopyrightAudioAsset>() {
-           public CopyrightAudioAsset apply(ResponseWrapper result) {
+        new Function<ResponseWrapper, CanvasDynamicSetting>() {
+           public CanvasDynamicSetting apply(ResponseWrapper result) {
              try {
                return APIRequestGet.this.parseResponse(result.getBody(), result.getHeader());
              } catch (Exception e) {
@@ -411,18 +394,18 @@ public class CopyrightAudioAsset extends APINode {
       return this;
     }
 
-    public APIRequestGet requestCopyrightField () {
-      return this.requestCopyrightField(true);
+    public APIRequestGet requestChildDocumentsField () {
+      return this.requestChildDocumentsField(true);
     }
-    public APIRequestGet requestCopyrightField (boolean value) {
-      this.requestField("copyright", value);
+    public APIRequestGet requestChildDocumentsField (boolean value) {
+      this.requestField("child_documents", value);
       return this;
     }
-    public APIRequestGet requestCreationTimeField () {
-      return this.requestCreationTimeField(true);
+    public APIRequestGet requestProductSetIdField () {
+      return this.requestProductSetIdField(true);
     }
-    public APIRequestGet requestCreationTimeField (boolean value) {
-      this.requestField("creation_time", value);
+    public APIRequestGet requestProductSetIdField (boolean value) {
+      this.requestField("product_set_id", value);
       return this;
     }
     public APIRequestGet requestIdField () {
@@ -430,20 +413,6 @@ public class CopyrightAudioAsset extends APINode {
     }
     public APIRequestGet requestIdField (boolean value) {
       this.requestField("id", value);
-      return this;
-    }
-    public APIRequestGet requestTitleField () {
-      return this.requestTitleField(true);
-    }
-    public APIRequestGet requestTitleField (boolean value) {
-      this.requestField("title", value);
-      return this;
-    }
-    public APIRequestGet requestUpdateTimeField () {
-      return this.requestUpdateTimeField(true);
-    }
-    public APIRequestGet requestUpdateTimeField (boolean value) {
-      this.requestField("update_time", value);
       return this;
     }
   }
@@ -462,21 +431,19 @@ public class CopyrightAudioAsset extends APINode {
     return gson;
   }
 
-  public CopyrightAudioAsset copyFrom(CopyrightAudioAsset instance) {
-    this.mCopyright = instance.mCopyright;
-    this.mCreationTime = instance.mCreationTime;
+  public CanvasDynamicSetting copyFrom(CanvasDynamicSetting instance) {
+    this.mChildDocuments = instance.mChildDocuments;
+    this.mProductSetId = instance.mProductSetId;
     this.mId = instance.mId;
-    this.mTitle = instance.mTitle;
-    this.mUpdateTime = instance.mUpdateTime;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;
   }
 
-  public static APIRequest.ResponseParser<CopyrightAudioAsset> getParser() {
-    return new APIRequest.ResponseParser<CopyrightAudioAsset>() {
-      public APINodeList<CopyrightAudioAsset> parseResponse(String response, APIContext context, APIRequest<CopyrightAudioAsset> request, String header) throws MalformedResponseException {
-        return CopyrightAudioAsset.parseResponse(response, context, request, header);
+  public static APIRequest.ResponseParser<CanvasDynamicSetting> getParser() {
+    return new APIRequest.ResponseParser<CanvasDynamicSetting>() {
+      public APINodeList<CanvasDynamicSetting> parseResponse(String response, APIContext context, APIRequest<CanvasDynamicSetting> request, String header) throws MalformedResponseException {
+        return CanvasDynamicSetting.parseResponse(response, context, request, header);
       }
     };
   }

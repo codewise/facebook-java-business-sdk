@@ -85,8 +85,6 @@ public class AdAssetFeedSpec extends APINode {
   private List<AdAssetFeedSpecLinkURL> mLinkUrls = null;
   @SerializedName("optimization_type")
   private String mOptimizationType = null;
-  @SerializedName("posts")
-  private List<Object> mPosts = null;
   @SerializedName("titles")
   private List<AdAssetFeedSpecTitle> mTitles = null;
   @SerializedName("videos")
@@ -407,15 +405,6 @@ public class AdAssetFeedSpec extends APINode {
     return this;
   }
 
-  public List<Object> getFieldPosts() {
-    return mPosts;
-  }
-
-  public AdAssetFeedSpec setFieldPosts(List<Object> value) {
-    this.mPosts = value;
-    return this;
-  }
-
   public List<AdAssetFeedSpecTitle> getFieldTitles() {
     return mTitles;
   }
@@ -451,6 +440,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("APPLY_NOW")
       VALUE_APPLY_NOW("APPLY_NOW"),
+      @SerializedName("AUDIO_CALL")
+      VALUE_AUDIO_CALL("AUDIO_CALL"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("BUY")
@@ -519,6 +510,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
+      @SerializedName("OPEN_INSTANT_APP")
+      VALUE_OPEN_INSTANT_APP("OPEN_INSTANT_APP"),
       @SerializedName("OPEN_LINK")
       VALUE_OPEN_LINK("OPEN_LINK"),
       @SerializedName("ORDER_NOW")
@@ -531,6 +524,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_PLAY_GAME_ON_FACEBOOK("PLAY_GAME_ON_FACEBOOK"),
       @SerializedName("PURCHASE_GIFT_CARDS")
       VALUE_PURCHASE_GIFT_CARDS("PURCHASE_GIFT_CARDS"),
+      @SerializedName("RAISE_MONEY")
+      VALUE_RAISE_MONEY("RAISE_MONEY"),
       @SerializedName("RECORD_NOW")
       VALUE_RECORD_NOW("RECORD_NOW"),
       @SerializedName("REFER_FRIENDS")
@@ -547,6 +542,8 @@ public class AdAssetFeedSpec extends APINode {
       VALUE_SEND_A_GIFT("SEND_A_GIFT"),
       @SerializedName("SEND_GIFT_MONEY")
       VALUE_SEND_GIFT_MONEY("SEND_GIFT_MONEY"),
+      @SerializedName("SEND_UPDATES")
+      VALUE_SEND_UPDATES("SEND_UPDATES"),
       @SerializedName("SHARE")
       VALUE_SHARE("SHARE"),
       @SerializedName("SHOP_NOW")
@@ -627,7 +624,6 @@ public class AdAssetFeedSpec extends APINode {
     this.mImages = instance.mImages;
     this.mLinkUrls = instance.mLinkUrls;
     this.mOptimizationType = instance.mOptimizationType;
-    this.mPosts = instance.mPosts;
     this.mTitles = instance.mTitles;
     this.mVideos = instance.mVideos;
     this.context = instance.context;

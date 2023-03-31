@@ -282,10 +282,6 @@ public class CPASBusinessSetupConfig extends APINode {
     return new APIRequestGet(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestUpdate update() {
-    return new APIRequestUpdate(this.getPrefixedId().toString(), context);
-  }
-
 
   public Boolean getFieldAcceptedCollabAdsTos() {
     return mAcceptedCollabAdsTos;
@@ -342,6 +338,7 @@ public class CPASBusinessSetupConfig extends APINode {
       "capabilities",
       "created_time",
       "currency",
+      "custom_audience_info",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -363,6 +360,7 @@ public class CPASBusinessSetupConfig extends APINode {
       "is_personal",
       "is_prepay_account",
       "is_tax_id_required",
+      "liable_address",
       "line_numbers",
       "media_agency",
       "min_campaign_group_spend_cap",
@@ -370,9 +368,12 @@ public class CPASBusinessSetupConfig extends APINode {
       "name",
       "offsite_pixels_tos_accepted",
       "owner",
+      "owner_business",
       "partner",
       "rf_spec",
+      "send_bill_to_address",
       "show_checkout_experience",
+      "sold_to_address",
       "spend_cap",
       "tax_id",
       "tax_id_status",
@@ -383,6 +384,7 @@ public class CPASBusinessSetupConfig extends APINode {
       "tos_accepted",
       "user_tasks",
       "user_tos_accepted",
+      "viewable_business",
     };
 
     @Override
@@ -607,6 +609,13 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("currency", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField () {
+      return this.requestCustomAudienceInfoField(true);
+    }
+    public APIRequestGetAdAccounts requestCustomAudienceInfoField (boolean value) {
+      this.requestField("custom_audience_info", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -754,6 +763,13 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("is_tax_id_required", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestLiableAddressField () {
+      return this.requestLiableAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestLiableAddressField (boolean value) {
+      this.requestField("liable_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestLineNumbersField () {
       return this.requestLineNumbersField(true);
     }
@@ -803,6 +819,13 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("owner", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestPartnerField () {
       return this.requestPartnerField(true);
     }
@@ -817,11 +840,25 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("rf_spec", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestSendBillToAddressField () {
+      return this.requestSendBillToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSendBillToAddressField (boolean value) {
+      this.requestField("send_bill_to_address", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField () {
       return this.requestShowCheckoutExperienceField(true);
     }
     public APIRequestGetAdAccounts requestShowCheckoutExperienceField (boolean value) {
       this.requestField("show_checkout_experience", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField () {
+      return this.requestSoldToAddressField(true);
+    }
+    public APIRequestGetAdAccounts requestSoldToAddressField (boolean value) {
+      this.requestField("sold_to_address", value);
       return this;
     }
     public APIRequestGetAdAccounts requestSpendCapField () {
@@ -892,6 +929,13 @@ public class CPASBusinessSetupConfig extends APINode {
     }
     public APIRequestGetAdAccounts requestUserTosAcceptedField (boolean value) {
       this.requestField("user_tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField () {
+      return this.requestViewableBusinessField(true);
+    }
+    public APIRequestGetAdAccounts requestViewableBusinessField (boolean value) {
+      this.requestField("viewable_business", value);
       return this;
     }
   }
@@ -1038,156 +1082,6 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("id", value);
       return this;
     }
-  }
-
-  public static class APIRequestUpdate extends APIRequest<CPASBusinessSetupConfig> {
-
-    CPASBusinessSetupConfig lastResponse = null;
-    @Override
-    public CPASBusinessSetupConfig getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "accepted_collab_ads_tos",
-      "ad_accounts",
-      "business",
-      "business_capabilities_status",
-      "capabilities_compliance_status",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public CPASBusinessSetupConfig parseResponse(String response, String header) throws APIException {
-      return CPASBusinessSetupConfig.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public CPASBusinessSetupConfig execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public CPASBusinessSetupConfig execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<CPASBusinessSetupConfig> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<CPASBusinessSetupConfig> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, CPASBusinessSetupConfig>() {
-           public CPASBusinessSetupConfig apply(ResponseWrapper result) {
-             try {
-               return APIRequestUpdate.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestUpdate(String nodeId, APIContext context) {
-      super(context, nodeId, "/", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestUpdate setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestUpdate setAcceptedCollabAdsTos (Boolean acceptedCollabAdsTos) {
-      this.setParam("accepted_collab_ads_tos", acceptedCollabAdsTos);
-      return this;
-    }
-    public APIRequestUpdate setAcceptedCollabAdsTos (String acceptedCollabAdsTos) {
-      this.setParam("accepted_collab_ads_tos", acceptedCollabAdsTos);
-      return this;
-    }
-
-    public APIRequestUpdate setAdAccounts (List<String> adAccounts) {
-      this.setParam("ad_accounts", adAccounts);
-      return this;
-    }
-    public APIRequestUpdate setAdAccounts (String adAccounts) {
-      this.setParam("ad_accounts", adAccounts);
-      return this;
-    }
-
-    public APIRequestUpdate setBusiness (String business) {
-      this.setParam("business", business);
-      return this;
-    }
-
-    public APIRequestUpdate setBusinessCapabilitiesStatus (Map<String, String> businessCapabilitiesStatus) {
-      this.setParam("business_capabilities_status", businessCapabilitiesStatus);
-      return this;
-    }
-    public APIRequestUpdate setBusinessCapabilitiesStatus (String businessCapabilitiesStatus) {
-      this.setParam("business_capabilities_status", businessCapabilitiesStatus);
-      return this;
-    }
-
-    public APIRequestUpdate setCapabilitiesComplianceStatus (Map<String, String> capabilitiesComplianceStatus) {
-      this.setParam("capabilities_compliance_status", capabilitiesComplianceStatus);
-      return this;
-    }
-    public APIRequestUpdate setCapabilitiesComplianceStatus (String capabilitiesComplianceStatus) {
-      this.setParam("capabilities_compliance_status", capabilitiesComplianceStatus);
-      return this;
-    }
-
-    public APIRequestUpdate requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestUpdate requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestUpdate requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestUpdate requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
   }
 
 

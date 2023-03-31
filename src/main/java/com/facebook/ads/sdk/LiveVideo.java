@@ -508,6 +508,7 @@ public class LiveVideo extends APINode {
       "gender",
       "hometown",
       "id",
+      "id_for_avatars",
       "inspirational_people",
       "install_type",
       "installed",
@@ -729,6 +730,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestIdForAvatarsField () {
+      return this.requestIdForAvatarsField(true);
+    }
+    public APIRequestGetBlockedUsers requestIdForAvatarsField (boolean value) {
+      this.requestField("id_for_avatars", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestInspirationalPeopleField () {
@@ -1388,6 +1396,7 @@ public class LiveVideo extends APINode {
       "new_like_count",
       "offer_eligible",
       "overall_star_rating",
+      "owner_business",
       "page_token",
       "parent_page",
       "parking",
@@ -2199,6 +2208,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOverallStarRatingField (boolean value) {
       this.requestField("overall_star_rating", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {

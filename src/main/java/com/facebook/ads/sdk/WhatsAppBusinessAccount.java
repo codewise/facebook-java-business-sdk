@@ -59,6 +59,10 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mAccountReviewStatus = null;
   @SerializedName("analytics")
   private Object mAnalytics = null;
+  @SerializedName("business_verification_status")
+  private String mBusinessVerificationStatus = null;
+  @SerializedName("country")
+  private String mCountry = null;
   @SerializedName("creation_time")
   private Long mCreationTime = null;
   @SerializedName("currency")
@@ -71,8 +75,12 @@ public class WhatsAppBusinessAccount extends APINode {
   private String mName = null;
   @SerializedName("on_behalf_of_business_info")
   private Object mOnBehalfOfBusinessInfo = null;
+  @SerializedName("owner_business")
+  private Business mOwnerBusiness = null;
   @SerializedName("owner_business_info")
   private Object mOwnerBusinessInfo = null;
+  @SerializedName("ownership_type")
+  private String mOwnershipType = null;
   @SerializedName("primary_funding_id")
   private String mPrimaryFundingId = null;
   @SerializedName("purchase_order_number")
@@ -302,8 +310,16 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestCreateAssignedUser(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetAudiences getAudiences() {
+    return new APIRequestGetAudiences(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetConversationAnalytics getConversationAnalytics() {
     return new APIRequestGetConversationAnalytics(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetExtensions getExtensions() {
+    return new APIRequestGetExtensions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestDeleteMessageTemplates deleteMessageTemplates() {
@@ -338,6 +354,10 @@ public class WhatsAppBusinessAccount extends APINode {
     return new APIRequestCreateProductCatalog(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetSchedules getSchedules() {
+    return new APIRequestGetSchedules(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestDeleteSubscribedApps deleteSubscribedApps() {
     return new APIRequestDeleteSubscribedApps(this.getPrefixedId().toString(), context);
   }
@@ -361,6 +381,14 @@ public class WhatsAppBusinessAccount extends APINode {
 
   public Object getFieldAnalytics() {
     return mAnalytics;
+  }
+
+  public String getFieldBusinessVerificationStatus() {
+    return mBusinessVerificationStatus;
+  }
+
+  public String getFieldCountry() {
+    return mCountry;
   }
 
   public Long getFieldCreationTime() {
@@ -387,8 +415,19 @@ public class WhatsAppBusinessAccount extends APINode {
     return mOnBehalfOfBusinessInfo;
   }
 
+  public Business getFieldOwnerBusiness() {
+    if (mOwnerBusiness != null) {
+      mOwnerBusiness.context = getContext();
+    }
+    return mOwnerBusiness;
+  }
+
   public Object getFieldOwnerBusinessInfo() {
     return mOwnerBusinessInfo;
+  }
+
+  public String getFieldOwnershipType() {
+    return mOwnershipType;
   }
 
   public String getFieldPrimaryFundingId() {
@@ -789,6 +828,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
   }
 
+  public static class APIRequestGetAudiences extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetAudiences.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetAudiences(String nodeId, APIContext context) {
+      super(context, nodeId, "/audiences", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetAudiences setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudiences setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetAudiences requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetAudiences requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudiences requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetAudiences requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudiences requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetAudiences requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetConversationAnalytics extends APIRequest<APINode> {
 
     APINodeList<APINode> lastResponse = null;
@@ -797,6 +940,7 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "conversation_categories",
       "conversation_directions",
       "conversation_types",
       "country_codes",
@@ -863,6 +1007,15 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+
+    public APIRequestGetConversationAnalytics setConversationCategories (List<EnumConversationCategories> conversationCategories) {
+      this.setParam("conversation_categories", conversationCategories);
+      return this;
+    }
+    public APIRequestGetConversationAnalytics setConversationCategories (String conversationCategories) {
+      this.setParam("conversation_categories", conversationCategories);
+      return this;
+    }
 
     public APIRequestGetConversationAnalytics setConversationDirections (List<EnumConversationDirections> conversationDirections) {
       this.setParam("conversation_directions", conversationDirections);
@@ -977,6 +1130,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestGetConversationAnalytics requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetExtensions extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetExtensions.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetExtensions(String nodeId, APIContext context) {
+      super(context, nodeId, "/extensions", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetExtensions setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtensions setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetExtensions requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetExtensions requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtensions requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetExtensions requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtensions requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetExtensions requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -1742,16 +1999,20 @@ public class WhatsAppBusinessAccount extends APINode {
     };
 
     public static final String[] FIELDS = {
+      "ad_account_to_collaborative_ads_share_settings",
+      "agency_collaborative_ads_share_settings",
       "business",
+      "catalog_store",
       "commerce_merchant_settings",
+      "creator_user",
       "da_display_settings",
       "default_image_url",
       "fallback_image_url",
       "feed_count",
       "id",
       "is_catalog_segment",
-      "latest_feed_upload_session",
       "name",
+      "owner_business",
       "product_count",
       "store_catalog_settings",
       "vertical",
@@ -1846,6 +2107,20 @@ public class WhatsAppBusinessAccount extends APINode {
       return this;
     }
 
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField () {
+      return this.requestAdAccountToCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAdAccountToCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("ad_account_to_collaborative_ads_share_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField () {
+      return this.requestAgencyCollaborativeAdsShareSettingsField(true);
+    }
+    public APIRequestGetProductCatalogs requestAgencyCollaborativeAdsShareSettingsField (boolean value) {
+      this.requestField("agency_collaborative_ads_share_settings", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestBusinessField () {
       return this.requestBusinessField(true);
     }
@@ -1853,11 +2128,25 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("business", value);
       return this;
     }
+    public APIRequestGetProductCatalogs requestCatalogStoreField () {
+      return this.requestCatalogStoreField(true);
+    }
+    public APIRequestGetProductCatalogs requestCatalogStoreField (boolean value) {
+      this.requestField("catalog_store", value);
+      return this;
+    }
     public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField () {
       return this.requestCommerceMerchantSettingsField(true);
     }
     public APIRequestGetProductCatalogs requestCommerceMerchantSettingsField (boolean value) {
       this.requestField("commerce_merchant_settings", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestCreatorUserField () {
+      return this.requestCreatorUserField(true);
+    }
+    public APIRequestGetProductCatalogs requestCreatorUserField (boolean value) {
+      this.requestField("creator_user", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestDaDisplaySettingsField () {
@@ -1902,18 +2191,18 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("is_catalog_segment", value);
       return this;
     }
-    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField () {
-      return this.requestLatestFeedUploadSessionField(true);
-    }
-    public APIRequestGetProductCatalogs requestLatestFeedUploadSessionField (boolean value) {
-      this.requestField("latest_feed_upload_session", value);
-      return this;
-    }
     public APIRequestGetProductCatalogs requestNameField () {
       return this.requestNameField(true);
     }
     public APIRequestGetProductCatalogs requestNameField (boolean value) {
       this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetProductCatalogs requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGetProductCatalogs requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
       return this;
     }
     public APIRequestGetProductCatalogs requestProductCountField () {
@@ -2043,6 +2332,110 @@ public class WhatsAppBusinessAccount extends APINode {
 
     @Override
     public APIRequestCreateProductCatalog requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
+  public static class APIRequestGetSchedules extends APIRequest<APINode> {
+
+    APINodeList<APINode> lastResponse = null;
+    @Override
+    public APINodeList<APINode> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public APINodeList<APINode> parseResponse(String response, String header) throws APIException {
+      return APINode.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<APINode> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<APINode> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<APINode>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<APINode>>() {
+           public APINodeList<APINode> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetSchedules.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetSchedules(String nodeId, APIContext context) {
+      super(context, nodeId, "/schedules", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetSchedules setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSchedules setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetSchedules requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetSchedules requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSchedules requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetSchedules requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSchedules requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetSchedules requestField (String field, boolean value) {
       this.requestFieldInternal(field, value);
       return this;
     }
@@ -2265,6 +2658,8 @@ public class WhatsAppBusinessAccount extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "override_callback_uri",
+      "verify_token",
     };
 
     public static final String[] FIELDS = {
@@ -2323,6 +2718,16 @@ public class WhatsAppBusinessAccount extends APINode {
     }
 
 
+    public APIRequestCreateSubscribedApp setOverrideCallbackUri (String overrideCallbackUri) {
+      this.setParam("override_callback_uri", overrideCallbackUri);
+      return this;
+    }
+
+    public APIRequestCreateSubscribedApp setVerifyToken (String verifyToken) {
+      this.setParam("verify_token", verifyToken);
+      return this;
+    }
+
     public APIRequestCreateSubscribedApp requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -2374,13 +2779,17 @@ public class WhatsAppBusinessAccount extends APINode {
     public static final String[] FIELDS = {
       "account_review_status",
       "analytics",
+      "business_verification_status",
+      "country",
       "creation_time",
       "currency",
       "id",
       "message_template_namespace",
       "name",
       "on_behalf_of_business_info",
+      "owner_business",
       "owner_business_info",
+      "ownership_type",
       "primary_funding_id",
       "purchase_order_number",
       "status",
@@ -2490,6 +2899,20 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("analytics", value);
       return this;
     }
+    public APIRequestGet requestBusinessVerificationStatusField () {
+      return this.requestBusinessVerificationStatusField(true);
+    }
+    public APIRequestGet requestBusinessVerificationStatusField (boolean value) {
+      this.requestField("business_verification_status", value);
+      return this;
+    }
+    public APIRequestGet requestCountryField () {
+      return this.requestCountryField(true);
+    }
+    public APIRequestGet requestCountryField (boolean value) {
+      this.requestField("country", value);
+      return this;
+    }
     public APIRequestGet requestCreationTimeField () {
       return this.requestCreationTimeField(true);
     }
@@ -2532,11 +2955,25 @@ public class WhatsAppBusinessAccount extends APINode {
       this.requestField("on_behalf_of_business_info", value);
       return this;
     }
+    public APIRequestGet requestOwnerBusinessField () {
+      return this.requestOwnerBusinessField(true);
+    }
+    public APIRequestGet requestOwnerBusinessField (boolean value) {
+      this.requestField("owner_business", value);
+      return this;
+    }
     public APIRequestGet requestOwnerBusinessInfoField () {
       return this.requestOwnerBusinessInfoField(true);
     }
     public APIRequestGet requestOwnerBusinessInfoField (boolean value) {
       this.requestField("owner_business_info", value);
+      return this;
+    }
+    public APIRequestGet requestOwnershipTypeField () {
+      return this.requestOwnershipTypeField(true);
+    }
+    public APIRequestGet requestOwnershipTypeField (boolean value) {
+      this.requestField("ownership_type", value);
       return this;
     }
     public APIRequestGet requestPrimaryFundingIdField () {
@@ -2572,8 +3009,12 @@ public class WhatsAppBusinessAccount extends APINode {
   public static enum EnumTasks {
       @SerializedName("DEVELOP")
       VALUE_DEVELOP("DEVELOP"),
+      @SerializedName("FULL_CONTROL")
+      VALUE_FULL_CONTROL("FULL_CONTROL"),
       @SerializedName("MANAGE")
       VALUE_MANAGE("MANAGE"),
+      @SerializedName("MANAGE_EXTENSIONS")
+      VALUE_MANAGE_EXTENSIONS("MANAGE_EXTENSIONS"),
       @SerializedName("MANAGE_PHONE")
       VALUE_MANAGE_PHONE("MANAGE_PHONE"),
       @SerializedName("MANAGE_TEMPLATES")
@@ -2597,17 +3038,42 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumCategory {
+      @SerializedName("AUTHENTICATION")
+      VALUE_AUTHENTICATION("AUTHENTICATION"),
       @SerializedName("MARKETING")
       VALUE_MARKETING("MARKETING"),
-      @SerializedName("OTP")
-      VALUE_OTP("OTP"),
-      @SerializedName("TRANSACTIONAL")
-      VALUE_TRANSACTIONAL("TRANSACTIONAL"),
+      @SerializedName("UTILITY")
+      VALUE_UTILITY("UTILITY"),
       ;
 
       private String value;
 
       private EnumCategory(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
+  public static enum EnumConversationCategories {
+      @SerializedName("AUTHENTICATION")
+      VALUE_AUTHENTICATION("AUTHENTICATION"),
+      @SerializedName("MARKETING")
+      VALUE_MARKETING("MARKETING"),
+      @SerializedName("SERVICE")
+      VALUE_SERVICE("SERVICE"),
+      @SerializedName("UNKNOWN")
+      VALUE_UNKNOWN("UNKNOWN"),
+      @SerializedName("UTILITY")
+      VALUE_UTILITY("UTILITY"),
+      ;
+
+      private String value;
+
+      private EnumConversationCategories(String value) {
         this.value = value;
       }
 
@@ -2662,6 +3128,8 @@ public class WhatsAppBusinessAccount extends APINode {
   }
 
   public static enum EnumDimensions {
+      @SerializedName("CONVERSATION_CATEGORY")
+      VALUE_CONVERSATION_CATEGORY("CONVERSATION_CATEGORY"),
       @SerializedName("CONVERSATION_DIRECTION")
       VALUE_CONVERSATION_DIRECTION("CONVERSATION_DIRECTION"),
       @SerializedName("CONVERSATION_TYPE")
@@ -2760,8 +3228,10 @@ public class WhatsAppBusinessAccount extends APINode {
       VALUE_DISABLED("DISABLED"),
       @SerializedName("IN_APPEAL")
       VALUE_IN_APPEAL("IN_APPEAL"),
-      @SerializedName("LOCKED")
-      VALUE_LOCKED("LOCKED"),
+      @SerializedName("LIMIT_EXCEEDED")
+      VALUE_LIMIT_EXCEEDED("LIMIT_EXCEEDED"),
+      @SerializedName("PAUSED")
+      VALUE_PAUSED("PAUSED"),
       @SerializedName("PENDING")
       VALUE_PENDING("PENDING"),
       @SerializedName("PENDING_DELETION")
@@ -2799,13 +3269,17 @@ public class WhatsAppBusinessAccount extends APINode {
   public WhatsAppBusinessAccount copyFrom(WhatsAppBusinessAccount instance) {
     this.mAccountReviewStatus = instance.mAccountReviewStatus;
     this.mAnalytics = instance.mAnalytics;
+    this.mBusinessVerificationStatus = instance.mBusinessVerificationStatus;
+    this.mCountry = instance.mCountry;
     this.mCreationTime = instance.mCreationTime;
     this.mCurrency = instance.mCurrency;
     this.mId = instance.mId;
     this.mMessageTemplateNamespace = instance.mMessageTemplateNamespace;
     this.mName = instance.mName;
     this.mOnBehalfOfBusinessInfo = instance.mOnBehalfOfBusinessInfo;
+    this.mOwnerBusiness = instance.mOwnerBusiness;
     this.mOwnerBusinessInfo = instance.mOwnerBusinessInfo;
+    this.mOwnershipType = instance.mOwnershipType;
     this.mPrimaryFundingId = instance.mPrimaryFundingId;
     this.mPurchaseOrderNumber = instance.mPurchaseOrderNumber;
     this.mStatus = instance.mStatus;

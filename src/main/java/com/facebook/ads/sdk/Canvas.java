@@ -69,6 +69,8 @@ public class Canvas extends APINode {
   private AdVideo mCollectionHeroVideo = null;
   @SerializedName("collection_thumbnails")
   private List<CanvasCollectionThumbnail> mCollectionThumbnails = null;
+  @SerializedName("dynamic_setting")
+  private CanvasDynamicSetting mDynamicSetting = null;
   @SerializedName("element_payload")
   private String mElementPayload = null;
   @SerializedName("elements")
@@ -92,7 +94,7 @@ public class Canvas extends APINode {
   @SerializedName("property_list")
   private List<String> mPropertyList = null;
   @SerializedName("source_template")
-  private CanvasTemplate mSourceTemplate = null;
+  private Object mSourceTemplate = null;
   @SerializedName("store_url")
   private String mStoreUrl = null;
   @SerializedName("style_list")
@@ -363,6 +365,13 @@ public class Canvas extends APINode {
     return mCollectionThumbnails;
   }
 
+  public CanvasDynamicSetting getFieldDynamicSetting() {
+    if (mDynamicSetting != null) {
+      mDynamicSetting.context = getContext();
+    }
+    return mDynamicSetting;
+  }
+
   public String getFieldElementPayload() {
     return mElementPayload;
   }
@@ -413,10 +422,7 @@ public class Canvas extends APINode {
     return mPropertyList;
   }
 
-  public CanvasTemplate getFieldSourceTemplate() {
-    if (mSourceTemplate != null) {
-      mSourceTemplate.context = getContext();
-    }
+  public Object getFieldSourceTemplate() {
     return mSourceTemplate;
   }
 
@@ -590,6 +596,7 @@ public class Canvas extends APINode {
       "collection_hero_image",
       "collection_hero_video",
       "collection_thumbnails",
+      "dynamic_setting",
       "element_payload",
       "elements",
       "fb_body_elements",
@@ -747,6 +754,13 @@ public class Canvas extends APINode {
     }
     public APIRequestGet requestCollectionThumbnailsField (boolean value) {
       this.requestField("collection_thumbnails", value);
+      return this;
+    }
+    public APIRequestGet requestDynamicSettingField () {
+      return this.requestDynamicSettingField(true);
+    }
+    public APIRequestGet requestDynamicSettingField (boolean value) {
+      this.requestField("dynamic_setting", value);
       return this;
     }
     public APIRequestGet requestElementPayloadField () {
@@ -1068,6 +1082,7 @@ public class Canvas extends APINode {
     this.mCollectionHeroImage = instance.mCollectionHeroImage;
     this.mCollectionHeroVideo = instance.mCollectionHeroVideo;
     this.mCollectionThumbnails = instance.mCollectionThumbnails;
+    this.mDynamicSetting = instance.mDynamicSetting;
     this.mElementPayload = instance.mElementPayload;
     this.mElements = instance.mElements;
     this.mFbBodyElements = instance.mFbBodyElements;

@@ -147,6 +147,8 @@ public class Vehicle extends APINode {
   private String mVehicleType = null;
   @SerializedName("vin")
   private String mVin = null;
+  @SerializedName("visibility")
+  private EnumVisibility mVisibility = null;
   @SerializedName("year")
   private Long mYear = null;
   protected static Gson gson = null;
@@ -566,6 +568,10 @@ public class Vehicle extends APINode {
     return mVin;
   }
 
+  public EnumVisibility getFieldVisibility() {
+    return mVisibility;
+  }
+
   public Long getFieldYear() {
     return mYear;
   }
@@ -957,6 +963,7 @@ public class Vehicle extends APINode {
       "vehicle_specifications",
       "vehicle_type",
       "vin",
+      "visibility",
       "year",
     };
 
@@ -1371,6 +1378,13 @@ public class Vehicle extends APINode {
       this.requestField("vin", value);
       return this;
     }
+    public APIRequestGet requestVisibilityField () {
+      return this.requestVisibilityField(true);
+    }
+    public APIRequestGet requestVisibilityField (boolean value) {
+      this.requestField("visibility", value);
+      return this;
+    }
     public APIRequestGet requestYearField () {
       return this.requestYearField(true);
     }
@@ -1741,6 +1755,25 @@ public class Vehicle extends APINode {
       }
   }
 
+  public static enum EnumVisibility {
+      @SerializedName("PUBLISHED")
+      VALUE_PUBLISHED("PUBLISHED"),
+      @SerializedName("STAGING")
+      VALUE_STAGING("STAGING"),
+      ;
+
+      private String value;
+
+      private EnumVisibility(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumAvailability {
       @SerializedName("AVAILABLE")
       VALUE_AVAILABLE("AVAILABLE"),
@@ -2050,6 +2083,7 @@ public class Vehicle extends APINode {
     this.mVehicleSpecifications = instance.mVehicleSpecifications;
     this.mVehicleType = instance.mVehicleType;
     this.mVin = instance.mVin;
+    this.mVisibility = instance.mVisibility;
     this.mYear = instance.mYear;
     this.context = instance.context;
     this.rawValue = instance.rawValue;

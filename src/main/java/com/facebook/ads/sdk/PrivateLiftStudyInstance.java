@@ -63,8 +63,14 @@ public class PrivateLiftStudyInstance extends APINode {
   private List<String> mFeatureList = null;
   @SerializedName("id")
   private String mId = null;
+  @SerializedName("issuer_certificate")
+  private String mIssuerCertificate = null;
   @SerializedName("latest_status_update_time")
   private String mLatestStatusUpdateTime = null;
+  @SerializedName("run_id")
+  private String mRunId = null;
+  @SerializedName("server_hostnames")
+  private List<String> mServerHostnames = null;
   @SerializedName("server_ips")
   private List<String> mServerIps = null;
   @SerializedName("status")
@@ -305,8 +311,20 @@ public class PrivateLiftStudyInstance extends APINode {
     return mId;
   }
 
+  public String getFieldIssuerCertificate() {
+    return mIssuerCertificate;
+  }
+
   public String getFieldLatestStatusUpdateTime() {
     return mLatestStatusUpdateTime;
+  }
+
+  public String getFieldRunId() {
+    return mRunId;
+  }
+
+  public List<String> getFieldServerHostnames() {
+    return mServerHostnames;
   }
 
   public List<String> getFieldServerIps() {
@@ -338,7 +356,10 @@ public class PrivateLiftStudyInstance extends APINode {
       "created_time",
       "feature_list",
       "id",
+      "issuer_certificate",
       "latest_status_update_time",
+      "run_id",
+      "server_hostnames",
       "server_ips",
       "status",
       "tier",
@@ -461,11 +482,32 @@ public class PrivateLiftStudyInstance extends APINode {
       this.requestField("id", value);
       return this;
     }
+    public APIRequestGet requestIssuerCertificateField () {
+      return this.requestIssuerCertificateField(true);
+    }
+    public APIRequestGet requestIssuerCertificateField (boolean value) {
+      this.requestField("issuer_certificate", value);
+      return this;
+    }
     public APIRequestGet requestLatestStatusUpdateTimeField () {
       return this.requestLatestStatusUpdateTimeField(true);
     }
     public APIRequestGet requestLatestStatusUpdateTimeField (boolean value) {
       this.requestField("latest_status_update_time", value);
+      return this;
+    }
+    public APIRequestGet requestRunIdField () {
+      return this.requestRunIdField(true);
+    }
+    public APIRequestGet requestRunIdField (boolean value) {
+      this.requestField("run_id", value);
+      return this;
+    }
+    public APIRequestGet requestServerHostnamesField () {
+      return this.requestServerHostnamesField(true);
+    }
+    public APIRequestGet requestServerHostnamesField (boolean value) {
+      this.requestField("server_hostnames", value);
       return this;
     }
     public APIRequestGet requestServerIpsField () {
@@ -608,6 +650,8 @@ public class PrivateLiftStudyInstance extends APINode {
   public static enum EnumOperation {
       @SerializedName("AGGREGATE")
       VALUE_AGGREGATE("AGGREGATE"),
+      @SerializedName("CANCEL")
+      VALUE_CANCEL("CANCEL"),
       @SerializedName("COMPUTE")
       VALUE_COMPUTE("COMPUTE"),
       @SerializedName("ID_MATCH")
@@ -649,7 +693,10 @@ public class PrivateLiftStudyInstance extends APINode {
     this.mCreatedTime = instance.mCreatedTime;
     this.mFeatureList = instance.mFeatureList;
     this.mId = instance.mId;
+    this.mIssuerCertificate = instance.mIssuerCertificate;
     this.mLatestStatusUpdateTime = instance.mLatestStatusUpdateTime;
+    this.mRunId = instance.mRunId;
+    this.mServerHostnames = instance.mServerHostnames;
     this.mServerIps = instance.mServerIps;
     this.mStatus = instance.mStatus;
     this.mTier = instance.mTier;
