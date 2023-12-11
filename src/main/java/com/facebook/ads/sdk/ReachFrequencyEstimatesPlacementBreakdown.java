@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -61,6 +46,12 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
   private List<Double> mAudienceNetwork = null;
   @SerializedName("desktop")
   private List<Double> mDesktop = null;
+  @SerializedName("facebook_search")
+  private List<Double> mFacebookSearch = null;
+  @SerializedName("fb_reels")
+  private List<Double> mFbReels = null;
+  @SerializedName("fb_reels_overlay")
+  private List<Double> mFbReelsOverlay = null;
   @SerializedName("ig_android")
   private List<Double> mIgAndroid = null;
   @SerializedName("ig_ios")
@@ -259,6 +250,33 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     return this;
   }
 
+  public List<Double> getFieldFacebookSearch() {
+    return mFacebookSearch;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFacebookSearch(List<Double> value) {
+    this.mFacebookSearch = value;
+    return this;
+  }
+
+  public List<Double> getFieldFbReels() {
+    return mFbReels;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFbReels(List<Double> value) {
+    this.mFbReels = value;
+    return this;
+  }
+
+  public List<Double> getFieldFbReelsOverlay() {
+    return mFbReelsOverlay;
+  }
+
+  public ReachFrequencyEstimatesPlacementBreakdown setFieldFbReelsOverlay(List<Double> value) {
+    this.mFbReelsOverlay = value;
+    return this;
+  }
+
   public List<Double> getFieldIgAndroid() {
     return mIgAndroid;
   }
@@ -369,6 +387,9 @@ public class ReachFrequencyEstimatesPlacementBreakdown extends APINode {
     this.mAndroid = instance.mAndroid;
     this.mAudienceNetwork = instance.mAudienceNetwork;
     this.mDesktop = instance.mDesktop;
+    this.mFacebookSearch = instance.mFacebookSearch;
+    this.mFbReels = instance.mFbReels;
+    this.mFbReelsOverlay = instance.mFbReelsOverlay;
     this.mIgAndroid = instance.mIgAndroid;
     this.mIgIos = instance.mIgIos;
     this.mIgOther = instance.mIgOther;

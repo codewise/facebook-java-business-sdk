@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -940,6 +925,7 @@ public class BusinessAssetGroup extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -955,6 +941,8 @@ public class BusinessAssetGroup extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -964,7 +952,6 @@ public class BusinessAssetGroup extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -998,6 +985,7 @@ public class BusinessAssetGroup extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -1127,6 +1115,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -1232,6 +1227,20 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetContainedAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetContainedAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1293,13 +1302,6 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetContainedAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetContainedAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestHasMigratedPermissionsField () {
@@ -1531,6 +1533,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetContainedAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetContainedAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetContainedAdAccounts requestUserTasksField () {
@@ -1812,6 +1821,8 @@ public class BusinessAssetGroup extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -1864,6 +1875,7 @@ public class BusinessAssetGroup extends APINode {
       "privacy_policy_url",
       "profile_section_url",
       "property_id",
+      "protected_mode_rules",
       "real_time_mode_devices",
       "restrictions",
       "restrictive_data_filter_params",
@@ -2153,6 +2165,20 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetContainedApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetContainedApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetContainedApplications requestBusinessField () {
@@ -2517,6 +2543,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedApplications requestPropertyIdField (boolean value) {
       this.requestField("property_id", value);
+      return this;
+    }
+    public APIRequestGetContainedApplications requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetContainedApplications requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
       return this;
     }
     public APIRequestGetContainedApplications requestRealTimeModeDevicesField () {
@@ -4432,6 +4465,7 @@ public class BusinessAssetGroup extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -4446,8 +4480,10 @@ public class BusinessAssetGroup extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -4455,11 +4491,11 @@ public class BusinessAssetGroup extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -4479,7 +4515,6 @@ public class BusinessAssetGroup extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -4492,6 +4527,7 @@ public class BusinessAssetGroup extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -4529,12 +4565,12 @@ public class BusinessAssetGroup extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -4892,6 +4928,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetContainedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetContainedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetContainedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -4990,6 +5033,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetContainedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetContainedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetContainedPages requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -5002,6 +5052,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetContainedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetContainedPages requestHasWhatsappNumberField () {
@@ -5053,13 +5110,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetContainedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetContainedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetContainedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -5086,6 +5136,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetContainedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetContainedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -5221,13 +5278,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetContainedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetContainedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetContainedPages requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -5310,6 +5360,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetContainedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetContainedPages requestPageTokenField () {
@@ -5571,13 +5628,6 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
-    public APIRequestGetContainedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetContainedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
-      return this;
-    }
     public APIRequestGetContainedPages requestTalkingAboutCountField () {
       return this.requestTalkingAboutCountField(true);
     }
@@ -5611,6 +5661,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedPages requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetContainedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetContainedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetContainedPages requestUsernameField () {
@@ -5926,6 +5983,7 @@ public class BusinessAssetGroup extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -6235,6 +6293,13 @@ public class BusinessAssetGroup extends APINode {
       this.requestField("usage", value);
       return this;
     }
+    public APIRequestGetContainedPixels requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetContainedPixels requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetContainedPixels requestValidEntriesField () {
       return this.requestValidEntriesField(true);
     }
@@ -6491,6 +6556,7 @@ public class BusinessAssetGroup extends APINode {
       "owner_business",
       "product_count",
       "store_catalog_settings",
+      "user_access_expire_time",
       "vertical",
     };
 
@@ -6693,6 +6759,13 @@ public class BusinessAssetGroup extends APINode {
     }
     public APIRequestGetContainedProductCatalogs requestStoreCatalogSettingsField (boolean value) {
       this.requestField("store_catalog_settings", value);
+      return this;
+    }
+    public APIRequestGetContainedProductCatalogs requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetContainedProductCatalogs requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetContainedProductCatalogs requestVerticalField () {

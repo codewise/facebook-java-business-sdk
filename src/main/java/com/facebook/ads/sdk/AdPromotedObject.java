@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPromotedObject extends APINode {
   @SerializedName("application_id")
   private String mApplicationId = null;
+  @SerializedName("conversion_goal_id")
+  private String mConversionGoalId = null;
   @SerializedName("custom_conversion_id")
   private String mCustomConversionId = null;
   @SerializedName("custom_event_str")
@@ -75,6 +62,8 @@ public class AdPromotedObject extends APINode {
   private String mOfferId = null;
   @SerializedName("offline_conversion_data_set_id")
   private String mOfflineConversionDataSetId = null;
+  @SerializedName("offsite_conversion_event_id")
+  private String mOffsiteConversionEventId = null;
   @SerializedName("omnichannel_object")
   private Object mOmnichannelObject = null;
   @SerializedName("page_id")
@@ -85,6 +74,8 @@ public class AdPromotedObject extends APINode {
   private String mPixelId = null;
   @SerializedName("pixel_rule")
   private String mPixelRule = null;
+  @SerializedName("place_page_set")
+  private AdPlacePageSet mPlacePageSet = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("product_catalog_id")
@@ -255,6 +246,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldConversionGoalId() {
+    return mConversionGoalId;
+  }
+
+  public AdPromotedObject setFieldConversionGoalId(String value) {
+    this.mConversionGoalId = value;
+    return this;
+  }
+
   public String getFieldCustomConversionId() {
     return mCustomConversionId;
   }
@@ -336,6 +336,15 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public String getFieldOffsiteConversionEventId() {
+    return mOffsiteConversionEventId;
+  }
+
+  public AdPromotedObject setFieldOffsiteConversionEventId(String value) {
+    this.mOffsiteConversionEventId = value;
+    return this;
+  }
+
   public Object getFieldOmnichannelObject() {
     return mOmnichannelObject;
   }
@@ -381,6 +390,23 @@ public class AdPromotedObject extends APINode {
     return this;
   }
 
+  public AdPlacePageSet getFieldPlacePageSet() {
+    if (mPlacePageSet != null) {
+      mPlacePageSet.context = getContext();
+    }
+    return mPlacePageSet;
+  }
+
+  public AdPromotedObject setFieldPlacePageSet(AdPlacePageSet value) {
+    this.mPlacePageSet = value;
+    return this;
+  }
+
+  public AdPromotedObject setFieldPlacePageSet(String value) {
+    Type type = new TypeToken<AdPlacePageSet>(){}.getType();
+    this.mPlacePageSet = AdPlacePageSet.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
@@ -437,6 +463,8 @@ public class AdPromotedObject extends APINode {
       VALUE_ADD_TO_CART("ADD_TO_CART"),
       @SerializedName("ADD_TO_WISHLIST")
       VALUE_ADD_TO_WISHLIST("ADD_TO_WISHLIST"),
+      @SerializedName("AD_IMPRESSION")
+      VALUE_AD_IMPRESSION("AD_IMPRESSION"),
       @SerializedName("COMPLETE_REGISTRATION")
       VALUE_COMPLETE_REGISTRATION("COMPLETE_REGISTRATION"),
       @SerializedName("CONTACT")
@@ -515,6 +543,7 @@ public class AdPromotedObject extends APINode {
 
   public AdPromotedObject copyFrom(AdPromotedObject instance) {
     this.mApplicationId = instance.mApplicationId;
+    this.mConversionGoalId = instance.mConversionGoalId;
     this.mCustomConversionId = instance.mCustomConversionId;
     this.mCustomEventStr = instance.mCustomEventStr;
     this.mCustomEventType = instance.mCustomEventType;
@@ -524,11 +553,13 @@ public class AdPromotedObject extends APINode {
     this.mObjectStoreUrl = instance.mObjectStoreUrl;
     this.mOfferId = instance.mOfferId;
     this.mOfflineConversionDataSetId = instance.mOfflineConversionDataSetId;
+    this.mOffsiteConversionEventId = instance.mOffsiteConversionEventId;
     this.mOmnichannelObject = instance.mOmnichannelObject;
     this.mPageId = instance.mPageId;
     this.mPixelAggregationRule = instance.mPixelAggregationRule;
     this.mPixelId = instance.mPixelId;
     this.mPixelRule = instance.mPixelRule;
+    this.mPlacePageSet = instance.mPlacePageSet;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mProductCatalogId = instance.mProductCatalogId;
     this.mProductItemId = instance.mProductItemId;

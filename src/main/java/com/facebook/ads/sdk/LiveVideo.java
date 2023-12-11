@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -88,7 +73,7 @@ public class LiveVideo extends APINode {
   @SerializedName("overlay_url")
   private String mOverlayUrl = null;
   @SerializedName("permalink_url")
-  private Object mPermalinkUrl = null;
+  private String mPermalinkUrl = null;
   @SerializedName("planned_start_time")
   private String mPlannedStartTime = null;
   @SerializedName("recommended_encoder_settings")
@@ -434,7 +419,7 @@ public class LiveVideo extends APINode {
     return mOverlayUrl;
   }
 
-  public Object getFieldPermalinkUrl() {
+  public String getFieldPermalinkUrl() {
     return mPermalinkUrl;
   }
 
@@ -497,7 +482,9 @@ public class LiveVideo extends APINode {
     public static final String[] FIELDS = {
       "about",
       "age_range",
+      "avatar_2d_profile_picture",
       "birthday",
+      "community",
       "cover",
       "currency",
       "education",
@@ -513,6 +500,7 @@ public class LiveVideo extends APINode {
       "install_type",
       "installed",
       "is_guest_user",
+      "is_work_account",
       "languages",
       "last_name",
       "link",
@@ -596,10 +584,6 @@ public class LiveVideo extends APINode {
     }
 
 
-    public APIRequestGetBlockedUsers setUid (Object uid) {
-      this.setParam("uid", uid);
-      return this;
-    }
     public APIRequestGetBlockedUsers setUid (String uid) {
       this.setParam("uid", uid);
       return this;
@@ -655,11 +639,25 @@ public class LiveVideo extends APINode {
       this.requestField("age_range", value);
       return this;
     }
+    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField () {
+      return this.requestAvatar2dProfilePictureField(true);
+    }
+    public APIRequestGetBlockedUsers requestAvatar2dProfilePictureField (boolean value) {
+      this.requestField("avatar_2d_profile_picture", value);
+      return this;
+    }
     public APIRequestGetBlockedUsers requestBirthdayField () {
       return this.requestBirthdayField(true);
     }
     public APIRequestGetBlockedUsers requestBirthdayField (boolean value) {
       this.requestField("birthday", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestCommunityField () {
+      return this.requestCommunityField(true);
+    }
+    public APIRequestGetBlockedUsers requestCommunityField (boolean value) {
+      this.requestField("community", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestCoverField () {
@@ -765,6 +763,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetBlockedUsers requestIsGuestUserField (boolean value) {
       this.requestField("is_guest_user", value);
+      return this;
+    }
+    public APIRequestGetBlockedUsers requestIsWorkAccountField () {
+      return this.requestIsWorkAccountField(true);
+    }
+    public APIRequestGetBlockedUsers requestIsWorkAccountField (boolean value) {
+      this.requestField("is_work_account", value);
       return this;
     }
     public APIRequestGetBlockedUsers requestLanguagesField () {
@@ -1337,6 +1342,7 @@ public class LiveVideo extends APINode {
       "directed_by",
       "display_subtext",
       "displayed_message_response_time",
+      "does_viewer_have_page_permission_link_ig",
       "emails",
       "engagement",
       "fan_count",
@@ -1351,8 +1357,10 @@ public class LiveVideo extends APINode {
       "global_brand_page_name",
       "global_brand_root_id",
       "has_added_app",
+      "has_lead_access",
       "has_transitioned_to_new_page_experience",
       "has_whatsapp_business_number",
+      "has_whatsapp_enterprise_number_using_cloud_api",
       "has_whatsapp_number",
       "hometown",
       "hours",
@@ -1360,11 +1368,11 @@ public class LiveVideo extends APINode {
       "impressum",
       "influences",
       "instagram_business_account",
-      "instant_articles_review_status",
       "is_always_open",
       "is_chain",
       "is_community_page",
       "is_eligible_for_branded_content",
+      "is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web",
       "is_messenger_bot_get_started_enabled",
       "is_messenger_platform_bot",
       "is_owned",
@@ -1384,7 +1392,6 @@ public class LiveVideo extends APINode {
       "merchant_review_status",
       "messaging_feature_status",
       "messenger_ads_default_icebreakers",
-      "messenger_ads_default_page_welcome_message",
       "messenger_ads_default_quick_replies",
       "messenger_ads_quick_replies_type",
       "mini_shop_storefront",
@@ -1397,6 +1404,7 @@ public class LiveVideo extends APINode {
       "offer_eligible",
       "overall_star_rating",
       "owner_business",
+      "page_about_story",
       "page_token",
       "parent_page",
       "parking",
@@ -1434,12 +1442,12 @@ public class LiveVideo extends APINode {
       "store_number",
       "studio",
       "supports_donate_button_in_live_video",
-      "supports_instant_articles",
       "talking_about_count",
       "temporary_status",
       "unread_message_count",
       "unread_notif_count",
       "unseen_message_count",
+      "user_access_expire_time",
       "username",
       "verification_status",
       "voip_info",
@@ -1797,6 +1805,13 @@ public class LiveVideo extends APINode {
       this.requestField("displayed_message_response_time", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestDoesViewerHavePagePermissionLinkIgField () {
+      return this.requestDoesViewerHavePagePermissionLinkIgField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestDoesViewerHavePagePermissionLinkIgField (boolean value) {
+      this.requestField("does_viewer_have_page_permission_link_ig", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestEmailsField () {
       return this.requestEmailsField(true);
     }
@@ -1895,6 +1910,13 @@ public class LiveVideo extends APINode {
       this.requestField("has_added_app", value);
       return this;
     }
+    public APIRequestGetCrosspostSharedPages requestHasLeadAccessField () {
+      return this.requestHasLeadAccessField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasLeadAccessField (boolean value) {
+      this.requestField("has_lead_access", value);
+      return this;
+    }
     public APIRequestGetCrosspostSharedPages requestHasTransitionedToNewPageExperienceField () {
       return this.requestHasTransitionedToNewPageExperienceField(true);
     }
@@ -1907,6 +1929,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappBusinessNumberField (boolean value) {
       this.requestField("has_whatsapp_business_number", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField () {
+      return this.requestHasWhatsappEnterpriseNumberUsingCloudApiField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestHasWhatsappEnterpriseNumberUsingCloudApiField (boolean value) {
+      this.requestField("has_whatsapp_enterprise_number_using_cloud_api", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestHasWhatsappNumberField () {
@@ -1958,13 +1987,6 @@ public class LiveVideo extends APINode {
       this.requestField("instagram_business_account", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField () {
-      return this.requestInstantArticlesReviewStatusField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestInstantArticlesReviewStatusField (boolean value) {
-      this.requestField("instant_articles_review_status", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestIsAlwaysOpenField () {
       return this.requestIsAlwaysOpenField(true);
     }
@@ -1991,6 +2013,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestIsEligibleForBrandedContentField (boolean value) {
       this.requestField("is_eligible_for_branded_content", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField () {
+      return this.requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestIsEligibleForDisableConnectIgBtnForNonPageAdminAmWebField (boolean value) {
+      this.requestField("is_eligible_for_disable_connect_ig_btn_for_non_page_admin_am_web", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestIsMessengerBotGetStartedEnabledField () {
@@ -2126,13 +2155,6 @@ public class LiveVideo extends APINode {
       this.requestField("messenger_ads_default_icebreakers", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultPageWelcomeMessageField () {
-      return this.requestMessengerAdsDefaultPageWelcomeMessageField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultPageWelcomeMessageField (boolean value) {
-      this.requestField("messenger_ads_default_page_welcome_message", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestMessengerAdsDefaultQuickRepliesField () {
       return this.requestMessengerAdsDefaultQuickRepliesField(true);
     }
@@ -2215,6 +2237,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestOwnerBusinessField (boolean value) {
       this.requestField("owner_business", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField () {
+      return this.requestPageAboutStoryField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestPageAboutStoryField (boolean value) {
+      this.requestField("page_about_story", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestPageTokenField () {
@@ -2476,13 +2505,6 @@ public class LiveVideo extends APINode {
       this.requestField("supports_donate_button_in_live_video", value);
       return this;
     }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField () {
-      return this.requestSupportsInstantArticlesField(true);
-    }
-    public APIRequestGetCrosspostSharedPages requestSupportsInstantArticlesField (boolean value) {
-      this.requestField("supports_instant_articles", value);
-      return this;
-    }
     public APIRequestGetCrosspostSharedPages requestTalkingAboutCountField () {
       return this.requestTalkingAboutCountField(true);
     }
@@ -2516,6 +2538,13 @@ public class LiveVideo extends APINode {
     }
     public APIRequestGetCrosspostSharedPages requestUnseenMessageCountField (boolean value) {
       this.requestField("unseen_message_count", value);
+      return this;
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetCrosspostSharedPages requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetCrosspostSharedPages requestUsernameField () {

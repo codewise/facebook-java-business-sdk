@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -81,6 +66,8 @@ public class AdSet extends APINode {
   private String mBudgetRemaining = null;
   @SerializedName("campaign")
   private Campaign mCampaign = null;
+  @SerializedName("campaign_active_time")
+  private String mCampaignActiveTime = null;
   @SerializedName("campaign_attribution")
   private String mCampaignAttribution = null;
   @SerializedName("campaign_id")
@@ -99,6 +86,10 @@ public class AdSet extends APINode {
   private String mDailySpendCap = null;
   @SerializedName("destination_type")
   private String mDestinationType = null;
+  @SerializedName("dsa_beneficiary")
+  private String mDsaBeneficiary = null;
+  @SerializedName("dsa_payor")
+  private String mDsaPayor = null;
   @SerializedName("effective_status")
   private EnumEffectiveStatus mEffectiveStatus = null;
   @SerializedName("end_time")
@@ -113,6 +104,8 @@ public class AdSet extends APINode {
   private String mId = null;
   @SerializedName("instagram_actor_id")
   private String mInstagramActorId = null;
+  @SerializedName("is_budget_schedule_enabled")
+  private Boolean mIsBudgetScheduleEnabled = null;
   @SerializedName("is_dynamic_creative")
   private Boolean mIsDynamicCreative = null;
   @SerializedName("issues_info")
@@ -158,7 +151,7 @@ public class AdSet extends APINode {
   @SerializedName("targeting")
   private Targeting mTargeting = null;
   @SerializedName("targeting_optimization_types")
-  private Map<String, Long> mTargetingOptimizationTypes = null;
+  private List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> mTargetingOptimizationTypes = null;
   @SerializedName("time_based_ad_rotation_id_blocks")
   private List<List<Long>> mTimeBasedAdRotationIdBlocks = null;
   @SerializedName("time_based_ad_rotation_intervals")
@@ -408,6 +401,10 @@ public class AdSet extends APINode {
     return new APIRequestGetAsyncAdRequests(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestCreateBudgetSchedule createBudgetSchedule() {
+    return new APIRequestCreateBudgetSchedule(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCopies getCopies() {
     return new APIRequestGetCopies(this.getPrefixedId().toString(), context);
   }
@@ -595,6 +592,15 @@ public class AdSet extends APINode {
     this.mCampaign = Campaign.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldCampaignActiveTime() {
+    return mCampaignActiveTime;
+  }
+
+  public AdSet setFieldCampaignActiveTime(String value) {
+    this.mCampaignActiveTime = value;
+    return this;
+  }
+
   public String getFieldCampaignAttribution() {
     return mCampaignAttribution;
   }
@@ -676,6 +682,24 @@ public class AdSet extends APINode {
     return this;
   }
 
+  public String getFieldDsaBeneficiary() {
+    return mDsaBeneficiary;
+  }
+
+  public AdSet setFieldDsaBeneficiary(String value) {
+    this.mDsaBeneficiary = value;
+    return this;
+  }
+
+  public String getFieldDsaPayor() {
+    return mDsaPayor;
+  }
+
+  public AdSet setFieldDsaPayor(String value) {
+    this.mDsaPayor = value;
+    return this;
+  }
+
   public EnumEffectiveStatus getFieldEffectiveStatus() {
     return mEffectiveStatus;
   }
@@ -741,6 +765,15 @@ public class AdSet extends APINode {
 
   public AdSet setFieldInstagramActorId(String value) {
     this.mInstagramActorId = value;
+    return this;
+  }
+
+  public Boolean getFieldIsBudgetScheduleEnabled() {
+    return mIsBudgetScheduleEnabled;
+  }
+
+  public AdSet setFieldIsBudgetScheduleEnabled(Boolean value) {
+    this.mIsBudgetScheduleEnabled = value;
     return this;
   }
 
@@ -975,11 +1008,11 @@ public class AdSet extends APINode {
     this.mTargeting = Targeting.getGson().fromJson(value, type);
     return this;
   }
-  public Map<String, Long> getFieldTargetingOptimizationTypes() {
+  public List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> getFieldTargetingOptimizationTypes() {
     return mTargetingOptimizationTypes;
   }
 
-  public AdSet setFieldTargetingOptimizationTypes(Map<String, Long> value) {
+  public AdSet setFieldTargetingOptimizationTypes(List<com.facebook.ads.sdk.customtype.TargetingOptimizationTuple> value) {
     this.mTargetingOptimizationTypes = value;
     return this;
   }
@@ -1543,12 +1576,14 @@ public class AdSet extends APINode {
       "authorization_category",
       "auto_update",
       "body",
+      "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -1558,11 +1593,13 @@ public class AdSet extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "facebook_branded_content",
       "id",
       "image_crops",
       "image_hash",
       "image_url",
       "instagram_actor_id",
+      "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_story_id",
       "instagram_user_id",
@@ -1580,6 +1617,7 @@ public class AdSet extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -1743,6 +1781,13 @@ public class AdSet extends APINode {
       this.requestField("body", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestBrandedContentField () {
+      return this.requestBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentField (boolean value) {
+      this.requestField("branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
       return this.requestBrandedContentSponsorPageIdField(true);
     }
@@ -1783,6 +1828,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
@@ -1848,6 +1900,13 @@ public class AdSet extends APINode {
       this.requestField("enable_launch_instant_app", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
+      return this.requestFacebookBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
+      this.requestField("facebook_branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestIdField () {
       return this.requestIdField(true);
     }
@@ -1881,6 +1940,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
+      return this.requestInstagramBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField (boolean value) {
+      this.requestField("instagram_branded_content", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField () {
@@ -2000,6 +2066,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
@@ -2574,7 +2647,10 @@ public class AdSet extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -2680,7 +2756,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetAds setTimeRange (Object timeRange) {
+    public APIRequestGetAds setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2741,11 +2817,32 @@ public class AdSet extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetAds requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetAds requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetAds requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetAds requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetAds requestAdlabelsField () {
@@ -3160,6 +3257,150 @@ public class AdSet extends APINode {
     }
   }
 
+  public static class APIRequestCreateBudgetSchedule extends APIRequest<HighDemandPeriod> {
+
+    HighDemandPeriod lastResponse = null;
+    @Override
+    public HighDemandPeriod getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+      "budget_value",
+      "budget_value_type",
+      "time_end",
+      "time_start",
+    };
+
+    public static final String[] FIELDS = {
+    };
+
+    @Override
+    public HighDemandPeriod parseResponse(String response, String header) throws APIException {
+      return HighDemandPeriod.parseResponse(response, getContext(), this, header).head();
+    }
+
+    @Override
+    public HighDemandPeriod execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public HighDemandPeriod execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<HighDemandPeriod> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<HighDemandPeriod> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, HighDemandPeriod>() {
+           public HighDemandPeriod apply(ResponseWrapper result) {
+             try {
+               return APIRequestCreateBudgetSchedule.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestCreateBudgetSchedule(String nodeId, APIContext context) {
+      super(context, nodeId, "/budget_schedules", "POST", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestCreateBudgetSchedule setBudgetValue (Long budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValue (String budgetValue) {
+      this.setParam("budget_value", budgetValue);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setBudgetValueType (HighDemandPeriod.EnumBudgetValueType budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setBudgetValueType (String budgetValueType) {
+      this.setParam("budget_value_type", budgetValueType);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeEnd (Long timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeEnd (String timeEnd) {
+      this.setParam("time_end", timeEnd);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule setTimeStart (Long timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+    public APIRequestCreateBudgetSchedule setTimeStart (String timeStart) {
+      this.setParam("time_start", timeStart);
+      return this;
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestCreateBudgetSchedule requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestCreateBudgetSchedule requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+  }
+
   public static class APIRequestGetCopies extends APIRequest<AdSet> {
 
     APINodeList<AdSet> lastResponse = null;
@@ -3188,6 +3429,7 @@ public class AdSet extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_active_time",
       "campaign_attribution",
       "campaign_id",
       "configured_status",
@@ -3197,6 +3439,8 @@ public class AdSet extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -3204,6 +3448,7 @@ public class AdSet extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
       "learning_stage_info",
@@ -3313,7 +3558,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setTimeRange (Object timeRange) {
+    public APIRequestGetCopies setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -3449,6 +3694,13 @@ public class AdSet extends APINode {
       this.requestField("campaign", value);
       return this;
     }
+    public APIRequestGetCopies requestCampaignActiveTimeField () {
+      return this.requestCampaignActiveTimeField(true);
+    }
+    public APIRequestGetCopies requestCampaignActiveTimeField (boolean value) {
+      this.requestField("campaign_active_time", value);
+      return this;
+    }
     public APIRequestGetCopies requestCampaignAttributionField () {
       return this.requestCampaignAttributionField(true);
     }
@@ -3512,6 +3764,20 @@ public class AdSet extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGetCopies requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetCopies requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetCopies requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetCopies requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGetCopies requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -3559,6 +3825,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGetCopies requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetCopies requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetCopies requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetCopies requestIsDynamicCreativeField () {
@@ -4324,7 +4597,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Object timeRange) {
+    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -4333,7 +4606,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -4626,7 +4899,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -4635,7 +4908,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -4960,6 +5233,7 @@ public class AdSet extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_active_time",
       "campaign_attribution",
       "campaign_id",
       "configured_status",
@@ -4969,6 +5243,8 @@ public class AdSet extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -4976,6 +5252,7 @@ public class AdSet extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
       "learning_stage_info",
@@ -5085,7 +5362,7 @@ public class AdSet extends APINode {
       return this;
     }
 
-    public APIRequestGet setTimeRange (Object timeRange) {
+    public APIRequestGet setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -5221,6 +5498,13 @@ public class AdSet extends APINode {
       this.requestField("campaign", value);
       return this;
     }
+    public APIRequestGet requestCampaignActiveTimeField () {
+      return this.requestCampaignActiveTimeField(true);
+    }
+    public APIRequestGet requestCampaignActiveTimeField (boolean value) {
+      this.requestField("campaign_active_time", value);
+      return this;
+    }
     public APIRequestGet requestCampaignAttributionField () {
       return this.requestCampaignAttributionField(true);
     }
@@ -5284,6 +5568,20 @@ public class AdSet extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGet requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGet requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGet requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGet requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGet requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -5331,6 +5629,13 @@ public class AdSet extends APINode {
     }
     public APIRequestGet requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGet requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGet requestIsDynamicCreativeField () {
@@ -5541,6 +5846,7 @@ public class AdSet extends APINode {
       "bid_constraints",
       "bid_strategy",
       "billing_event",
+      "campaign_attribution",
       "campaign_spec",
       "creative_sequence",
       "daily_budget",
@@ -5549,6 +5855,8 @@ public class AdSet extends APINode {
       "daily_spend_cap",
       "date_format",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "end_time",
       "execution_options",
       "existing_customer_budget_percentage",
@@ -5573,7 +5881,6 @@ public class AdSet extends APINode {
       "time_start",
       "time_stop",
       "tune_for_category",
-      "upstream_events",
     };
 
     public static final String[] FIELDS = {
@@ -5709,6 +6016,15 @@ public class AdSet extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setCampaignAttribution (Object campaignAttribution) {
+      this.setParam("campaign_attribution", campaignAttribution);
+      return this;
+    }
+    public APIRequestUpdate setCampaignAttribution (String campaignAttribution) {
+      this.setParam("campaign_attribution", campaignAttribution);
+      return this;
+    }
+
     public APIRequestUpdate setCampaignSpec (Object campaignSpec) {
       this.setParam("campaign_spec", campaignSpec);
       return this;
@@ -5774,6 +6090,16 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setDestinationType (String destinationType) {
       this.setParam("destination_type", destinationType);
+      return this;
+    }
+
+    public APIRequestUpdate setDsaBeneficiary (String dsaBeneficiary) {
+      this.setParam("dsa_beneficiary", dsaBeneficiary);
+      return this;
+    }
+
+    public APIRequestUpdate setDsaPayor (String dsaPayor) {
+      this.setParam("dsa_payor", dsaPayor);
       return this;
     }
 
@@ -5962,15 +6288,6 @@ public class AdSet extends APINode {
     }
     public APIRequestUpdate setTuneForCategory (String tuneForCategory) {
       this.setParam("tune_for_category", tuneForCategory);
-      return this;
-    }
-
-    public APIRequestUpdate setUpstreamEvents (Map<String, String> upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
-      return this;
-    }
-    public APIRequestUpdate setUpstreamEvents (String upstreamEvents) {
-      this.setParam("upstream_events", upstreamEvents);
       return this;
     }
 
@@ -6165,6 +6482,10 @@ public class AdSet extends APINode {
       VALUE_QUALITY_LEAD("QUALITY_LEAD"),
       @SerializedName("REACH")
       VALUE_REACH("REACH"),
+      @SerializedName("REMINDERS_SET")
+      VALUE_REMINDERS_SET("REMINDERS_SET"),
+      @SerializedName("SUBSCRIBERS")
+      VALUE_SUBSCRIBERS("SUBSCRIBERS"),
       @SerializedName("THRUPLAY")
       VALUE_THRUPLAY("THRUPLAY"),
       @SerializedName("VALUE")
@@ -6483,6 +6804,7 @@ public class AdSet extends APINode {
     this.mBillingEvent = instance.mBillingEvent;
     this.mBudgetRemaining = instance.mBudgetRemaining;
     this.mCampaign = instance.mCampaign;
+    this.mCampaignActiveTime = instance.mCampaignActiveTime;
     this.mCampaignAttribution = instance.mCampaignAttribution;
     this.mCampaignId = instance.mCampaignId;
     this.mConfiguredStatus = instance.mConfiguredStatus;
@@ -6492,6 +6814,8 @@ public class AdSet extends APINode {
     this.mDailyMinSpendTarget = instance.mDailyMinSpendTarget;
     this.mDailySpendCap = instance.mDailySpendCap;
     this.mDestinationType = instance.mDestinationType;
+    this.mDsaBeneficiary = instance.mDsaBeneficiary;
+    this.mDsaPayor = instance.mDsaPayor;
     this.mEffectiveStatus = instance.mEffectiveStatus;
     this.mEndTime = instance.mEndTime;
     this.mExistingCustomerBudgetPercentage = instance.mExistingCustomerBudgetPercentage;
@@ -6499,6 +6823,7 @@ public class AdSet extends APINode {
     this.mFullFunnelExplorationMode = instance.mFullFunnelExplorationMode;
     this.mId = instance.mId;
     this.mInstagramActorId = instance.mInstagramActorId;
+    this.mIsBudgetScheduleEnabled = instance.mIsBudgetScheduleEnabled;
     this.mIsDynamicCreative = instance.mIsDynamicCreative;
     this.mIssuesInfo = instance.mIssuesInfo;
     this.mLearningStageInfo = instance.mLearningStageInfo;

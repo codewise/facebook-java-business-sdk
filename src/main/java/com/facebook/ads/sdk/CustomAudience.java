@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -686,6 +671,7 @@ public class CustomAudience extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -701,6 +687,8 @@ public class CustomAudience extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -710,7 +698,6 @@ public class CustomAudience extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -744,6 +731,7 @@ public class CustomAudience extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -878,6 +866,13 @@ public class CustomAudience extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -983,6 +978,20 @@ public class CustomAudience extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -1044,13 +1053,6 @@ public class CustomAudience extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -1284,6 +1286,13 @@ public class CustomAudience extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1461,7 +1470,10 @@ public class CustomAudience extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -1610,11 +1622,32 @@ public class CustomAudience extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetAds requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetAds requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetAds requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetAds requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetAds requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetAds requestAdlabelsField () {
@@ -3120,6 +3153,7 @@ public class CustomAudience extends APINode {
       "rule",
       "rule_aggregation",
       "tags",
+      "use_in_campaigns",
     };
 
     public static final String[] FIELDS = {
@@ -3331,6 +3365,15 @@ public class CustomAudience extends APINode {
       return this;
     }
 
+    public APIRequestUpdate setUseInCampaigns (Boolean useInCampaigns) {
+      this.setParam("use_in_campaigns", useInCampaigns);
+      return this;
+    }
+    public APIRequestUpdate setUseInCampaigns (String useInCampaigns) {
+      this.setParam("use_in_campaigns", useInCampaigns);
+      return this;
+    }
+
     public APIRequestUpdate requestAllFields () {
       return this.requestAllFields(true);
     }
@@ -3467,6 +3510,8 @@ public class CustomAudience extends APINode {
       VALUE_APP("APP"),
       @SerializedName("BAG_OF_ACCOUNTS")
       VALUE_BAG_OF_ACCOUNTS("BAG_OF_ACCOUNTS"),
+      @SerializedName("BIDDING")
+      VALUE_BIDDING("BIDDING"),
       @SerializedName("CLAIM")
       VALUE_CLAIM("CLAIM"),
       @SerializedName("CUSTOM")
@@ -3485,10 +3530,14 @@ public class CustomAudience extends APINode {
       VALUE_OFFLINE_CONVERSION("OFFLINE_CONVERSION"),
       @SerializedName("PARTNER")
       VALUE_PARTNER("PARTNER"),
+      @SerializedName("PRIMARY")
+      VALUE_PRIMARY("PRIMARY"),
       @SerializedName("REGULATED_CATEGORIES_AUDIENCE")
       VALUE_REGULATED_CATEGORIES_AUDIENCE("REGULATED_CATEGORIES_AUDIENCE"),
       @SerializedName("STUDY_RULE_AUDIENCE")
       VALUE_STUDY_RULE_AUDIENCE("STUDY_RULE_AUDIENCE"),
+      @SerializedName("SUBSCRIBER_SEGMENT")
+      VALUE_SUBSCRIBER_SEGMENT("SUBSCRIBER_SEGMENT"),
       @SerializedName("VIDEO")
       VALUE_VIDEO("VIDEO"),
       @SerializedName("WEBSITE")

@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -352,10 +337,6 @@ public class OfflineConversionDataSet extends APINode {
     return new APIRequestGetCustomConversions(this.getPrefixedId().toString(), context);
   }
 
-  public APIRequestCreateEvent createEvent() {
-    return new APIRequestCreateEvent(this.getPrefixedId().toString(), context);
-  }
-
   public APIRequestGetServerEventsPermittedBusiness getServerEventsPermittedBusiness() {
     return new APIRequestGetServerEventsPermittedBusiness(this.getPrefixedId().toString(), context);
   }
@@ -556,6 +537,7 @@ public class OfflineConversionDataSet extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -571,6 +553,8 @@ public class OfflineConversionDataSet extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -580,7 +564,6 @@ public class OfflineConversionDataSet extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -614,6 +597,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -748,6 +732,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -853,6 +844,20 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -914,13 +919,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -1154,6 +1152,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -1331,6 +1336,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -1542,6 +1548,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAgencies requestVerificationStatusField () {
@@ -2397,154 +2410,6 @@ public class OfflineConversionDataSet extends APINode {
     }
   }
 
-  public static class APIRequestCreateEvent extends APIRequest<APINode> {
-
-    APINode lastResponse = null;
-    @Override
-    public APINode getLastResponse() {
-      return lastResponse;
-    }
-    public static final String[] PARAMS = {
-      "data",
-      "namespace_id",
-      "progress",
-      "upload_id",
-      "upload_source",
-      "upload_tag",
-    };
-
-    public static final String[] FIELDS = {
-    };
-
-    @Override
-    public APINode parseResponse(String response, String header) throws APIException {
-      return APINode.parseResponse(response, getContext(), this, header).head();
-    }
-
-    @Override
-    public APINode execute() throws APIException {
-      return execute(new HashMap<String, Object>());
-    }
-
-    @Override
-    public APINode execute(Map<String, Object> extraParams) throws APIException {
-      ResponseWrapper rw = executeInternal(extraParams);
-      lastResponse = parseResponse(rw.getBody(), rw.getHeader());
-      return lastResponse;
-    }
-
-    public ListenableFuture<APINode> executeAsync() throws APIException {
-      return executeAsync(new HashMap<String, Object>());
-    };
-
-    public ListenableFuture<APINode> executeAsync(Map<String, Object> extraParams) throws APIException {
-      return Futures.transform(
-        executeAsyncInternal(extraParams),
-        new Function<ResponseWrapper, APINode>() {
-           public APINode apply(ResponseWrapper result) {
-             try {
-               return APIRequestCreateEvent.this.parseResponse(result.getBody(), result.getHeader());
-             } catch (Exception e) {
-               throw new RuntimeException(e);
-             }
-           }
-         }
-      );
-    };
-
-    public APIRequestCreateEvent(String nodeId, APIContext context) {
-      super(context, nodeId, "/events", "POST", Arrays.asList(PARAMS));
-    }
-
-    @Override
-    public APIRequestCreateEvent setParam(String param, Object value) {
-      setParamInternal(param, value);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent setParams(Map<String, Object> params) {
-      setParamsInternal(params);
-      return this;
-    }
-
-
-    public APIRequestCreateEvent setData (List<String> data) {
-      this.setParam("data", data);
-      return this;
-    }
-    public APIRequestCreateEvent setData (String data) {
-      this.setParam("data", data);
-      return this;
-    }
-
-    public APIRequestCreateEvent setNamespaceId (String namespaceId) {
-      this.setParam("namespace_id", namespaceId);
-      return this;
-    }
-
-    public APIRequestCreateEvent setProgress (Object progress) {
-      this.setParam("progress", progress);
-      return this;
-    }
-    public APIRequestCreateEvent setProgress (String progress) {
-      this.setParam("progress", progress);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadId (String uploadId) {
-      this.setParam("upload_id", uploadId);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadSource (String uploadSource) {
-      this.setParam("upload_source", uploadSource);
-      return this;
-    }
-
-    public APIRequestCreateEvent setUploadTag (String uploadTag) {
-      this.setParam("upload_tag", uploadTag);
-      return this;
-    }
-
-    public APIRequestCreateEvent requestAllFields () {
-      return this.requestAllFields(true);
-    }
-
-    public APIRequestCreateEvent requestAllFields (boolean value) {
-      for (String field : FIELDS) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields) {
-      return this.requestFields(fields, true);
-    }
-
-    @Override
-    public APIRequestCreateEvent requestFields (List<String> fields, boolean value) {
-      for (String field : fields) {
-        this.requestField(field, value);
-      }
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field) {
-      this.requestField(field, true);
-      return this;
-    }
-
-    @Override
-    public APIRequestCreateEvent requestField (String field, boolean value) {
-      this.requestFieldInternal(field, value);
-      return this;
-    }
-
-  }
-
   public static class APIRequestGetServerEventsPermittedBusiness extends APIRequest<Business> {
 
     APINodeList<Business> lastResponse = null;
@@ -2573,6 +2438,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -2786,6 +2652,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("updated_time", value);
       return this;
     }
+    public APIRequestGetServerEventsPermittedBusiness requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetServerEventsPermittedBusiness requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetServerEventsPermittedBusiness requestVerificationStatusField () {
       return this.requestVerificationStatusField(true);
     }
@@ -2827,6 +2700,7 @@ public class OfflineConversionDataSet extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -2842,6 +2716,8 @@ public class OfflineConversionDataSet extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -2851,7 +2727,6 @@ public class OfflineConversionDataSet extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -2885,6 +2760,7 @@ public class OfflineConversionDataSet extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -3028,6 +2904,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetSharedAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -3133,6 +3016,20 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetSharedAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -3194,13 +3091,6 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetSharedAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetSharedAccounts requestHasMigratedPermissionsField () {
@@ -3434,6 +3324,13 @@ public class OfflineConversionDataSet extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetSharedAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -3486,6 +3383,7 @@ public class OfflineConversionDataSet extends APINode {
       "two_factor_type",
       "updated_by",
       "updated_time",
+      "user_access_expire_time",
       "verification_status",
       "vertical",
       "vertical_id",
@@ -3706,6 +3604,13 @@ public class OfflineConversionDataSet extends APINode {
     }
     public APIRequestGetSharedAgencies requestUpdatedTimeField (boolean value) {
       this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetSharedAgencies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetSharedAgencies requestVerificationStatusField () {

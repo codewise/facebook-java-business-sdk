@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -333,6 +318,7 @@ public class AdStudyCell extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -348,6 +334,8 @@ public class AdStudyCell extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -357,7 +345,6 @@ public class AdStudyCell extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -391,6 +378,7 @@ public class AdStudyCell extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -520,6 +508,13 @@ public class AdStudyCell extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -625,6 +620,20 @@ public class AdStudyCell extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -686,13 +695,6 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -926,6 +928,13 @@ public class AdStudyCell extends APINode {
       this.requestField("tos_accepted", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestUserTasksField () {
       return this.requestUserTasksField(true);
     }
@@ -973,6 +982,7 @@ public class AdStudyCell extends APINode {
       "billing_event",
       "budget_remaining",
       "campaign",
+      "campaign_active_time",
       "campaign_attribution",
       "campaign_id",
       "configured_status",
@@ -982,6 +992,8 @@ public class AdStudyCell extends APINode {
       "daily_min_spend_target",
       "daily_spend_cap",
       "destination_type",
+      "dsa_beneficiary",
+      "dsa_payor",
       "effective_status",
       "end_time",
       "existing_customer_budget_percentage",
@@ -989,6 +1001,7 @@ public class AdStudyCell extends APINode {
       "full_funnel_exploration_mode",
       "id",
       "instagram_actor_id",
+      "is_budget_schedule_enabled",
       "is_dynamic_creative",
       "issues_info",
       "learning_stage_info",
@@ -1198,6 +1211,13 @@ public class AdStudyCell extends APINode {
       this.requestField("campaign", value);
       return this;
     }
+    public APIRequestGetAdSets requestCampaignActiveTimeField () {
+      return this.requestCampaignActiveTimeField(true);
+    }
+    public APIRequestGetAdSets requestCampaignActiveTimeField (boolean value) {
+      this.requestField("campaign_active_time", value);
+      return this;
+    }
     public APIRequestGetAdSets requestCampaignAttributionField () {
       return this.requestCampaignAttributionField(true);
     }
@@ -1261,6 +1281,20 @@ public class AdStudyCell extends APINode {
       this.requestField("destination_type", value);
       return this;
     }
+    public APIRequestGetAdSets requestDsaBeneficiaryField () {
+      return this.requestDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdSets requestDsaBeneficiaryField (boolean value) {
+      this.requestField("dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestDsaPayorField () {
+      return this.requestDsaPayorField(true);
+    }
+    public APIRequestGetAdSets requestDsaPayorField (boolean value) {
+      this.requestField("dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdSets requestEffectiveStatusField () {
       return this.requestEffectiveStatusField(true);
     }
@@ -1308,6 +1342,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetAdSets requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetAdSets requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetAdSets requestIsDynamicCreativeField () {
@@ -1513,8 +1554,6 @@ public class AdStudyCell extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
-      "ad_strategy_group_id",
-      "ad_strategy_id",
       "adlabels",
       "bid_strategy",
       "boosted_object_id",
@@ -1522,6 +1561,7 @@ public class AdStudyCell extends APINode {
       "budget_rebalance_flag",
       "budget_remaining",
       "buying_type",
+      "campaign_group_active_time",
       "can_create_brand_lift_study",
       "can_use_spend_cap",
       "configured_status",
@@ -1530,6 +1570,7 @@ public class AdStudyCell extends APINode {
       "effective_status",
       "has_secondary_skadnetwork_reporting",
       "id",
+      "is_budget_schedule_enabled",
       "is_skadnetwork_attribution",
       "issues_info",
       "last_budget_toggling_time",
@@ -1650,20 +1691,6 @@ public class AdStudyCell extends APINode {
       this.requestField("account_id", value);
       return this;
     }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField () {
-      return this.requestAdStrategyGroupIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyGroupIdField (boolean value) {
-      this.requestField("ad_strategy_group_id", value);
-      return this;
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField () {
-      return this.requestAdStrategyIdField(true);
-    }
-    public APIRequestGetCampaigns requestAdStrategyIdField (boolean value) {
-      this.requestField("ad_strategy_id", value);
-      return this;
-    }
     public APIRequestGetCampaigns requestAdlabelsField () {
       return this.requestAdlabelsField(true);
     }
@@ -1711,6 +1738,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestBuyingTypeField (boolean value) {
       this.requestField("buying_type", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField () {
+      return this.requestCampaignGroupActiveTimeField(true);
+    }
+    public APIRequestGetCampaigns requestCampaignGroupActiveTimeField (boolean value) {
+      this.requestField("campaign_group_active_time", value);
       return this;
     }
     public APIRequestGetCampaigns requestCanCreateBrandLiftStudyField () {
@@ -1767,6 +1801,13 @@ public class AdStudyCell extends APINode {
     }
     public APIRequestGetCampaigns requestIdField (boolean value) {
       this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField () {
+      return this.requestIsBudgetScheduleEnabledField(true);
+    }
+    public APIRequestGetCampaigns requestIsBudgetScheduleEnabledField (boolean value) {
+      this.requestField("is_budget_schedule_enabled", value);
       return this;
     }
     public APIRequestGetCampaigns requestIsSkadnetworkAttributionField () {

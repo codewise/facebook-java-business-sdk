@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdPreview extends APINode {
   @SerializedName("body")
   private String mBody = null;
+  @SerializedName("transformation_spec")
+  private Object mTransformationSpec = null;
   protected static Gson gson = null;
 
   public AdPreview() {
@@ -217,6 +204,15 @@ public class AdPreview extends APINode {
     return this;
   }
 
+  public Object getFieldTransformationSpec() {
+    return mTransformationSpec;
+  }
+
+  public AdPreview setFieldTransformationSpec(Object value) {
+    this.mTransformationSpec = value;
+    return this;
+  }
+
 
 
   public static enum EnumAdFormat {
@@ -232,6 +228,10 @@ public class AdPreview extends APINode {
       VALUE_BIZ_DISCO_FEED_MOBILE("BIZ_DISCO_FEED_MOBILE"),
       @SerializedName("DESKTOP_FEED_STANDARD")
       VALUE_DESKTOP_FEED_STANDARD("DESKTOP_FEED_STANDARD"),
+      @SerializedName("FACEBOOK_PROFILE_FEED_DESKTOP")
+      VALUE_FACEBOOK_PROFILE_FEED_DESKTOP("FACEBOOK_PROFILE_FEED_DESKTOP"),
+      @SerializedName("FACEBOOK_PROFILE_FEED_MOBILE")
+      VALUE_FACEBOOK_PROFILE_FEED_MOBILE("FACEBOOK_PROFILE_FEED_MOBILE"),
       @SerializedName("FACEBOOK_REELS_BANNER")
       VALUE_FACEBOOK_REELS_BANNER("FACEBOOK_REELS_BANNER"),
       @SerializedName("FACEBOOK_REELS_BANNER_DESKTOP")
@@ -258,6 +258,8 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_FEED_WEB_M_SITE("INSTAGRAM_FEED_WEB_M_SITE"),
       @SerializedName("INSTAGRAM_PROFILE_FEED")
       VALUE_INSTAGRAM_PROFILE_FEED("INSTAGRAM_PROFILE_FEED"),
+      @SerializedName("INSTAGRAM_PROFILE_REELS")
+      VALUE_INSTAGRAM_PROFILE_REELS("INSTAGRAM_PROFILE_REELS"),
       @SerializedName("INSTAGRAM_REELS")
       VALUE_INSTAGRAM_REELS("INSTAGRAM_REELS"),
       @SerializedName("INSTAGRAM_REELS_OVERLAY")
@@ -266,12 +268,12 @@ public class AdPreview extends APINode {
       VALUE_INSTAGRAM_SEARCH_CHAIN("INSTAGRAM_SEARCH_CHAIN"),
       @SerializedName("INSTAGRAM_SEARCH_GRID")
       VALUE_INSTAGRAM_SEARCH_GRID("INSTAGRAM_SEARCH_GRID"),
-      @SerializedName("INSTAGRAM_SHOP")
-      VALUE_INSTAGRAM_SHOP("INSTAGRAM_SHOP"),
       @SerializedName("INSTAGRAM_STANDARD")
       VALUE_INSTAGRAM_STANDARD("INSTAGRAM_STANDARD"),
       @SerializedName("INSTAGRAM_STORY")
       VALUE_INSTAGRAM_STORY("INSTAGRAM_STORY"),
+      @SerializedName("INSTAGRAM_STORY_EFFECT_TRAY")
+      VALUE_INSTAGRAM_STORY_EFFECT_TRAY("INSTAGRAM_STORY_EFFECT_TRAY"),
       @SerializedName("INSTAGRAM_STORY_WEB")
       VALUE_INSTAGRAM_STORY_WEB("INSTAGRAM_STORY_WEB"),
       @SerializedName("INSTAGRAM_STORY_WEB_M_SITE")
@@ -338,6 +340,27 @@ public class AdPreview extends APINode {
       }
   }
 
+  public static enum EnumCreativeFeature {
+      @SerializedName("product_metadata_automation")
+      VALUE_PRODUCT_METADATA_AUTOMATION("product_metadata_automation"),
+      @SerializedName("profile_card")
+      VALUE_PROFILE_CARD("profile_card"),
+      @SerializedName("standard_enhancements_catalog")
+      VALUE_STANDARD_ENHANCEMENTS_CATALOG("standard_enhancements_catalog"),
+      ;
+
+      private String value;
+
+      private EnumCreativeFeature(String value) {
+        this.value = value;
+      }
+
+      @Override
+      public String toString() {
+        return value;
+      }
+  }
+
   public static enum EnumRenderType {
       @SerializedName("FALLBACK")
       VALUE_FALLBACK("FALLBACK"),
@@ -371,6 +394,7 @@ public class AdPreview extends APINode {
 
   public AdPreview copyFrom(AdPreview instance) {
     this.mBody = instance.mBody;
+    this.mTransformationSpec = instance.mTransformationSpec;
     this.context = instance.context;
     this.rawValue = instance.rawValue;
     return this;

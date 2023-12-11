@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -87,6 +72,8 @@ public class Lead extends APINode {
   private String mPlatform = null;
   @SerializedName("post")
   private Link mPost = null;
+  @SerializedName("post_submission_check_result")
+  private LeadGenPostSubmissionCheckResult mPostSubmissionCheckResult = null;
   @SerializedName("retailer_item_id")
   private String mRetailerItemId = null;
   @SerializedName("vehicle")
@@ -379,6 +366,10 @@ public class Lead extends APINode {
     return mPost;
   }
 
+  public LeadGenPostSubmissionCheckResult getFieldPostSubmissionCheckResult() {
+    return mPostSubmissionCheckResult;
+  }
+
   public String getFieldRetailerItemId() {
     return mRetailerItemId;
   }
@@ -523,6 +514,7 @@ public class Lead extends APINode {
       "partner_name",
       "platform",
       "post",
+      "post_submission_check_result",
       "retailer_item_id",
       "vehicle",
     };
@@ -728,6 +720,13 @@ public class Lead extends APINode {
       this.requestField("post", value);
       return this;
     }
+    public APIRequestGet requestPostSubmissionCheckResultField () {
+      return this.requestPostSubmissionCheckResultField(true);
+    }
+    public APIRequestGet requestPostSubmissionCheckResultField (boolean value) {
+      this.requestField("post_submission_check_result", value);
+      return this;
+    }
     public APIRequestGet requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -775,6 +774,7 @@ public class Lead extends APINode {
     this.mPartnerName = instance.mPartnerName;
     this.mPlatform = instance.mPlatform;
     this.mPost = instance.mPost;
+    this.mPostSubmissionCheckResult = instance.mPostSubmissionCheckResult;
     this.mRetailerItemId = instance.mRetailerItemId;
     this.mVehicle = instance.mVehicle;
     this.context = instance.context;

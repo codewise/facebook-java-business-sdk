@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -71,6 +56,8 @@ public class AdCreative extends APINode {
   private Boolean mAutoUpdate = null;
   @SerializedName("body")
   private String mBody = null;
+  @SerializedName("branded_content")
+  private AdCreativeBrandedContentAds mBrandedContent = null;
   @SerializedName("branded_content_sponsor_page_id")
   private String mBrandedContentSponsorPageId = null;
   @SerializedName("bundle_folder_id")
@@ -83,6 +70,8 @@ public class AdCreative extends APINode {
   private String mCategoryMediaSource = null;
   @SerializedName("collaborative_ads_lsb_image_bank_id")
   private String mCollaborativeAdsLsbImageBankId = null;
+  @SerializedName("creative_sourcing_spec")
+  private AdCreativeSourcingSpec mCreativeSourcingSpec = null;
   @SerializedName("degrees_of_freedom_spec")
   private AdCreativeDegreesOfFreedomSpec mDegreesOfFreedomSpec = null;
   @SerializedName("destination_set_id")
@@ -101,6 +90,8 @@ public class AdCreative extends APINode {
   private Boolean mEnableDirectInstall = null;
   @SerializedName("enable_launch_instant_app")
   private Boolean mEnableLaunchInstantApp = null;
+  @SerializedName("facebook_branded_content")
+  private AdCreativeFacebookBrandedContent mFacebookBrandedContent = null;
   @SerializedName("id")
   private String mId = null;
   @SerializedName("image_crops")
@@ -111,6 +102,8 @@ public class AdCreative extends APINode {
   private String mImageUrl = null;
   @SerializedName("instagram_actor_id")
   private String mInstagramActorId = null;
+  @SerializedName("instagram_branded_content")
+  private AdCreativeInstagramBrandedContent mInstagramBrandedContent = null;
   @SerializedName("instagram_permalink_url")
   private String mInstagramPermalinkUrl = null;
   @SerializedName("instagram_story_id")
@@ -145,6 +138,8 @@ public class AdCreative extends APINode {
   private String mObjectUrl = null;
   @SerializedName("omnichannel_link_spec")
   private AdCreativeOmnichannelLinkSpec mOmnichannelLinkSpec = null;
+  @SerializedName("photo_album_source_object_story_id")
+  private String mPhotoAlbumSourceObjectStoryId = null;
   @SerializedName("place_page_set_id")
   private String mPlacePageSetId = null;
   @SerializedName("platform_customizations")
@@ -498,6 +493,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeBrandedContentAds getFieldBrandedContent() {
+    return mBrandedContent;
+  }
+
+  public AdCreative setFieldBrandedContent(AdCreativeBrandedContentAds value) {
+    this.mBrandedContent = value;
+    return this;
+  }
+
+  public AdCreative setFieldBrandedContent(String value) {
+    Type type = new TypeToken<AdCreativeBrandedContentAds>(){}.getType();
+    this.mBrandedContent = AdCreativeBrandedContentAds.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldBrandedContentSponsorPageId() {
     return mBrandedContentSponsorPageId;
   }
@@ -552,6 +561,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeSourcingSpec getFieldCreativeSourcingSpec() {
+    return mCreativeSourcingSpec;
+  }
+
+  public AdCreative setFieldCreativeSourcingSpec(AdCreativeSourcingSpec value) {
+    this.mCreativeSourcingSpec = value;
+    return this;
+  }
+
+  public AdCreative setFieldCreativeSourcingSpec(String value) {
+    Type type = new TypeToken<AdCreativeSourcingSpec>(){}.getType();
+    this.mCreativeSourcingSpec = AdCreativeSourcingSpec.getGson().fromJson(value, type);
+    return this;
+  }
   public AdCreativeDegreesOfFreedomSpec getFieldDegreesOfFreedomSpec() {
     return mDegreesOfFreedomSpec;
   }
@@ -638,6 +661,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeFacebookBrandedContent getFieldFacebookBrandedContent() {
+    return mFacebookBrandedContent;
+  }
+
+  public AdCreative setFieldFacebookBrandedContent(AdCreativeFacebookBrandedContent value) {
+    this.mFacebookBrandedContent = value;
+    return this;
+  }
+
+  public AdCreative setFieldFacebookBrandedContent(String value) {
+    Type type = new TypeToken<AdCreativeFacebookBrandedContent>(){}.getType();
+    this.mFacebookBrandedContent = AdCreativeFacebookBrandedContent.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldId() {
     return mId;
   }
@@ -689,6 +726,20 @@ public class AdCreative extends APINode {
     return this;
   }
 
+  public AdCreativeInstagramBrandedContent getFieldInstagramBrandedContent() {
+    return mInstagramBrandedContent;
+  }
+
+  public AdCreative setFieldInstagramBrandedContent(AdCreativeInstagramBrandedContent value) {
+    this.mInstagramBrandedContent = value;
+    return this;
+  }
+
+  public AdCreative setFieldInstagramBrandedContent(String value) {
+    Type type = new TypeToken<AdCreativeInstagramBrandedContent>(){}.getType();
+    this.mInstagramBrandedContent = AdCreativeInstagramBrandedContent.getGson().fromJson(value, type);
+    return this;
+  }
   public String getFieldInstagramPermalinkUrl() {
     return mInstagramPermalinkUrl;
   }
@@ -857,6 +908,15 @@ public class AdCreative extends APINode {
     this.mOmnichannelLinkSpec = AdCreativeOmnichannelLinkSpec.getGson().fromJson(value, type);
     return this;
   }
+  public String getFieldPhotoAlbumSourceObjectStoryId() {
+    return mPhotoAlbumSourceObjectStoryId;
+  }
+
+  public AdCreative setFieldPhotoAlbumSourceObjectStoryId(String value) {
+    this.mPhotoAlbumSourceObjectStoryId = value;
+    return this;
+  }
+
   public String getFieldPlacePageSetId() {
     return mPlacePageSetId;
   }
@@ -1258,6 +1318,7 @@ public class AdCreative extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "creative_feature",
       "dynamic_asset_label",
       "dynamic_creative_spec",
       "dynamic_customization",
@@ -1274,6 +1335,7 @@ public class AdCreative extends APINode {
 
     public static final String[] FIELDS = {
       "body",
+      "transformation_spec",
     };
 
     @Override
@@ -1335,6 +1397,15 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
+      return this;
+    }
+
+    public APIRequestGetPreviews setCreativeFeature (AdPreview.EnumCreativeFeature creativeFeature) {
+      this.setParam("creative_feature", creativeFeature);
+      return this;
+    }
+    public APIRequestGetPreviews setCreativeFeature (String creativeFeature) {
+      this.setParam("creative_feature", creativeFeature);
       return this;
     }
 
@@ -1471,6 +1542,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGetPreviews requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetPreviews requestTransformationSpecField () {
+      return this.requestTransformationSpecField(true);
+    }
+    public APIRequestGetPreviews requestTransformationSpecField (boolean value) {
+      this.requestField("transformation_spec", value);
       return this;
     }
   }
@@ -1632,12 +1710,14 @@ public class AdCreative extends APINode {
       "authorization_category",
       "auto_update",
       "body",
+      "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -1647,11 +1727,13 @@ public class AdCreative extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "facebook_branded_content",
       "id",
       "image_crops",
       "image_hash",
       "image_url",
       "instagram_actor_id",
+      "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_story_id",
       "instagram_user_id",
@@ -1669,6 +1751,7 @@ public class AdCreative extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -1850,6 +1933,13 @@ public class AdCreative extends APINode {
       this.requestField("body", value);
       return this;
     }
+    public APIRequestGet requestBrandedContentField () {
+      return this.requestBrandedContentField(true);
+    }
+    public APIRequestGet requestBrandedContentField (boolean value) {
+      this.requestField("branded_content", value);
+      return this;
+    }
     public APIRequestGet requestBrandedContentSponsorPageIdField () {
       return this.requestBrandedContentSponsorPageIdField(true);
     }
@@ -1890,6 +1980,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGet requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGet requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGet requestDegreesOfFreedomSpecField () {
@@ -1955,6 +2052,13 @@ public class AdCreative extends APINode {
       this.requestField("enable_launch_instant_app", value);
       return this;
     }
+    public APIRequestGet requestFacebookBrandedContentField () {
+      return this.requestFacebookBrandedContentField(true);
+    }
+    public APIRequestGet requestFacebookBrandedContentField (boolean value) {
+      this.requestField("facebook_branded_content", value);
+      return this;
+    }
     public APIRequestGet requestIdField () {
       return this.requestIdField(true);
     }
@@ -1988,6 +2092,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGet requestInstagramBrandedContentField () {
+      return this.requestInstagramBrandedContentField(true);
+    }
+    public APIRequestGet requestInstagramBrandedContentField (boolean value) {
+      this.requestField("instagram_branded_content", value);
       return this;
     }
     public APIRequestGet requestInstagramPermalinkUrlField () {
@@ -2107,6 +2218,13 @@ public class AdCreative extends APINode {
     }
     public APIRequestGet requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGet requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGet requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGet requestPlacePageSetIdField () {
@@ -2366,6 +2484,8 @@ public class AdCreative extends APINode {
       VALUE_APPLY_NOW("APPLY_NOW"),
       @SerializedName("AUDIO_CALL")
       VALUE_AUDIO_CALL("AUDIO_CALL"),
+      @SerializedName("BOOK_NOW")
+      VALUE_BOOK_NOW("BOOK_NOW"),
       @SerializedName("BOOK_TRAVEL")
       VALUE_BOOK_TRAVEL("BOOK_TRAVEL"),
       @SerializedName("BUY")
@@ -2380,6 +2500,8 @@ public class AdCreative extends APINode {
       VALUE_CALL_ME("CALL_ME"),
       @SerializedName("CALL_NOW")
       VALUE_CALL_NOW("CALL_NOW"),
+      @SerializedName("CONFIRM")
+      VALUE_CONFIRM("CONFIRM"),
       @SerializedName("CONTACT")
       VALUE_CONTACT("CONTACT"),
       @SerializedName("CONTACT_US")
@@ -2408,12 +2530,16 @@ public class AdCreative extends APINode {
       VALUE_GET_OFFER("GET_OFFER"),
       @SerializedName("GET_OFFER_VIEW")
       VALUE_GET_OFFER_VIEW("GET_OFFER_VIEW"),
+      @SerializedName("GET_PROMOTIONS")
+      VALUE_GET_PROMOTIONS("GET_PROMOTIONS"),
       @SerializedName("GET_QUOTE")
       VALUE_GET_QUOTE("GET_QUOTE"),
       @SerializedName("GET_SHOWTIMES")
       VALUE_GET_SHOWTIMES("GET_SHOWTIMES"),
       @SerializedName("GET_STARTED")
       VALUE_GET_STARTED("GET_STARTED"),
+      @SerializedName("INQUIRE_NOW")
+      VALUE_INQUIRE_NOW("INQUIRE_NOW"),
       @SerializedName("INSTALL_APP")
       VALUE_INSTALL_APP("INSTALL_APP"),
       @SerializedName("INSTALL_MOBILE_APP")
@@ -2430,8 +2556,6 @@ public class AdCreative extends APINode {
       VALUE_MESSAGE_PAGE("MESSAGE_PAGE"),
       @SerializedName("MOBILE_DOWNLOAD")
       VALUE_MOBILE_DOWNLOAD("MOBILE_DOWNLOAD"),
-      @SerializedName("MOMENTS")
-      VALUE_MOMENTS("MOMENTS"),
       @SerializedName("NO_BUTTON")
       VALUE_NO_BUTTON("NO_BUTTON"),
       @SerializedName("OPEN_INSTANT_APP")
@@ -2729,12 +2853,14 @@ public class AdCreative extends APINode {
     this.mAuthorizationCategory = instance.mAuthorizationCategory;
     this.mAutoUpdate = instance.mAutoUpdate;
     this.mBody = instance.mBody;
+    this.mBrandedContent = instance.mBrandedContent;
     this.mBrandedContentSponsorPageId = instance.mBrandedContentSponsorPageId;
     this.mBundleFolderId = instance.mBundleFolderId;
     this.mCallToActionType = instance.mCallToActionType;
     this.mCategorizationCriteria = instance.mCategorizationCriteria;
     this.mCategoryMediaSource = instance.mCategoryMediaSource;
     this.mCollaborativeAdsLsbImageBankId = instance.mCollaborativeAdsLsbImageBankId;
+    this.mCreativeSourcingSpec = instance.mCreativeSourcingSpec;
     this.mDegreesOfFreedomSpec = instance.mDegreesOfFreedomSpec;
     this.mDestinationSetId = instance.mDestinationSetId;
     this.mDynamicAdVoice = instance.mDynamicAdVoice;
@@ -2744,11 +2870,13 @@ public class AdCreative extends APINode {
     this.mEffectiveObjectStoryId = instance.mEffectiveObjectStoryId;
     this.mEnableDirectInstall = instance.mEnableDirectInstall;
     this.mEnableLaunchInstantApp = instance.mEnableLaunchInstantApp;
+    this.mFacebookBrandedContent = instance.mFacebookBrandedContent;
     this.mId = instance.mId;
     this.mImageCrops = instance.mImageCrops;
     this.mImageHash = instance.mImageHash;
     this.mImageUrl = instance.mImageUrl;
     this.mInstagramActorId = instance.mInstagramActorId;
+    this.mInstagramBrandedContent = instance.mInstagramBrandedContent;
     this.mInstagramPermalinkUrl = instance.mInstagramPermalinkUrl;
     this.mInstagramStoryId = instance.mInstagramStoryId;
     this.mInstagramUserId = instance.mInstagramUserId;
@@ -2766,6 +2894,7 @@ public class AdCreative extends APINode {
     this.mObjectType = instance.mObjectType;
     this.mObjectUrl = instance.mObjectUrl;
     this.mOmnichannelLinkSpec = instance.mOmnichannelLinkSpec;
+    this.mPhotoAlbumSourceObjectStoryId = instance.mPhotoAlbumSourceObjectStoryId;
     this.mPlacePageSetId = instance.mPlacePageSetId;
     this.mPlatformCustomizations = instance.mPlatformCustomizations;
     this.mPlayableAssetId = instance.mPlayableAssetId;

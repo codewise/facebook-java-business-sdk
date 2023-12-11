@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -58,13 +43,13 @@ public class InstantArticlesStats extends APINode {
   @SerializedName("error")
   private String mError = null;
   @SerializedName("metadata")
-  private Map<String, Object> mMetadata = null;
+  private List<Map<String, Object>> mMetadata = null;
   @SerializedName("metric")
   private Object mMetric = null;
   @SerializedName("totals")
-  private Map<String, Object> mTotals = null;
+  private List<Map<String, Object>> mTotals = null;
   @SerializedName("x_axis_breakdown")
-  private List<Map<String, Object>> mXAxisBreakdown = null;
+  private List<List<Map<String, Object>>> mXAxisBreakdown = null;
   protected static Gson gson = null;
 
   public InstantArticlesStats() {
@@ -225,11 +210,11 @@ public class InstantArticlesStats extends APINode {
     return this;
   }
 
-  public Map<String, Object> getFieldMetadata() {
+  public List<Map<String, Object>> getFieldMetadata() {
     return mMetadata;
   }
 
-  public InstantArticlesStats setFieldMetadata(Map<String, Object> value) {
+  public InstantArticlesStats setFieldMetadata(List<Map<String, Object>> value) {
     this.mMetadata = value;
     return this;
   }
@@ -243,20 +228,20 @@ public class InstantArticlesStats extends APINode {
     return this;
   }
 
-  public Map<String, Object> getFieldTotals() {
+  public List<Map<String, Object>> getFieldTotals() {
     return mTotals;
   }
 
-  public InstantArticlesStats setFieldTotals(Map<String, Object> value) {
+  public InstantArticlesStats setFieldTotals(List<Map<String, Object>> value) {
     this.mTotals = value;
     return this;
   }
 
-  public List<Map<String, Object>> getFieldXAxisBreakdown() {
+  public List<List<Map<String, Object>>> getFieldXAxisBreakdown() {
     return mXAxisBreakdown;
   }
 
-  public InstantArticlesStats setFieldXAxisBreakdown(List<Map<String, Object>> value) {
+  public InstantArticlesStats setFieldXAxisBreakdown(List<List<Map<String, Object>>> value) {
     this.mXAxisBreakdown = value;
     return this;
   }

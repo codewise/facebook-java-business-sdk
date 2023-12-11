@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -60,9 +45,9 @@ public class CPASBusinessSetupConfig extends APINode {
   @SerializedName("business")
   private Business mBusiness = null;
   @SerializedName("business_capabilities_status")
-  private Map<String, String> mBusinessCapabilitiesStatus = null;
+  private List<Map<String, String>> mBusinessCapabilitiesStatus = null;
   @SerializedName("capabilities_compliance_status")
-  private Map<String, Object> mCapabilitiesComplianceStatus = null;
+  private List<Map<String, Object>> mCapabilitiesComplianceStatus = null;
   @SerializedName("id")
   private String mId = null;
   protected static Gson gson = null;
@@ -294,11 +279,11 @@ public class CPASBusinessSetupConfig extends APINode {
     return mBusiness;
   }
 
-  public Map<String, String> getFieldBusinessCapabilitiesStatus() {
+  public List<Map<String, String>> getFieldBusinessCapabilitiesStatus() {
     return mBusinessCapabilitiesStatus;
   }
 
-  public Map<String, Object> getFieldCapabilitiesComplianceStatus() {
+  public List<Map<String, Object>> getFieldCapabilitiesComplianceStatus() {
     return mCapabilitiesComplianceStatus;
   }
 
@@ -324,6 +309,7 @@ public class CPASBusinessSetupConfig extends APINode {
       "ad_account_promotable_objects",
       "age",
       "agency_client_declaration",
+      "all_capabilities",
       "amount_spent",
       "attribution_spec",
       "balance",
@@ -339,6 +325,8 @@ public class CPASBusinessSetupConfig extends APINode {
       "created_time",
       "currency",
       "custom_audience_info",
+      "default_dsa_beneficiary",
+      "default_dsa_payor",
       "disable_reason",
       "end_advertiser",
       "end_advertiser_name",
@@ -348,7 +336,6 @@ public class CPASBusinessSetupConfig extends APINode {
       "fb_entity",
       "funding_source",
       "funding_source_details",
-      "has_advertiser_opted_in_odax",
       "has_migrated_permissions",
       "has_page_authorized_adaccount",
       "id",
@@ -382,6 +369,7 @@ public class CPASBusinessSetupConfig extends APINode {
       "timezone_name",
       "timezone_offset_hours_utc",
       "tos_accepted",
+      "user_access_expire_time",
       "user_tasks",
       "user_tos_accepted",
       "viewable_business",
@@ -511,6 +499,13 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("agency_client_declaration", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField () {
+      return this.requestAllCapabilitiesField(true);
+    }
+    public APIRequestGetAdAccounts requestAllCapabilitiesField (boolean value) {
+      this.requestField("all_capabilities", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestAmountSpentField () {
       return this.requestAmountSpentField(true);
     }
@@ -616,6 +611,20 @@ public class CPASBusinessSetupConfig extends APINode {
       this.requestField("custom_audience_info", value);
       return this;
     }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField () {
+      return this.requestDefaultDsaBeneficiaryField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaBeneficiaryField (boolean value) {
+      this.requestField("default_dsa_beneficiary", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField () {
+      return this.requestDefaultDsaPayorField(true);
+    }
+    public APIRequestGetAdAccounts requestDefaultDsaPayorField (boolean value) {
+      this.requestField("default_dsa_payor", value);
+      return this;
+    }
     public APIRequestGetAdAccounts requestDisableReasonField () {
       return this.requestDisableReasonField(true);
     }
@@ -677,13 +686,6 @@ public class CPASBusinessSetupConfig extends APINode {
     }
     public APIRequestGetAdAccounts requestFundingSourceDetailsField (boolean value) {
       this.requestField("funding_source_details", value);
-      return this;
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField () {
-      return this.requestHasAdvertiserOptedInOdaxField(true);
-    }
-    public APIRequestGetAdAccounts requestHasAdvertiserOptedInOdaxField (boolean value) {
-      this.requestField("has_advertiser_opted_in_odax", value);
       return this;
     }
     public APIRequestGetAdAccounts requestHasMigratedPermissionsField () {
@@ -915,6 +917,13 @@ public class CPASBusinessSetupConfig extends APINode {
     }
     public APIRequestGetAdAccounts requestTosAcceptedField (boolean value) {
       this.requestField("tos_accepted", value);
+      return this;
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdAccounts requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
       return this;
     }
     public APIRequestGetAdAccounts requestUserTasksField () {

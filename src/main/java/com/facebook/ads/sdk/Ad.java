@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,8 +42,14 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class Ad extends APINode {
   @SerializedName("account_id")
   private String mAccountId = null;
+  @SerializedName("ad_active_time")
+  private String mAdActiveTime = null;
   @SerializedName("ad_review_feedback")
   private AdgroupReviewFeedback mAdReviewFeedback = null;
+  @SerializedName("ad_schedule_end_time")
+  private String mAdScheduleEndTime = null;
+  @SerializedName("ad_schedule_start_time")
+  private String mAdScheduleStartTime = null;
   @SerializedName("adlabels")
   private List<AdLabel> mAdlabels = null;
   @SerializedName("adset")
@@ -389,8 +380,20 @@ public class Ad extends APINode {
     return mAccountId;
   }
 
+  public String getFieldAdActiveTime() {
+    return mAdActiveTime;
+  }
+
   public AdgroupReviewFeedback getFieldAdReviewFeedback() {
     return mAdReviewFeedback;
+  }
+
+  public String getFieldAdScheduleEndTime() {
+    return mAdScheduleEndTime;
+  }
+
+  public String getFieldAdScheduleStartTime() {
+    return mAdScheduleStartTime;
   }
 
   public List<AdLabel> getFieldAdlabels() {
@@ -554,12 +557,14 @@ public class Ad extends APINode {
       "authorization_category",
       "auto_update",
       "body",
+      "branded_content",
       "branded_content_sponsor_page_id",
       "bundle_folder_id",
       "call_to_action_type",
       "categorization_criteria",
       "category_media_source",
       "collaborative_ads_lsb_image_bank_id",
+      "creative_sourcing_spec",
       "degrees_of_freedom_spec",
       "destination_set_id",
       "dynamic_ad_voice",
@@ -569,11 +574,13 @@ public class Ad extends APINode {
       "effective_object_story_id",
       "enable_direct_install",
       "enable_launch_instant_app",
+      "facebook_branded_content",
       "id",
       "image_crops",
       "image_hash",
       "image_url",
       "instagram_actor_id",
+      "instagram_branded_content",
       "instagram_permalink_url",
       "instagram_story_id",
       "instagram_user_id",
@@ -591,6 +598,7 @@ public class Ad extends APINode {
       "object_type",
       "object_url",
       "omnichannel_link_spec",
+      "photo_album_source_object_story_id",
       "place_page_set_id",
       "platform_customizations",
       "playable_asset_id",
@@ -754,6 +762,13 @@ public class Ad extends APINode {
       this.requestField("body", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestBrandedContentField () {
+      return this.requestBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestBrandedContentField (boolean value) {
+      this.requestField("branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestBrandedContentSponsorPageIdField () {
       return this.requestBrandedContentSponsorPageIdField(true);
     }
@@ -794,6 +809,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestCollaborativeAdsLsbImageBankIdField (boolean value) {
       this.requestField("collaborative_ads_lsb_image_bank_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField () {
+      return this.requestCreativeSourcingSpecField(true);
+    }
+    public APIRequestGetAdCreatives requestCreativeSourcingSpecField (boolean value) {
+      this.requestField("creative_sourcing_spec", value);
       return this;
     }
     public APIRequestGetAdCreatives requestDegreesOfFreedomSpecField () {
@@ -859,6 +881,13 @@ public class Ad extends APINode {
       this.requestField("enable_launch_instant_app", value);
       return this;
     }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField () {
+      return this.requestFacebookBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestFacebookBrandedContentField (boolean value) {
+      this.requestField("facebook_branded_content", value);
+      return this;
+    }
     public APIRequestGetAdCreatives requestIdField () {
       return this.requestIdField(true);
     }
@@ -892,6 +921,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestInstagramActorIdField (boolean value) {
       this.requestField("instagram_actor_id", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField () {
+      return this.requestInstagramBrandedContentField(true);
+    }
+    public APIRequestGetAdCreatives requestInstagramBrandedContentField (boolean value) {
+      this.requestField("instagram_branded_content", value);
       return this;
     }
     public APIRequestGetAdCreatives requestInstagramPermalinkUrlField () {
@@ -1011,6 +1047,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetAdCreatives requestOmnichannelLinkSpecField (boolean value) {
       this.requestField("omnichannel_link_spec", value);
+      return this;
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField () {
+      return this.requestPhotoAlbumSourceObjectStoryIdField(true);
+    }
+    public APIRequestGetAdCreatives requestPhotoAlbumSourceObjectStoryIdField (boolean value) {
+      this.requestField("photo_album_source_object_story_id", value);
       return this;
     }
     public APIRequestGetAdCreatives requestPlacePageSetIdField () {
@@ -1461,7 +1504,10 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -1567,7 +1613,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetCopies setTimeRange (Object timeRange) {
+    public APIRequestGetCopies setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -1628,11 +1674,32 @@ public class Ad extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGetCopies requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGetCopies requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGetCopies requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGetCopies requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGetCopies requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGetCopies requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGetCopies requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGetCopies requestAdlabelsField () {
@@ -2219,7 +2286,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRange (Object timeRange) {
+    public APIRequestGetInsights setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2228,7 +2295,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsights setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsights setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -2521,7 +2588,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRange (Object timeRange) {
+    public APIRequestGetInsightsAsync setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -2530,7 +2597,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGetInsightsAsync setTimeRanges (List<Object> timeRanges) {
+    public APIRequestGetInsightsAsync setTimeRanges (List<Map<String, String>> timeRanges) {
       this.setParam("time_ranges", timeRanges);
       return this;
     }
@@ -2622,6 +2689,7 @@ public class Ad extends APINode {
       "partner_name",
       "platform",
       "post",
+      "post_submission_check_result",
       "retailer_item_id",
       "vehicle",
     };
@@ -2827,6 +2895,13 @@ public class Ad extends APINode {
       this.requestField("post", value);
       return this;
     }
+    public APIRequestGetLeads requestPostSubmissionCheckResultField () {
+      return this.requestPostSubmissionCheckResultField(true);
+    }
+    public APIRequestGetLeads requestPostSubmissionCheckResultField (boolean value) {
+      this.requestField("post_submission_check_result", value);
+      return this;
+    }
     public APIRequestGetLeads requestRetailerItemIdField () {
       return this.requestRetailerItemIdField(true);
     }
@@ -2852,6 +2927,7 @@ public class Ad extends APINode {
     }
     public static final String[] PARAMS = {
       "ad_format",
+      "creative_feature",
       "dynamic_asset_label",
       "dynamic_creative_spec",
       "dynamic_customization",
@@ -2868,6 +2944,7 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "body",
+      "transformation_spec",
     };
 
     @Override
@@ -2929,6 +3006,15 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews setAdFormat (String adFormat) {
       this.setParam("ad_format", adFormat);
+      return this;
+    }
+
+    public APIRequestGetPreviews setCreativeFeature (AdPreview.EnumCreativeFeature creativeFeature) {
+      this.setParam("creative_feature", creativeFeature);
+      return this;
+    }
+    public APIRequestGetPreviews setCreativeFeature (String creativeFeature) {
+      this.setParam("creative_feature", creativeFeature);
       return this;
     }
 
@@ -3065,6 +3151,13 @@ public class Ad extends APINode {
     }
     public APIRequestGetPreviews requestBodyField (boolean value) {
       this.requestField("body", value);
+      return this;
+    }
+    public APIRequestGetPreviews requestTransformationSpecField () {
+      return this.requestTransformationSpecField(true);
+    }
+    public APIRequestGetPreviews requestTransformationSpecField (boolean value) {
+      this.requestField("transformation_spec", value);
       return this;
     }
   }
@@ -3318,7 +3411,10 @@ public class Ad extends APINode {
 
     public static final String[] FIELDS = {
       "account_id",
+      "ad_active_time",
       "ad_review_feedback",
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset",
       "adset_id",
@@ -3442,7 +3538,7 @@ public class Ad extends APINode {
       return this;
     }
 
-    public APIRequestGet setTimeRange (Object timeRange) {
+    public APIRequestGet setTimeRange (Map<String, String> timeRange) {
       this.setParam("time_range", timeRange);
       return this;
     }
@@ -3494,11 +3590,32 @@ public class Ad extends APINode {
       this.requestField("account_id", value);
       return this;
     }
+    public APIRequestGet requestAdActiveTimeField () {
+      return this.requestAdActiveTimeField(true);
+    }
+    public APIRequestGet requestAdActiveTimeField (boolean value) {
+      this.requestField("ad_active_time", value);
+      return this;
+    }
     public APIRequestGet requestAdReviewFeedbackField () {
       return this.requestAdReviewFeedbackField(true);
     }
     public APIRequestGet requestAdReviewFeedbackField (boolean value) {
       this.requestField("ad_review_feedback", value);
+      return this;
+    }
+    public APIRequestGet requestAdScheduleEndTimeField () {
+      return this.requestAdScheduleEndTimeField(true);
+    }
+    public APIRequestGet requestAdScheduleEndTimeField (boolean value) {
+      this.requestField("ad_schedule_end_time", value);
+      return this;
+    }
+    public APIRequestGet requestAdScheduleStartTimeField () {
+      return this.requestAdScheduleStartTimeField(true);
+    }
+    public APIRequestGet requestAdScheduleStartTimeField (boolean value) {
+      this.requestField("ad_schedule_start_time", value);
       return this;
     }
     public APIRequestGet requestAdlabelsField () {
@@ -3735,6 +3852,8 @@ public class Ad extends APINode {
       return lastResponse;
     }
     public static final String[] PARAMS = {
+      "ad_schedule_end_time",
+      "ad_schedule_start_time",
       "adlabels",
       "adset_spec",
       "audience_id",
@@ -3807,6 +3926,16 @@ public class Ad extends APINode {
       return this;
     }
 
+
+    public APIRequestUpdate setAdScheduleEndTime (String adScheduleEndTime) {
+      this.setParam("ad_schedule_end_time", adScheduleEndTime);
+      return this;
+    }
+
+    public APIRequestUpdate setAdScheduleStartTime (String adScheduleStartTime) {
+      this.setParam("ad_schedule_start_time", adScheduleStartTime);
+      return this;
+    }
 
     public APIRequestUpdate setAdlabels (List<Object> adlabels) {
       this.setParam("adlabels", adlabels);
@@ -4207,7 +4336,10 @@ public class Ad extends APINode {
 
   public Ad copyFrom(Ad instance) {
     this.mAccountId = instance.mAccountId;
+    this.mAdActiveTime = instance.mAdActiveTime;
     this.mAdReviewFeedback = instance.mAdReviewFeedback;
+    this.mAdScheduleEndTime = instance.mAdScheduleEndTime;
+    this.mAdScheduleStartTime = instance.mAdScheduleStartTime;
     this.mAdlabels = instance.mAdlabels;
     this.mAdset = instance.mAdset;
     this.mAdsetId = instance.mAdsetId;

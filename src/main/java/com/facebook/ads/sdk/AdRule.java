@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -1232,6 +1217,8 @@ public class AdRule extends APINode {
       VALUE_AM_AD_OBJECT_NAME_CARD("AM_AD_OBJECT_NAME_CARD"),
       @SerializedName("AM_AMFE_L3_RECOMMENDATION")
       VALUE_AM_AMFE_L3_RECOMMENDATION("AM_AMFE_L3_RECOMMENDATION"),
+      @SerializedName("AM_AUTOFLOW_GUIDANCE_CARD")
+      VALUE_AM_AUTOFLOW_GUIDANCE_CARD("AM_AUTOFLOW_GUIDANCE_CARD"),
       @SerializedName("AM_AUTO_APPLY_WIDGET")
       VALUE_AM_AUTO_APPLY_WIDGET("AM_AUTO_APPLY_WIDGET"),
       @SerializedName("AM_EDITOR_CARD")
@@ -1240,10 +1227,20 @@ public class AdRule extends APINode {
       VALUE_AM_INFO_CARD("AM_INFO_CARD"),
       @SerializedName("AM_NAME_CELL_DROPDOWN")
       VALUE_AM_NAME_CELL_DROPDOWN("AM_NAME_CELL_DROPDOWN"),
+      @SerializedName("AM_OPTIMIZATION_TIP_GUIDANCE_CARD")
+      VALUE_AM_OPTIMIZATION_TIP_GUIDANCE_CARD("AM_OPTIMIZATION_TIP_GUIDANCE_CARD"),
       @SerializedName("AM_PERFORMANCE_SUMMARY")
       VALUE_AM_PERFORMANCE_SUMMARY("AM_PERFORMANCE_SUMMARY"),
       @SerializedName("AM_RULE_LANDING_PAGE_BANNER")
       VALUE_AM_RULE_LANDING_PAGE_BANNER("AM_RULE_LANDING_PAGE_BANNER"),
+      @SerializedName("AM_SYD_RESOLUTION_FLOW")
+      VALUE_AM_SYD_RESOLUTION_FLOW("AM_SYD_RESOLUTION_FLOW"),
+      @SerializedName("AM_SYD_RESOLUTION_FLOW_MODAL")
+      VALUE_AM_SYD_RESOLUTION_FLOW_MODAL("AM_SYD_RESOLUTION_FLOW_MODAL"),
+      @SerializedName("AM_TABLE_DELIVERY_COLUMN_POPOVER")
+      VALUE_AM_TABLE_DELIVERY_COLUMN_POPOVER("AM_TABLE_DELIVERY_COLUMN_POPOVER"),
+      @SerializedName("AM_TABLE_TOGGLE_POPOVER")
+      VALUE_AM_TABLE_TOGGLE_POPOVER("AM_TABLE_TOGGLE_POPOVER"),
       @SerializedName("AM_TOOLBAR_CREATE_RULE_DROPDOWN")
       VALUE_AM_TOOLBAR_CREATE_RULE_DROPDOWN("AM_TOOLBAR_CREATE_RULE_DROPDOWN"),
       @SerializedName("PE_CAMPAIGN_STRUCTURE_MENU")

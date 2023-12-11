@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -2390,7 +2375,6 @@ public class ProductSet extends APINode {
       "additional_variant_attributes",
       "age_group",
       "applinks",
-      "ar_data",
       "availability",
       "brand",
       "capability_to_review_status",
@@ -2441,6 +2425,7 @@ public class ProductSet extends APINode {
       "product_catalog",
       "product_feed",
       "product_group",
+      "product_local_info",
       "product_type",
       "quantity_to_sell_on_facebook",
       "retailer_id",
@@ -2455,7 +2440,9 @@ public class ProductSet extends APINode {
       "short_description",
       "size",
       "start_date",
+      "tags",
       "url",
+      "video_fetch_status",
       "visibility",
       "wa_compliance_category",
     };
@@ -2618,13 +2605,6 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetProducts requestApplinksField (boolean value) {
       this.requestField("applinks", value);
-      return this;
-    }
-    public APIRequestGetProducts requestArDataField () {
-      return this.requestArDataField(true);
-    }
-    public APIRequestGetProducts requestArDataField (boolean value) {
-      this.requestField("ar_data", value);
       return this;
     }
     public APIRequestGetProducts requestAvailabilityField () {
@@ -2977,6 +2957,13 @@ public class ProductSet extends APINode {
       this.requestField("product_group", value);
       return this;
     }
+    public APIRequestGetProducts requestProductLocalInfoField () {
+      return this.requestProductLocalInfoField(true);
+    }
+    public APIRequestGetProducts requestProductLocalInfoField (boolean value) {
+      this.requestField("product_local_info", value);
+      return this;
+    }
     public APIRequestGetProducts requestProductTypeField () {
       return this.requestProductTypeField(true);
     }
@@ -3075,11 +3062,25 @@ public class ProductSet extends APINode {
       this.requestField("start_date", value);
       return this;
     }
+    public APIRequestGetProducts requestTagsField () {
+      return this.requestTagsField(true);
+    }
+    public APIRequestGetProducts requestTagsField (boolean value) {
+      this.requestField("tags", value);
+      return this;
+    }
     public APIRequestGetProducts requestUrlField () {
       return this.requestUrlField(true);
     }
     public APIRequestGetProducts requestUrlField (boolean value) {
       this.requestField("url", value);
+      return this;
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField () {
+      return this.requestVideoFetchStatusField(true);
+    }
+    public APIRequestGetProducts requestVideoFetchStatusField (boolean value) {
+      this.requestField("video_fetch_status", value);
       return this;
     }
     public APIRequestGetProducts requestVisibilityField () {
@@ -3116,6 +3117,7 @@ public class ProductSet extends APINode {
       "amount_price",
       "amount_qualifier",
       "applinks",
+      "availability",
       "body_style",
       "cashback_currency",
       "cashback_price",
@@ -3125,11 +3127,17 @@ public class ProductSet extends APINode {
       "downpayment_currency",
       "downpayment_price",
       "downpayment_qualifier",
+      "drivetrain",
       "end_date",
       "end_time",
+      "exterior_color",
+      "fuel_type",
+      "generation",
       "id",
       "image_fetch_status",
       "images",
+      "interior_color",
+      "interior_upholstery",
       "make",
       "model",
       "offer_description",
@@ -3142,6 +3150,7 @@ public class ProductSet extends APINode {
       "term_length",
       "term_qualifier",
       "title",
+      "transmission",
       "trim",
       "unit_price",
       "url",
@@ -3292,6 +3301,13 @@ public class ProductSet extends APINode {
       this.requestField("applinks", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestAvailabilityField () {
+      return this.requestAvailabilityField(true);
+    }
+    public APIRequestGetVehicleOffers requestAvailabilityField (boolean value) {
+      this.requestField("availability", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestBodyStyleField () {
       return this.requestBodyStyleField(true);
     }
@@ -3355,6 +3371,13 @@ public class ProductSet extends APINode {
       this.requestField("downpayment_qualifier", value);
       return this;
     }
+    public APIRequestGetVehicleOffers requestDrivetrainField () {
+      return this.requestDrivetrainField(true);
+    }
+    public APIRequestGetVehicleOffers requestDrivetrainField (boolean value) {
+      this.requestField("drivetrain", value);
+      return this;
+    }
     public APIRequestGetVehicleOffers requestEndDateField () {
       return this.requestEndDateField(true);
     }
@@ -3367,6 +3390,27 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicleOffers requestEndTimeField (boolean value) {
       this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField () {
+      return this.requestExteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestExteriorColorField (boolean value) {
+      this.requestField("exterior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField () {
+      return this.requestFuelTypeField(true);
+    }
+    public APIRequestGetVehicleOffers requestFuelTypeField (boolean value) {
+      this.requestField("fuel_type", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestGenerationField () {
+      return this.requestGenerationField(true);
+    }
+    public APIRequestGetVehicleOffers requestGenerationField (boolean value) {
+      this.requestField("generation", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestIdField () {
@@ -3388,6 +3432,20 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicleOffers requestImagesField (boolean value) {
       this.requestField("images", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField () {
+      return this.requestInteriorColorField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorColorField (boolean value) {
+      this.requestField("interior_color", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField () {
+      return this.requestInteriorUpholsteryField(true);
+    }
+    public APIRequestGetVehicleOffers requestInteriorUpholsteryField (boolean value) {
+      this.requestField("interior_upholstery", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestMakeField () {
@@ -3472,6 +3530,13 @@ public class ProductSet extends APINode {
     }
     public APIRequestGetVehicleOffers requestTitleField (boolean value) {
       this.requestField("title", value);
+      return this;
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField () {
+      return this.requestTransmissionField(true);
+    }
+    public APIRequestGetVehicleOffers requestTransmissionField (boolean value) {
+      this.requestField("transmission", value);
       return this;
     }
     public APIRequestGetVehicleOffers requestTrimField () {

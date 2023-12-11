@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -90,7 +75,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("daily_impression_curve")
   private List<Double> mDailyImpressionCurve = null;
   @SerializedName("daily_impression_curve_map")
-  private Map<Long, List<Double>> mDailyImpressionCurveMap = null;
+  private List<Map<Long, List<Double>>> mDailyImpressionCurveMap = null;
   @SerializedName("day_parting_schedule")
   private List<ReachFrequencyDayPart> mDayPartingSchedule = null;
   @SerializedName("destination_id")
@@ -122,9 +107,9 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("frequency_cap")
   private Long mFrequencyCap = null;
   @SerializedName("frequency_distribution_map")
-  private Map<Long, List<Double>> mFrequencyDistributionMap = null;
+  private List<Map<Long, List<Double>>> mFrequencyDistributionMap = null;
   @SerializedName("frequency_distribution_map_agg")
-  private Map<Long, List<Long>> mFrequencyDistributionMapAgg = null;
+  private List<Map<Long, List<Long>>> mFrequencyDistributionMapAgg = null;
   @SerializedName("grp_audience_size")
   private Double mGrpAudienceSize = null;
   @SerializedName("grp_avg_probability_map")
@@ -190,7 +175,7 @@ public class ReachFrequencyPrediction extends APINode {
   @SerializedName("placement_breakdown")
   private ReachFrequencyEstimatesPlacementBreakdown mPlacementBreakdown = null;
   @SerializedName("placement_breakdown_map")
-  private Map<Long, ReachFrequencyEstimatesPlacementBreakdown> mPlacementBreakdownMap = null;
+  private List<Map<Long, ReachFrequencyEstimatesPlacementBreakdown>> mPlacementBreakdownMap = null;
   @SerializedName("plan_name")
   private String mPlanName = null;
   @SerializedName("plan_type")
@@ -509,7 +494,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mDailyImpressionCurve;
   }
 
-  public Map<Long, List<Double>> getFieldDailyImpressionCurveMap() {
+  public List<Map<Long, List<Double>>> getFieldDailyImpressionCurveMap() {
     return mDailyImpressionCurveMap;
   }
 
@@ -573,11 +558,11 @@ public class ReachFrequencyPrediction extends APINode {
     return mFrequencyCap;
   }
 
-  public Map<Long, List<Double>> getFieldFrequencyDistributionMap() {
+  public List<Map<Long, List<Double>>> getFieldFrequencyDistributionMap() {
     return mFrequencyDistributionMap;
   }
 
-  public Map<Long, List<Long>> getFieldFrequencyDistributionMapAgg() {
+  public List<Map<Long, List<Long>>> getFieldFrequencyDistributionMapAgg() {
     return mFrequencyDistributionMapAgg;
   }
 
@@ -709,7 +694,7 @@ public class ReachFrequencyPrediction extends APINode {
     return mPlacementBreakdown;
   }
 
-  public Map<Long, ReachFrequencyEstimatesPlacementBreakdown> getFieldPlacementBreakdownMap() {
+  public List<Map<Long, ReachFrequencyEstimatesPlacementBreakdown>> getFieldPlacementBreakdownMap() {
     return mPlacementBreakdownMap;
   }
 

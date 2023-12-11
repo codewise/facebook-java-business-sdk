@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -284,12 +269,20 @@ public class AdStudyObjective extends APINode {
     return new APIRequestGetApplications(this.getPrefixedId().toString(), context);
   }
 
+  public APIRequestGetBrandRequests getBrandRequests() {
+    return new APIRequestGetBrandRequests(this.getPrefixedId().toString(), context);
+  }
+
   public APIRequestGetCustomConversions getCustomConversions() {
     return new APIRequestGetCustomConversions(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetOfflineConversionDataSets getOfflineConversionDataSets() {
     return new APIRequestGetOfflineConversionDataSets(this.getPrefixedId().toString(), context);
+  }
+
+  public APIRequestGetPartnerPrivateStudies getPartnerPrivateStudies() {
+    return new APIRequestGetPartnerPrivateStudies(this.getPrefixedId().toString(), context);
   }
 
   public APIRequestGetPartnerStudies getPartnerStudies() {
@@ -373,6 +366,7 @@ public class AdStudyObjective extends APINode {
       "owner_ad_account",
       "owner_business",
       "usage",
+      "user_access_expire_time",
       "valid_entries",
     };
 
@@ -682,6 +676,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("usage", value);
       return this;
     }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetAdsPixels requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
     public APIRequestGetAdsPixels requestValidEntriesField () {
       return this.requestValidEntriesField(true);
     }
@@ -727,6 +728,8 @@ public class AdStudyObjective extends APINode {
       "auto_event_mapping_android",
       "auto_event_mapping_ios",
       "auto_event_setup_enabled",
+      "auto_log_app_events_default",
+      "auto_log_app_events_enabled",
       "business",
       "canvas_fluid_height",
       "canvas_fluid_width",
@@ -779,6 +782,7 @@ public class AdStudyObjective extends APINode {
       "privacy_policy_url",
       "profile_section_url",
       "property_id",
+      "protected_mode_rules",
       "real_time_mode_devices",
       "restrictions",
       "restrictive_data_filter_params",
@@ -1068,6 +1072,20 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestAutoEventSetupEnabledField (boolean value) {
       this.requestField("auto_event_setup_enabled", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField () {
+      return this.requestAutoLogAppEventsDefaultField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsDefaultField (boolean value) {
+      this.requestField("auto_log_app_events_default", value);
+      return this;
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField () {
+      return this.requestAutoLogAppEventsEnabledField(true);
+    }
+    public APIRequestGetApplications requestAutoLogAppEventsEnabledField (boolean value) {
+      this.requestField("auto_log_app_events_enabled", value);
       return this;
     }
     public APIRequestGetApplications requestBusinessField () {
@@ -1434,6 +1452,13 @@ public class AdStudyObjective extends APINode {
       this.requestField("property_id", value);
       return this;
     }
+    public APIRequestGetApplications requestProtectedModeRulesField () {
+      return this.requestProtectedModeRulesField(true);
+    }
+    public APIRequestGetApplications requestProtectedModeRulesField (boolean value) {
+      this.requestField("protected_mode_rules", value);
+      return this;
+    }
     public APIRequestGetApplications requestRealTimeModeDevicesField () {
       return this.requestRealTimeModeDevicesField(true);
     }
@@ -1607,6 +1632,278 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetApplications requestWeeklyActiveUsersField (boolean value) {
       this.requestField("weekly_active_users", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetBrandRequests extends APIRequest<BrandRequest> {
+
+    APINodeList<BrandRequest> lastResponse = null;
+    @Override
+    public APINodeList<BrandRequest> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "ad_countries",
+      "additional_contacts",
+      "approval_level",
+      "cells",
+      "countries",
+      "deny_reason",
+      "end_time",
+      "estimated_reach",
+      "id",
+      "is_multicell",
+      "locale",
+      "max_age",
+      "min_age",
+      "questions",
+      "region",
+      "request_status",
+      "review_date",
+      "start_time",
+      "status",
+      "submit_date",
+      "total_budget",
+    };
+
+    @Override
+    public APINodeList<BrandRequest> parseResponse(String response, String header) throws APIException {
+      return BrandRequest.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<BrandRequest> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<BrandRequest> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<BrandRequest>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<BrandRequest>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<BrandRequest>>() {
+           public APINodeList<BrandRequest> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetBrandRequests.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetBrandRequests(String nodeId, APIContext context) {
+      super(context, nodeId, "/brand_requests", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetBrandRequests setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandRequests setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetBrandRequests requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetBrandRequests requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandRequests requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetBrandRequests requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandRequests requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetBrandRequests requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetBrandRequests requestAdCountriesField () {
+      return this.requestAdCountriesField(true);
+    }
+    public APIRequestGetBrandRequests requestAdCountriesField (boolean value) {
+      this.requestField("ad_countries", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestAdditionalContactsField () {
+      return this.requestAdditionalContactsField(true);
+    }
+    public APIRequestGetBrandRequests requestAdditionalContactsField (boolean value) {
+      this.requestField("additional_contacts", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestApprovalLevelField () {
+      return this.requestApprovalLevelField(true);
+    }
+    public APIRequestGetBrandRequests requestApprovalLevelField (boolean value) {
+      this.requestField("approval_level", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestCellsField () {
+      return this.requestCellsField(true);
+    }
+    public APIRequestGetBrandRequests requestCellsField (boolean value) {
+      this.requestField("cells", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestCountriesField () {
+      return this.requestCountriesField(true);
+    }
+    public APIRequestGetBrandRequests requestCountriesField (boolean value) {
+      this.requestField("countries", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestDenyReasonField () {
+      return this.requestDenyReasonField(true);
+    }
+    public APIRequestGetBrandRequests requestDenyReasonField (boolean value) {
+      this.requestField("deny_reason", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestEndTimeField () {
+      return this.requestEndTimeField(true);
+    }
+    public APIRequestGetBrandRequests requestEndTimeField (boolean value) {
+      this.requestField("end_time", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestEstimatedReachField () {
+      return this.requestEstimatedReachField(true);
+    }
+    public APIRequestGetBrandRequests requestEstimatedReachField (boolean value) {
+      this.requestField("estimated_reach", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetBrandRequests requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestIsMulticellField () {
+      return this.requestIsMulticellField(true);
+    }
+    public APIRequestGetBrandRequests requestIsMulticellField (boolean value) {
+      this.requestField("is_multicell", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestLocaleField () {
+      return this.requestLocaleField(true);
+    }
+    public APIRequestGetBrandRequests requestLocaleField (boolean value) {
+      this.requestField("locale", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestMaxAgeField () {
+      return this.requestMaxAgeField(true);
+    }
+    public APIRequestGetBrandRequests requestMaxAgeField (boolean value) {
+      this.requestField("max_age", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestMinAgeField () {
+      return this.requestMinAgeField(true);
+    }
+    public APIRequestGetBrandRequests requestMinAgeField (boolean value) {
+      this.requestField("min_age", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestQuestionsField () {
+      return this.requestQuestionsField(true);
+    }
+    public APIRequestGetBrandRequests requestQuestionsField (boolean value) {
+      this.requestField("questions", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestRegionField () {
+      return this.requestRegionField(true);
+    }
+    public APIRequestGetBrandRequests requestRegionField (boolean value) {
+      this.requestField("region", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestRequestStatusField () {
+      return this.requestRequestStatusField(true);
+    }
+    public APIRequestGetBrandRequests requestRequestStatusField (boolean value) {
+      this.requestField("request_status", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestReviewDateField () {
+      return this.requestReviewDateField(true);
+    }
+    public APIRequestGetBrandRequests requestReviewDateField (boolean value) {
+      this.requestField("review_date", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestStartTimeField () {
+      return this.requestStartTimeField(true);
+    }
+    public APIRequestGetBrandRequests requestStartTimeField (boolean value) {
+      this.requestField("start_time", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestStatusField () {
+      return this.requestStatusField(true);
+    }
+    public APIRequestGetBrandRequests requestStatusField (boolean value) {
+      this.requestField("status", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestSubmitDateField () {
+      return this.requestSubmitDateField(true);
+    }
+    public APIRequestGetBrandRequests requestSubmitDateField (boolean value) {
+      this.requestField("submit_date", value);
+      return this;
+    }
+    public APIRequestGetBrandRequests requestTotalBudgetField () {
+      return this.requestTotalBudgetField(true);
+    }
+    public APIRequestGetBrandRequests requestTotalBudgetField (boolean value) {
+      this.requestField("total_budget", value);
       return this;
     }
   }
@@ -2223,6 +2520,278 @@ public class AdStudyObjective extends APINode {
     }
     public APIRequestGetOfflineConversionDataSets requestValidEntriesField (boolean value) {
       this.requestField("valid_entries", value);
+      return this;
+    }
+  }
+
+  public static class APIRequestGetPartnerPrivateStudies extends APIRequest<Business> {
+
+    APINodeList<Business> lastResponse = null;
+    @Override
+    public APINodeList<Business> getLastResponse() {
+      return lastResponse;
+    }
+    public static final String[] PARAMS = {
+    };
+
+    public static final String[] FIELDS = {
+      "block_offline_analytics",
+      "collaborative_ads_managed_partner_business_info",
+      "collaborative_ads_managed_partner_eligibility",
+      "collaborative_ads_partner_premium_options",
+      "created_by",
+      "created_time",
+      "extended_updated_time",
+      "id",
+      "is_hidden",
+      "link",
+      "name",
+      "primary_page",
+      "profile_picture_uri",
+      "timezone_id",
+      "two_factor_type",
+      "updated_by",
+      "updated_time",
+      "user_access_expire_time",
+      "verification_status",
+      "vertical",
+      "vertical_id",
+    };
+
+    @Override
+    public APINodeList<Business> parseResponse(String response, String header) throws APIException {
+      return Business.parseResponse(response, getContext(), this, header);
+    }
+
+    @Override
+    public APINodeList<Business> execute() throws APIException {
+      return execute(new HashMap<String, Object>());
+    }
+
+    @Override
+    public APINodeList<Business> execute(Map<String, Object> extraParams) throws APIException {
+      ResponseWrapper rw = executeInternal(extraParams);
+      lastResponse = parseResponse(rw.getBody(),rw.getHeader());
+      return lastResponse;
+    }
+
+    public ListenableFuture<APINodeList<Business>> executeAsync() throws APIException {
+      return executeAsync(new HashMap<String, Object>());
+    };
+
+    public ListenableFuture<APINodeList<Business>> executeAsync(Map<String, Object> extraParams) throws APIException {
+      return Futures.transform(
+        executeAsyncInternal(extraParams),
+        new Function<ResponseWrapper, APINodeList<Business>>() {
+           public APINodeList<Business> apply(ResponseWrapper result) {
+             try {
+               return APIRequestGetPartnerPrivateStudies.this.parseResponse(result.getBody(), result.getHeader());
+             } catch (Exception e) {
+               throw new RuntimeException(e);
+             }
+           }
+         }
+      );
+    };
+
+    public APIRequestGetPartnerPrivateStudies(String nodeId, APIContext context) {
+      super(context, nodeId, "/partner_private_studies", "GET", Arrays.asList(PARAMS));
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies setParam(String param, Object value) {
+      setParamInternal(param, value);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies setParams(Map<String, Object> params) {
+      setParamsInternal(params);
+      return this;
+    }
+
+
+    public APIRequestGetPartnerPrivateStudies requestAllFields () {
+      return this.requestAllFields(true);
+    }
+
+    public APIRequestGetPartnerPrivateStudies requestAllFields (boolean value) {
+      for (String field : FIELDS) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies requestFields (List<String> fields) {
+      return this.requestFields(fields, true);
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies requestFields (List<String> fields, boolean value) {
+      for (String field : fields) {
+        this.requestField(field, value);
+      }
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies requestField (String field) {
+      this.requestField(field, true);
+      return this;
+    }
+
+    @Override
+    public APIRequestGetPartnerPrivateStudies requestField (String field, boolean value) {
+      this.requestFieldInternal(field, value);
+      return this;
+    }
+
+    public APIRequestGetPartnerPrivateStudies requestBlockOfflineAnalyticsField () {
+      return this.requestBlockOfflineAnalyticsField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestBlockOfflineAnalyticsField (boolean value) {
+      this.requestField("block_offline_analytics", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsManagedPartnerBusinessInfoField () {
+      return this.requestCollaborativeAdsManagedPartnerBusinessInfoField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsManagedPartnerBusinessInfoField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_business_info", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsManagedPartnerEligibilityField () {
+      return this.requestCollaborativeAdsManagedPartnerEligibilityField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsManagedPartnerEligibilityField (boolean value) {
+      this.requestField("collaborative_ads_managed_partner_eligibility", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsPartnerPremiumOptionsField () {
+      return this.requestCollaborativeAdsPartnerPremiumOptionsField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestCollaborativeAdsPartnerPremiumOptionsField (boolean value) {
+      this.requestField("collaborative_ads_partner_premium_options", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestCreatedByField () {
+      return this.requestCreatedByField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestCreatedByField (boolean value) {
+      this.requestField("created_by", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestCreatedTimeField () {
+      return this.requestCreatedTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestCreatedTimeField (boolean value) {
+      this.requestField("created_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestExtendedUpdatedTimeField () {
+      return this.requestExtendedUpdatedTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestExtendedUpdatedTimeField (boolean value) {
+      this.requestField("extended_updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestIdField () {
+      return this.requestIdField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestIdField (boolean value) {
+      this.requestField("id", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestIsHiddenField () {
+      return this.requestIsHiddenField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestIsHiddenField (boolean value) {
+      this.requestField("is_hidden", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestLinkField () {
+      return this.requestLinkField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestLinkField (boolean value) {
+      this.requestField("link", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestNameField () {
+      return this.requestNameField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestNameField (boolean value) {
+      this.requestField("name", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestPrimaryPageField () {
+      return this.requestPrimaryPageField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestPrimaryPageField (boolean value) {
+      this.requestField("primary_page", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestProfilePictureUriField () {
+      return this.requestProfilePictureUriField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestProfilePictureUriField (boolean value) {
+      this.requestField("profile_picture_uri", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestTimezoneIdField () {
+      return this.requestTimezoneIdField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestTimezoneIdField (boolean value) {
+      this.requestField("timezone_id", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestTwoFactorTypeField () {
+      return this.requestTwoFactorTypeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestTwoFactorTypeField (boolean value) {
+      this.requestField("two_factor_type", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestUpdatedByField () {
+      return this.requestUpdatedByField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestUpdatedByField (boolean value) {
+      this.requestField("updated_by", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestUpdatedTimeField () {
+      return this.requestUpdatedTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestUpdatedTimeField (boolean value) {
+      this.requestField("updated_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField () {
+      return this.requestUserAccessExpireTimeField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestUserAccessExpireTimeField (boolean value) {
+      this.requestField("user_access_expire_time", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerificationStatusField () {
+      return this.requestVerificationStatusField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerificationStatusField (boolean value) {
+      this.requestField("verification_status", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerticalField () {
+      return this.requestVerticalField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerticalField (boolean value) {
+      this.requestField("vertical", value);
+      return this;
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerticalIdField () {
+      return this.requestVerticalIdField(true);
+    }
+    public APIRequestGetPartnerPrivateStudies requestVerticalIdField (boolean value) {
+      this.requestField("vertical_id", value);
       return this;
     }
   }

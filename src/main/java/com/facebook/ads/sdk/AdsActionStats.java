@@ -1,24 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc. All rights reserved.
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
  *
- * You are hereby granted a non-exclusive, worldwide, royalty-free license to
- * use, copy, modify, and distribute this software in source code or binary
- * form for use in connection with the web services and APIs provided by
- * Facebook.
- *
- * As with any software that integrates with the Facebook platform, your use
- * of this software is subject to the Facebook Developer Principles and
- * Policies [http://developers.facebook.com/policy/]. This copyright notice
- * shall be included in all copies or substantial portions of the software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
- * THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
- * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
- * DEALINGS IN THE SOFTWARE.
- *
+ * This source code is licensed under the license found in the
+ * LICENSE file in the root directory of this source tree.
  */
 
 package com.facebook.ads.sdk;
@@ -57,6 +42,8 @@ import com.facebook.ads.sdk.APIException.MalformedResponseException;
 public class AdsActionStats extends APINode {
   @SerializedName("1d_click")
   private String m1dClick = null;
+  @SerializedName("1d_ev")
+  private String m1dEv = null;
   @SerializedName("1d_view")
   private String m1dView = null;
   @SerializedName("28d_click")
@@ -274,6 +261,15 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats setField1dClick(String value) {
     this.m1dClick = value;
+    return this;
+  }
+
+  public String getField1dEv() {
+    return m1dEv;
+  }
+
+  public AdsActionStats setField1dEv(String value) {
+    this.m1dEv = value;
     return this;
   }
 
@@ -565,6 +561,7 @@ public class AdsActionStats extends APINode {
 
   public AdsActionStats copyFrom(AdsActionStats instance) {
     this.m1dClick = instance.m1dClick;
+    this.m1dEv = instance.m1dEv;
     this.m1dView = instance.m1dView;
     this.m28dClick = instance.m28dClick;
     this.m28dView = instance.m28dView;
